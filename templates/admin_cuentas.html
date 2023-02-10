@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container-fluid cuentas">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Administrar cuentas</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="db-default.html"><i class='bx bx-bell'></i></a></li>
+                        <li class="breadcrumb-item active">Cuentas</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="content">
+                <div class="table-data usuarios">
+                    <div class="order">
+                        <div class="head">
+                            <h3>Cuentas</h3>
+                            <button id="crearCuentaMaestra" class="btn btn-success">Crear cuenta</button>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Codigo</th>
+                                    <th>Status</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for usuario in datausuarios %}
+                                {% if usuario.cod_cliente == "All" and usuario.cod_cuenta != "0000"%}
+                                <tr>
+                                    <td>
+                                        <img src="{{url_for('static', filename='img/user-img-web.png')}}">
+                                        <p>{{usuario.usuario}}</p>
+                                    </td>
+                                    <td>{{usuario.cod_cuenta}}</td>
+                                    <td><span class="status completed">Activo</span></td>
+                                    <td class="actions">
+                                        <a href="#" class="editar-cuenta" data-cuenta-id="{{usuario.ID}}"><i
+                                                class="bx bx-edit edit"></i></a>
+                                        <a href="#" class="delete-cuenta" data-cuenta-id="{{usuario.ID}}"><i
+                                                class="bx bx-x delete"></i></a>
+                                    </td>
+                                </tr>
+                                {% endif %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="accordion todo">
+                        <div class="head">
+                            <h3>Clientes x cuenta</h3>
+                            <a href="#" class="btn btn-primary text-color-white">Crear cliente</a>
+                        </div>
+                        <ul class="todo-list">
+                            {% for usuario in datausuarios %}
+                            {% if usuario.cod_cliente == "All" and usuario.cod_cuenta != "0000"%}
+                            <li class="li completed accordion-header">
+                                <p class="accordion-title">{{usuario.usuario}}</p>
+                                <i class='bx bx-plus'></i>
+                            </li>
+                            <div class="accordion-body">
+                                {% for u in datausuarios %}
+                                {% if u.cod_cuenta == usuario.cod_cuenta and u.cod_cliente != "All" %}
+                                <li class="li not-completed">
+                                    <p>{{u.usuario}} - {{u.cod_cliente}}</p>
+                                    <div>
+                                        <a href="#"><i class="bx bx-edit edit"></i></a>
+                                        <a href="#"><i class="bx bx-x delete"></i></a>
+                                    </div>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{url_for('static', filename='js/admin_cuentas.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Editar evento</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="db-default.html"><i class='bx bx-bell'></i></a></li>
+                        <li class="breadcrumb-item active">Evento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center justify-content-between">
+                    <a class="btn btn-success" href="/home"><i class='bx bx-chevron-left'></i>Regresar</a>
+                    <h4>Información general del evento</h4>
+                </div>
+                <div id="widget-body" class="widget-body">
+                    <div>
+                        <p>Localización Geocerca</p>
+                    </div>
+                    <div id="datos-evento" class="datos-evento">
+                        <div id="map" class="mapa-evento">
+
+                        </div>
+                        <form action="" id="formulario-datos" class="pt-5">
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <label for="">Código del Evento:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.cod_evento}}" disabled>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="">Placa:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.placa}}" disabled>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="">Latitud:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.latitud}}" disabled>
+                                </div>
+                                <div class="col-lg-3">
+                                    <label for="">Longitud:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.longitud}}" disabled>
+                                </div>
+                                <div class="col-lg-3 pt-3">
+                                    <label for="">Velocidad:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.velocidad}}" disabled>
+                                </div>
+                                <div class="col-lg-3 pt-3">
+                                    <label for="">Prioridad:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.prioridad}}" disabled>
+                                </div>
+                                <div class="col-lg-3 pt-3">
+                                    <label for="">Cliente:</label>
+                                    <input type="text" class="form-control" value="{{cliente}}" disabled>
+                                </div>
+                                <div class="col-lg-3 pt-3">
+                                    <label for="">Fecha de recepción:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.fecha}}" disabled>
+                                </div>
+                                <div class="col-lg-12 pt-3">
+                                    <textarea class="textarea form-control" name="" id="" cols="30" rows="3"
+                                        disabled>{{dataevento.direccion}}</textarea>
+                                </div>
+                                <div class="col-lg-12 pt-3">
+                                    <a href="#" class="btn btn-primary">En gestión</a>
+                                    <a href="#" class="btn btn-success">Confirmado</a>
+                                    <a href="#" class="btn btn-warning">Descartado</a>
+                                </div>
+                                <div class="col-lg-12 pt-3">
+                                    <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"
+                                        rows="3" placeholder="Agregue un comentario"></textarea>
+                                </div>
+                                <div class="col-lg-12 pt-3">
+                                    <button type="button" class="btn btn-outline-info"
+                                        id="btn-textarea-1">No/Programada</button>
+                                    <button type="button" class="btn btn-outline-info"
+                                        id="btn-textarea-2">Fuera/Servicio</button>
+                                    <button type="button" class="btn btn-outline-info"
+                                        id="btn-textarea-3">Falla/Sensor</button>
+                                    <button type="button" class="btn btn-outline-info"
+                                        id="btn-textarea-4">Intervención</button>
+                                    <button type="button" class="btn btn-outline-info" id="btn-textarea-5">Prueba
+                                        nocturna</button>
+                                    <button type="button" class="btn btn-outline-info"
+                                        id="btn-textarea-6">Prueba/Cencon</button>
+                                </div>
+                                <div class="col-lg-12 pt-3">
+                                    <p>Comentarios</p>
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Comentario</th>
+                                                <th>Usuario</th>
+                                                <th>Fecha</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

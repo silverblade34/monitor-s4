@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!-- Begin Preloader -->
+<div id="preloader">
+    <div class="canvas">
+        <img src="{{url_for('static', filename='icons/logo-png.png')}}" alt="logo" class="loader-logo">
+        <div class="spinner"></div>
+    </div>
+</div>
+<!-- End Preloader -->
+<!-- Begin Page Header-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Eventos</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class='bx bx-calendar-event'></i></a>
+                        </li>
+                        <li class="breadcrumb-item active">Eventos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Consultar evento</h4>
+                </div>
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <table id="sorting-table" class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Placa</th>
+                                    <th>Fecha recepción</th>
+                                    <th>Velocidad</th>
+                                    <th><span style="width:100px;">Dirección</span></th>
+                                    <th>Estado</th>
+                                    <th>Fecha ultima acción</th>
+                                    <th>Prioridad</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sorting -->
+        </div>
+    </div>
+</div>
+{% endblock %}

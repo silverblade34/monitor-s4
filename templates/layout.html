@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!--
+Item Name: Elisyam - Web App & Admin Dashboard Template
+Version: 1.5
+Author: SAEROX
+
+** A license must be purchased in order to legally use this template for your project **
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sysnet</title>
+    <link rel="shortcut icon" href="{{url_for('static', filename='icons/logo-png.png')}}" />
+    <meta name="description" content="Elisyam is a Web App and Admin Dashboard Template built with Bootstrap 4">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Google Fonts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        WebFont.load({
+            google: { "families": ["Montserrat:400,500,600,700", "Noto+Sans:400,700"] },
+            active: function () {
+                sessionStorage.fonts = true;
+            }
+        });
+    </script>
+    <!-- Favicon -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='icons/logo-png.png')}}">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/elisyam-1.5.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/datetables/datatables.min.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin_cuentas.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.2.2/dist/sweetalert2.min.css"
+        integrity="sha384-TcnWZLK1x3OehEiV7Unu/LXyV7ysuEtR0Vz8bw1GZjtjLmDbE5K5/5n1m9G5q3c" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body id="page-top">
+    <div class="page">
+        <!-- Begin Header -->
+        <header class="header">
+            <nav class="navbar fixed-top">
+                <!-- Begin Search Box-->
+                <div class="search-box">
+                    <button class="dismiss"><i class="ion-close-round"></i></button>
+                    <form id="searchForm" action="#" role="search">
+                        <input type="search" placeholder="Buscar ..." class="form-control">
+                    </form>
+                </div>
+                <!-- End Search Box-->
+                <!-- Begin Topbar -->
+                <div class="navbar-holder d-flex align-items-center align-middle justify-content-between">
+                    <!-- Begin Logo -->
+                    <div class="navbar-header">
+                        <a href="/home" class="navbar-brand">
+                            <div class="brand-image brand-big">
+                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                    class="logo-small">
+                            </div>
+                            <div class="brand-image brand-small">
+                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                    class="logo-small">
+                            </div>
+                        </a>
+                        <div class="text-logo">
+                            <p>Sysnet del Perú</p>
+                        </div>
+                        <!-- Toggle Button -->
+                        <a id="toggle-btn" href="#" class="menu-btn active">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </a>
+                        <!-- End Toggle -->
+                    </div>
+                    <!-- End Logo -->
+                    <!-- Begin Navbar Menu -->
+                    <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center pull-right">
+                        <!-- Search -->
+                        <li class="nav-item d-flex align-items-center"><a id="search" href="#"><i
+                                    class='bx bx-search'></i></a></li>
+                        <!-- End Search -->
+                        <!-- Begin Notifications -->
+                        <li class="nav-item dropdown"><a id="notifications" rel="nofollow" data-target="#" href="#"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i
+                                    class="la la-bell animated infinite swing"></i><span class="badge-pulse"></span></a>
+                            <ul aria-labelledby="notifications" class="dropdown-menu notification">
+                                <li>
+                                    <div class="notifications-header">
+                                        <div class="title">Notifications (4)</div>
+                                        <div class="notifications-overlay"></div>
+                                        <img src="{{url_for('static', filename='icons/logo-text')}}" alt="">
+                                    </div>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="message-icon">
+                                            <i class="la la-user"></i>
+                                        </div>
+                                        <div class="message-body">
+                                            <div class="message-body-heading">
+                                                New user registered
+                                            </div>
+                                            <span class="date">2 hours ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="message-icon">
+                                            <i class="la la-calendar-check-o"></i>
+                                        </div>
+                                        <div class="message-body">
+                                            <div class="message-body-heading">
+                                                New event added
+                                            </div>
+                                            <span class="date">7 hours ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="message-icon">
+                                            <i class="la la-history"></i>
+                                        </div>
+                                        <div class="message-body">
+                                            <div class="message-body-heading">
+                                                Server rebooted
+                                            </div>
+                                            <span class="date">7 hours ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <div class="message-icon">
+                                            <i class="la la-twitter"></i>
+                                        </div>
+                                        <div class="message-body">
+                                            <div class="message-body-heading">
+                                                You have 3 new followers
+                                            </div>
+                                            <span class="date">10 hours ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center">View
+                                        All Notifications</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- End Notifications -->
+                        <!-- User -->
+                        <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i
+                                    class='bx bxs-user-circle'></i></a>
+                            <ul aria-labelledby="user" class="user-size dropdown-menu">
+                                <li class="welcome">
+                                    <a href="#" class="edit-profil"><i class="la la-gear"></i></a>
+                                    <i class='bx bxs-user-circle'></i>
+                                </li>
+                                <li>
+                                    <a href="pages-profile.html" class="dropdown-item">
+                                        Perfil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" class="dropdown-item no-padding-bottom">
+                                        Settings
+                                    </a>
+                                </li>
+                                <li class="separator"></li>
+                                <li><a rel="nofollow" href="/logout" class="dropdown-item logout text-center"><i
+                                            class="ti-power-off"></i></a></li>
+                            </ul>
+                        </li>
+                        <!-- End User -->
+                        <!-- Begin Quick Actions -->
+                        <li class="nav-item"><a href="#off-canvas" class="open-sidebar"><i
+                                    class="la la-ellipsis-h"></i></a></li>
+                        <!-- End Quick Actions -->
+                    </ul>
+                    <!-- End Navbar Menu -->
+                </div>
+                <!-- End Topbar -->
+            </nav>
+        </header>
+        <!-- End Header -->
+        <!-- End Preloader -->
+        <div class="page-content d-flex align-items-stretch">
+            <div class="default-sidebar">
+                <!-- Begin Side Navbar -->
+                <nav class="side-navbar box-scroll sidebar-scroll">
+                    <!-- Begin Main Navigation -->
+                    <ul class="list-unstyled">
+                        <li><a href="#"><i class='bx bx-home'></i><span>Home</span></a>
+                        </li>
+                        <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i
+                                    class='bx bxs-devices'></i><span>Monitoreo</span></a>
+                            <ul id="dropdown-app" class="collapse list-unstyled pt-0">
+                                <li><a href="#">Tablero de control</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i
+                                    class='bx bx-bell'></i><span>Eventos</span></a>
+                            <ul id="dropdown-ui" class="collapse list-unstyled pt-0">
+                                <li><a href="#">Consultar registrar</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i
+                                    class='bx bx-bar-chart-square'></i><span>Reportes</span></a>
+                            <ul id="dropdown-icons" class="collapse list-unstyled pt-0">
+                                <li><a href="#">Listado de eventos x cliente</a></li>
+                                <li><a href="#">Listado de eventos x cliente x turno</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#dropdown-forms" aria-expanded="false" data-toggle="collapse"><i
+                                    class='bx bx-file'></i><span>Reporte KPIs</span></a>
+                            <ul id="dropdown-forms" class="collapse list-unstyled pt-0">
+                                <li><a href="#">Top five Reports</a></li>
+                                <li><a href="#">Top 10 placas x Eventos</a></li>
+                            </ul>
+                        </li>
+                        <li class="active"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
+                                    class='bx bx-cog'></i><span>Administrar</span></a>
+                            <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
+                                <a href="#dropdown-mantenimientos" aria-expanded="false"
+                                    data-toggle="collapse"><span>Mantenimientos</span></a>
+                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled pt-0">
+                                    <li><a href="/admincuentas">Usuarios</a></li>
+                                    <li><a class="active" href="tables-datatables.html">Datatables</a></li>
+                                    <li><a href="tables-tabledit.html">Tabledit</a></li>
+                                </ul>
+                            </ul>
+                        </li>
+                    </ul>
+                    <!-- End Main Navigation -->
+                </nav>
+                <!-- End Side Navbar -->
+            </div>
+            <div class="content-inner">
+                <!-- CONTENIDO PRINCIPAL-->
+                {% block body %}
+
+                {% endblock %}
+                <!-- CONTENIDO PRINCIPAL-->
+                <footer class="main-footer">
+                    <div class="row">
+                        <div
+                            class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-xl-start justify-content-lg-start justify-content-md-start justify-content-center">
+                            <p class="text-gradient-02">Sysnet del Perú</p>
+                        </div>
+                        <div
+                            class="col-xl-6 col-lg-6 col-md-6 col-sm-12 d-flex align-items-center justify-content-xl-end justify-content-lg-end justify-content-md-end justify-content-center">
+                            <ul class="nav">
+                            </ul>
+                        </div>
+                    </div>
+                </footer>
+                <!-- CONTENIDO PRINCIPAL-->
+            </div>
+        </div>
+        <!-- Begin Page Footer-->
+        <!-- End Page Footer -->
+        <a href="#" class="go-top"><i class="la la-arrow-up"></i></a>
+        <!-- Offcanvas Sidebar -->
+        <div class="off-sidebar from-right">
+            <div class="off-sidebar-container">
+                <header class="off-sidebar-header">
+                    <ul class="button-nav nav nav-tabs mt-3 mb-3 ml-3" role="tablist" id="weather-tab">
+                        <li><a class="active" data-toggle="tab" href="#messenger" role="tab"
+                                id="messenger-tab">Messages</a></li>
+                        <li><a data-toggle="tab" href="#today" role="tab" id="today-tab">Today</a></li>
+                    </ul>
+                    <a href="#off-canvas" class="off-sidebar-close"></a>
+                </header>
+                <!-- End Offcanvas Container -->
+            </div>
+            <!-- End Offsidebar Container -->
+        </div>
+        <!-- End Offcanvas Sidebar -->
+    </div>
+    <!-- End Page Content -->
+    </div>
+    </div>
+    <script src="{{url_for('static', filename='js/vendors/base/jquery.min.js')}}"></script>
+    <!-- Carga de la API de Google Maps -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+    </script>
+    <script src="{{url_for('static', filename='js/act_tabla.js')}}"></script>
+    <script src="{{url_for('static', filename='js/edit_evento.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/base/core.min.js')}}"></script>
+    <!-- End Vendor Js -->
+    <!-- Begin Page Vendor Js -->
+    <script src="{{url_for('static', filename='js/vendors/datatables/datatables.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/dataTables.buttons.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/jszip.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/buttons.html5.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/pdfmake.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/vfs_fonts.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/datatables/buttons.print.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/nicescroll/nicescroll.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/vendors/app/app.min.js')}}"></script>
+    <!-- End Page Vendor Js -->
+    <!-- Begin Page Snippets -->
+    <script src="{{url_for('static', filename='js/components/tables/tables.js')}}"></script>
+    <!-- End Page Snippets -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.2.2/dist/sweetalert2.min.js"
+        integrity="sha384-54y5LwpQO9Xc4gqe7bKHWp15P5leOcdupjPk33ltC/8c1e9G1Ei+l2DjwU6zPOZ0"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
