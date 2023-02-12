@@ -21,7 +21,12 @@ class UsuariosController:
         usuario = response.responseBuscarUsuario(datausuarios, idusuario)
         return usuario
     
-    def actualizarUsuario(self,id,cod_cuenta, cod_cliente, contrasena, usuario, ruc):
+    def actualizarUsuario(self,id, data):
         response = UsuariosResponse()
-        dataresp = response.responseActualizarUsuario(id,cod_cuenta, cod_cliente, contrasena, usuario, ruc) 
+        dataresp = response.responseActualizarUsuario(id, data) 
         return dataresp
+    
+    def listarCuentas(self):
+        response = UsuariosResponse()
+        data = response.responseListarCuentas()
+        return data

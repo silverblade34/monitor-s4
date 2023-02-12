@@ -104,12 +104,12 @@
 	font-weight: 700;
 }
 
-#content .table-data .order table tr td .status.completed {
+#content .table-data .order table tr td .status.true {
 	background: #59c1de;
 }
 
-#content .table-data .order table tr td .status.process {
-	background: var(--yellow);
+#content .table-data .order table tr td .status.false{
+	background: #DB504A;
 }
 
 #content .table-data .order table tr td .status.pending {
@@ -232,6 +232,22 @@
 	color: #464646;
 	width: 100%;
 	font-size: 15px;
+	text-align: left;
+}
+
+.form-crearcuenta .form-select{
+	width: 100%;
+	padding: 10px;
+	font-size: 14px;
+	border: 0.5px solid rgb(155, 155, 155);
+	border-radius: 5px;
+}
+
+.form-crearcuenta .form-label-vercontraseña{
+	margin-top: 6px;
+	font-size: 13px;
+	color: #464646;
+	width: 100%;
 	text-align: left;
 }
 

@@ -1,4 +1,4 @@
-// Animacion acordeon
+// ------------------------------Animacion acordeon---------------------------------
 var accHeader = document.getElementsByClassName("accordion-header");
 
 for (var i = 0; i < accHeader.length; i++) {
@@ -12,7 +12,7 @@ for (var i = 0; i < accHeader.length; i++) {
   });
 };
 
-// ---------------------------------- Crear cuenta -----------------------------------
+// ----------------------------------Modal Crear cuenta SweetAlert2-----------------------------------
 
 const crearCuentaMaestra = document.getElementById("crearCuentaMaestra");
 
@@ -22,15 +22,19 @@ crearCuentaMaestra.addEventListener("click", function () {
     html: `
       <form class="form-crearcuenta">
         <label class="form-label">Codigo de cuenta</label>
-        <input type="text" id="cod_cuenta" class = "form-control input-text" required>
+        <input type="text" id="cod_cuenta" class = "form-control input-text" placeholder="0001">
         <label class="form-label">Ruc</label>
-        <input type="text" id="ruc" class = "form-control input-text" required>
+        <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
         <label class="form-label">Empresa</label>
-        <input type="text" id="nombre_cuenta" class = "form-control input-text" required>
+        <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
         <label class="form-label">Usuario</label>
-        <input type="text" id="usuario_cuenta" class = "form-control input-text" required>
+        <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
         <label class="form-label">Contraseña</label>
-        <input type="password" id="password" class = "form-control input-pass" required>
+        <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
+        <label class="form-label-vercontraseña">
+        <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+        Ver contraseña
+        </label>
       </form>
     `,
     showCancelButton: true,
@@ -51,7 +55,6 @@ crearCuentaMaestra.addEventListener("click", function () {
           nombre_cuenta: nombre_cuenta,
           nombre_rol: "Administrador",
           nombre_cliente: ""
-
         }
       };
     }
@@ -91,7 +94,7 @@ crearCuentaMaestra.addEventListener("click", function () {
   });
 });
 
-// ----------------------------------Eliminar cuenta-----------------------------------
+// ----------------------------------Modal Eliminar cuenta SweetAlert2-----------------------------------
 
 const btnsdeletecuenta = document.querySelectorAll(".delete-cuenta");
 
@@ -133,7 +136,7 @@ btnsdeletecuenta.forEach(btndeletecuenta => {
 });
 
 
-// ----------------------------------Editar cuenta-----------------------------------
+// ----------------------------------Modal Editar cuenta SweetAlert2-----------------------------------
 
 const editarCuentasMaestra = document.querySelectorAll(".editar-cuenta");
 
@@ -165,11 +168,15 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
             <input type="password" id="password" class = "form-control input-pass" value="${data.contrasena}">
+            <label class="form-label-vercontraseña">
+            <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+            Ver contraseña
+            </label>
             <label class="form-label">Ruc</label>
             <input type="text" id="ruc" class = "form-control input-text" value="${data.ruc}">
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
             <label class="form-label">Estado</label>
-            <input checked class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" ${data.estado === true ? 'checked' : ''}>
+            <input class="form-check-input" type="checkbox" id="estado-cuenta" ${data.estado === true ? 'checked' : ''}>
             </div>
           </form>
         `,
@@ -180,19 +187,27 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
             const ruc = document.getElementById("ruc").value;
+            const estadoCheckbox = document.getElementById("estado-cuenta").checked;
+            const nombre_cuenta = document.getElementById("nombre_cuenta").value;
             return {
               id: cuentaId,
-              cod_cuenta: codcuenta,
-              cod_cliente: "All",
-              usuario: usuario,
-              contrasena: password,
-              ruc: ruc
+              data: {
+                cod_cuenta: codcuenta,
+                cod_cliente: "All",
+                usuario: usuario,
+                contrasena: password,
+                ruc: ruc,
+                estado: estadoCheckbox,
+                nombre_cuenta: nombre_cuenta,
+                nombre_rol: "Administrador",
+                nombre_cliente: ""
+              }
             };
           }
         }).then(function (result) {
           if (result.value) {
             const data = result.value;
-            if (!data.cod_cuenta || !data.usuario || !data.contrasena || !data.ruc) {
+            if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
             }
@@ -226,4 +241,105 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
   });
 });
 
+// -------------------------Modal Crear cuenta cliente-----------------------------
+
+const crearCuentaCliente = document.getElementById("crearCuentaCliente");
+
+crearCuentaCliente.addEventListener("click", function () {
+  const cuentaId = this.dataset.cuentaId;
+  fetch('/listar_cuentasmaestras', {
+    method: "GET",
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Error al buscar cuenta");
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(data)
+      const options = data.map(item => `<option value="${item.cod_cuenta}">${item.nombre_cuenta}</option>`).join('');
+      Swal.fire({
+        title: "Crear cliente",
+        html: `
+            <form class="form-crearcuenta">
+              <label class="form-label">Empresa a la que estara asociada</label>
+              <select class="form-select" id="select-cuentamaestro" aria-label="Default select example">
+                <option selected>A que cuenta pertenece</option>
+                ${options}
+              </select>
+              <label class="form-label">Codigo de cliente</label>
+              <input type="text" id="cod_cliente" class = "form-control input-text" placeholder="Ejemplo: 0003">
+              <label class="form-label">Ruc</label>
+              <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
+              <label class="form-label">Cliente</label>
+              <input type="text" id="nombre_cliente" class = "form-control input-text" placeholder="Nombre del cliente">
+              <label class="form-label">Usuario</label>
+              <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <label class="form-label">Contraseña</label>
+              <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
+              <label class="form-label-vercontraseña">
+              <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+              Ver contraseña
+              </label>
+            </form>
+          `,
+        showCancelButton: true,
+        confirmButtonText: "Crear",
+        preConfirm: function () {
+          const codcuenta = document.getElementById("select-cuentamaestro").value;
+          const usuario = document.getElementById("usuario_cuenta").value;
+          const password = document.getElementById("password").value;
+          const ruc = document.getElementById("ruc").value;
+          const nombre_cliente = document.getElementById("nombre_cliente").value;
+          const cod_cliente = document.getElementById("cod_cliente").value;
+          return {
+            data: {
+              cod_cuenta: codcuenta,
+              cod_cliente: cod_cliente,
+              usuario: usuario,
+              contrasena: password,
+              ruc: ruc,
+              nombre_cuenta: "",
+              nombre_rol: "Administrador",
+              nombre_cliente: nombre_cliente
+            }
+          };
+        }
+      }).then(function (result) {
+        if (result.value) {
+          const data = result.value;
+          console.log(data);
+          if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+            Swal.fire("Error", "Todos los campos son requeridos", "error");
+            return;
+          }
+          // Envía los datos del formulario a una ruta POST en Flask
+          fetch("/crear_cuenta", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+            .then(response => {
+              if (!response.ok) {
+                throw new Error("Error al crear cuenta");
+              }
+              return response.json();
+            })
+            .then(data => {
+              Swal.fire("Agregado", data.message + "!", "success");
+              setTimeout(function () {
+                location.reload();
+              }, 2000);
+            })
+            .catch(error => {
+              console.error(error);
+              Swal.fire("Error", "Error al crear cuenta", "error");
+            });
+        }
+      });
+    });
+});
 

@@ -15,6 +15,15 @@ def listar_usuarios():
     else:
         return redirect(url_for('login'))
     
+@app.route('/listar_cuentasmaestras', methods=['GET'])
+def listar_cuentasmaestras():
+    if 'user' in session:
+        _userCL = UsuariosController()
+        data = _userCL.listarCuentas() 
+        return data
+    else:
+        return redirect(url_for('login'))
+    
 @app.route('/crear_cuenta', methods=['POST'])
 def crear_cuenta():
     if 'user' in session:
@@ -46,7 +55,7 @@ def buscar_cuenta():
 def actualizar_cuenta():
     if 'user' in session:
         _userCL = UsuariosController()
-        data = _userCL.actualizarUsuario(request.json['id'], request.json['cod_cuenta'], request.json['cod_cliente'],request.json['contrasena'], request.json['usuario'], request.json['ruc']) 
+        data = _userCL.actualizarUsuario(request.json['id'],request.json['data']) 
         return data
     else:
         return redirect(url_for('login'))

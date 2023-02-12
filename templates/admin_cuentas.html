@@ -41,7 +41,11 @@
                                         <p>{{usuario.usuario}}</p>
                                     </td>
                                     <td>{{usuario.cod_cuenta}}</td>
-                                    <td><span class="status completed">Activo</span></td>
+                                    {% if usuario.estado == True %}
+                                    <td><span class="status true">Activo</span></td>
+                                    {% else %}
+                                    <td><span class="status false">Desactivada</span></td>
+                                    {% endif %}
                                     <td class="actions">
                                         <a href="#" class="editar-cuenta" data-cuenta-id="{{usuario.ID}}"><i
                                                 class="bx bx-edit edit"></i></a>
@@ -57,7 +61,7 @@
                     <div class="accordion todo">
                         <div class="head">
                             <h3>Clientes x cuenta</h3>
-                            <a href="#" class="btn btn-primary text-color-white">Crear cliente</a>
+                            <button id="crearCuentaCliente" class="btn btn-primary text-color-white">Crear cliente</button>
                         </div>
                         <ul class="todo-list">
                             {% for usuario in datausuarios %}

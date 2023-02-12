@@ -33,4 +33,4 @@ function actualizarTabla() {
 $(document).ready(function () {
   actualizarTabla();
 });
-setInterval(actualizarTabla, 10000);
+// setInterval(actualizarTabla, 10000);

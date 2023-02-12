@@ -4,7 +4,7 @@ import requests, hashlib
 class ApiConnection:
     @staticmethod
     def connectionApi(user, pasw):
-        url = 'http://192.168.1.44:3000/api/v1/login'
+        url = 'http://161.35.104.161:3000/api/v1/login'
         hed = {"Content-Type": "application/json"}  
         hash_object = hashlib.md5(pasw.encode())
         passw = hash_object.hexdigest()

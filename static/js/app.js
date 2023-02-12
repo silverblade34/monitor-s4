@@ -1,39 +1,23 @@
-const inputs = document.querySelectorAll(".input-field");
-const toggle_btn = document.querySelectorAll(".toggle");
-const main = document.querySelector("main");
-const bullets = document.querySelectorAll(".bullets span");
-const images = document.querySelectorAll(".image");
-
-inputs.forEach((inp) => {
-  inp.addEventListener("focus", () => {
-    inp.classList.add("active");
-  });
-  inp.addEventListener("blur", () => {
-    if (inp.value != "") return;
-    inp.classList.remove("active");
-  });
-});
-
-toggle_btn.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    main.classList.toggle("sign-up-mode");
-  });
-});
-
-function moveSlider() {
-  let index = this.dataset.value;
-
-  let currentImage = document.querySelector(`.img-${index}`);
-  images.forEach((img) => img.classList.remove("show"));
-  currentImage.classList.add("show");
-
-  const textSlider = document.querySelector(".text-group");
-  textSlider.style.transform = `translateY(${-(index - 1) * 2.2}rem)`;
-
-  bullets.forEach((bull) => bull.classList.remove("active"));
-  this.classList.add("active");
+function randombg() {
+  var random = Math.floor(Math.random() * 3) + 0;
+  var bigSize = [
+    "url('https://www.centralgps.cl/wp-content/uploads/2020/01/rastreo-gps-centralgps.jpg')", 
+    "url('https://www.movertis.com/wp-content/uploads/2020/08/Como-funciona-el-sistema-GPS.jpg')",
+    "url('https://images7.alphacoders.com/311/thumb-1920-311833.jpg')",
+    "url('https://img.freepik.com/foto-gratis/hombre-vista-lateral-coche-entregando-paquete_23-2148889990.jpg?w=740&t=st=1676157659~exp=1676158259~hmac=63e702e9e3df38d7faca0122199c6b7b4da4163e6ef90a55e0fa208622bd4d46')",
+  ];
+  document.getElementById("right").style.backgroundImage = bigSize[random];
 }
 
-bullets.forEach((bullet) => {
-  bullet.addEventListener("click", moveSlider);
+document.getElementById("password-toggle").addEventListener("click", function() {
+  var input = document.getElementById("password-input");
+  if (input.type === "password") {
+    this.classList.remove("fa-eye");
+    this.classList.add("fa-eye-slash");
+    input.type = "text";
+  } else {
+    this.classList.remove("fa-eye-slash");
+    this.classList.add("fa-eye");
+    input.type = "password";
+  }
 });

@@ -8,6 +8,15 @@ class UsuariosResponse:
         data = resp.json()
         return data
     
+    def responseListarCuentas(self):
+        resp = requests.get(f'http://161.35.104.161:3000/api/v1/Allusuarios')
+        data = resp.json()
+        cuentasmaestras = []
+        for usuario in data["data"]:
+            if usuario["cod_cliente"] == "All" and usuario["cod_cuenta"] != "0000":
+                cuentasmaestras.append(usuario)
+        return cuentasmaestras
+    
     def responseCrearUsuario(self, datauser):
         hed = {"Content-Type": "application/json"}
         hash_object = hashlib.md5(datauser["contrasena"].encode())
@@ -31,19 +40,20 @@ class UsuariosResponse:
                 print(usuario)
                 return usuario
     
-    def responseActualizarUsuario(self,id,cod_cuenta, cod_cliente, passw, usuario, ruc):
+    def responseActualizarUsuario(self,id, data):
         hed = {"Content-Type": "application/json"}
         datausuarios = self.responseListarUsuarios()
-        hash_object = hashlib.md5(passw.encode())
+        hash_object = hashlib.md5(data["contrasena"].encode())
         contrasena = hash_object.hexdigest()
         contrasenafin = ""
-        for usuario in datausuarios:
+        for usuario in datausuarios["data"]:
             if usuario["ID"] == id:
-                if usuario["contrasena"] == contrasena:
-                    contrasenafin == usuario["contrasena"]
+                if usuario["contrasena"] == data["contrasena"]:
+                    contrasenafin = usuario["contrasena"]
                 else:
-                    contrasenafin == contrasena
-        payload = { "id": id, "cod_cliente": cod_cliente, "cod_cuenta": cod_cuenta, "contrasena": contrasenafin, "usuario": usuario,"ruc": ruc}
+                    contrasenafin = contrasena
+        payload = { "id": id, "cod_cliente": data["cod_cliente"], "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"],"ruc": data["ruc"],
+                   "nombre_cuenta": data["nombre_cuenta"],"nombre_cliente": data["nombre_cliente"], "nombre_rol": data["nombre_rol"], "estado" : data["estado"]}
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/Editusuarios', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data

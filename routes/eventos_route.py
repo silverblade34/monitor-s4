@@ -18,7 +18,7 @@ def listar_eventos():
 def editar_evento():
     _eventCL = EventosController()
     idevento = request.args["idevento"]
-    session["idevento"] = idevento
+    # session["idevento"] = idevento
     dataevento = _eventCL.buscarEvento(idevento)
     if dataevento["status"] == True:
         return render_template("edit_evento.html", id = idevento, dataevento = dataevento["data"], cliente = session["datauser"]["nombre_cuenta"])
@@ -28,7 +28,8 @@ def editar_evento():
 @app.route('/func_buscarEvento', methods=['GET'])
 def func_buscarEvento():
     _eventCL = EventosController()
-    idevento = session["idevento"]
+    # idevento = session["idevento"]
+    idevento = ""
     dataevento = _eventCL.buscarEvento(idevento)
     print(dataevento["data"])
     return dataevento["data"]
