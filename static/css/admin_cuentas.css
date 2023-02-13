@@ -70,20 +70,24 @@
 	border-bottom: 1px solid var(--grey);
 }
 
+#content .table-data .order table tr {
+	height: 50px;
+}
+
+
 #content .table-data .order table td {
 	padding: 16px 0;
+	height: 100%;
 }
 
 #content .table-data .order table tr td:first-child {
 	display: flex;
 	align-items: center;
+	margin-top: 8px;
 	grid-gap: 12px;
 	padding-left: 6px;
 }
 
-#content .table-data .order table tr {
-	line-height: 25px;
-}
 
 #content .table-data .order table td img {
 	width: 36px;
@@ -217,7 +221,6 @@
 .accordion-body {
 	margin-bottom: 9px;
 	padding: 0 18px;
-	background-color: white;
 	max-height: 0;
 	overflow: hidden;
 	transition: max-height 0.3s ease-out;

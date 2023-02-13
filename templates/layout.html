@@ -158,6 +158,7 @@ Author: SAEROX
                                 </li>
                             </ul>
                         </li>
+                        <li>{{ datauser.usuario}}</li>
                         <!-- End Notifications -->
                         <!-- User -->
                         <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#"
@@ -202,7 +203,7 @@ Author: SAEROX
                 <nav class="side-navbar box-scroll sidebar-scroll">
                     <!-- Begin Main Navigation -->
                     <ul class="list-unstyled">
-                        <li><a href="#"><i class='bx bx-home'></i><span>Home</span></a>
+                        <li><a href="/home"><i class='bx bx-home'></i><span>Home</span></a>
                         </li>
                         <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bxs-devices'></i><span>Monitoreo</span></a>
@@ -232,7 +233,7 @@ Author: SAEROX
                                 <li><a href="#">Top 10 placas x Eventos</a></li>
                             </ul>
                         </li>
-                        {% if datauser.cod_cliente == "All" %}
+                        {% if datauser.nombre_rol == "Administrador" %}
                         <li class="active"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
                             <ul id="dropdown-tables" class="collapse list-unstyled pt-0">

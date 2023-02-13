@@ -13,6 +13,7 @@ body {
   height: 100vh;
 }
 
+
 .left {
   overflow: hidden;
   display: flex;
@@ -49,9 +50,32 @@ body {
   background: rgba(38, 116, 212, 0.6);
 }
 
+/* Mensaje de alerta */
+.alert {
+  padding: 15px 10px;
+  background-color: #f44336; /* Red */
+  color: white;
+  margin-bottom: 15px;
+  max-width: 380px;
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* The close button */
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
 .header > h2 {
   margin: 0;
-  color: #3c6aff;
+  color: #535699;
   text-align: center;
 }
 
