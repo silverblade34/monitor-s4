@@ -16,20 +16,19 @@ def listar_eventos():
 
 @app.route('/editar_evento', methods=['GET'])
 def editar_evento():
-    _eventCL = EventosController()
-    idevento = request.args["idevento"]
-    # session["idevento"] = idevento
-    dataevento = _eventCL.buscarEvento(idevento)
-    if dataevento["status"] == True:
-        return render_template("edit_evento.html", id = idevento, dataevento = dataevento["data"], cliente = session["datauser"]["nombre_cuenta"])
+    if 'user' in session:
+        _eventCL = EventosController()
+        session["idevento"] = request.args["idevento"]
+        dataevento = _eventCL.buscarEvento(session["idevento"])
+        if dataevento["status"] == True:
+            return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], cliente = session["datauser"]["nombre_cuenta"], datauser = session["datauser"])
     else:
         return redirect(url_for('home'))
 
 @app.route('/func_buscarEvento', methods=['GET'])
 def func_buscarEvento():
     _eventCL = EventosController()
-    # idevento = session["idevento"]
-    idevento = ""
+    idevento = session["idevento"]
     dataevento = _eventCL.buscarEvento(idevento)
     print(dataevento["data"])
     return dataevento["data"]

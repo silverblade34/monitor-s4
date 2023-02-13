@@ -232,6 +232,7 @@ Author: SAEROX
                                 <li><a href="#">Top 10 placas x Eventos</a></li>
                             </ul>
                         </li>
+                        {% if datauser.cod_cliente == "All" %}
                         <li class="active"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
                             <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
@@ -244,6 +245,7 @@ Author: SAEROX
                                 </ul>
                             </ul>
                         </li>
+                        {% endif %}
                     </ul>
                     <!-- End Main Navigation -->
                 </nav>

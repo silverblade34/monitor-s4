@@ -11,7 +11,7 @@ def listar_usuarios():
     if 'user' in session:
         _userCL = UsuariosController()
         data = _userCL.listarUsuarios()
-        return render_template('admin_cuentas.html', datausuarios = data["data"])
+        return render_template('admin_cuentas.html', datausuarios = data["data"],datauser = session["datauser"])
     else:
         return redirect(url_for('login'))
     

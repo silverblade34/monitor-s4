@@ -15,6 +15,6 @@ class EventosResponse:
     
     def responseBuscarEvento(self, idevento):
         data = {"id": idevento}
-        resp = requests.post(f'161.35.104.161:3000/api/v1/Idbydnoticacion', data=json.dumps(data))
+        resp = requests.post(f'http://161.35.104.161:3000/api/v1/Idbydnoticacion', data=json.dumps(data))
         data = resp.json()
         return data

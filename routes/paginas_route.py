@@ -15,9 +15,9 @@ def index():
 @app.route('/home', methods=['GET'])
 def home():
     if 'user' in session:
-        # if 'idevento' in session:
-        #     session.pop('idevento', None)
-        return render_template('index.html')
+        if 'idevento' in session:
+            session.pop('idevento', None) 
+        return render_template('index.html', datauser = session["datauser"])
     else:
         return redirect(url_for('login'))
 
