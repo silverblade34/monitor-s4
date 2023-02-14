@@ -57,3 +57,13 @@ class UsuariosResponse:
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/Editusuarios', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
+
+    def responseCrearUsuarioCliente(self, datauser, cod_cuenta):
+        hed = {"Content-Type": "application/json"}
+        hash_object = hashlib.md5(datauser["contrasena"].encode())
+        contrasena = hash_object.hexdigest()
+        payload = {"cod_cuenta": cod_cuenta, "cod_cliente" : datauser["cod_cliente"], "contrasena" : contrasena, "usuario" : datauser["usuario"], "ruc" : datauser["ruc"], "nombre_cuenta": datauser["nombre_cuenta"],
+        "nombre_cliente": datauser["nombre_cliente"], "nombre_rol": datauser["nombre_rol"], "estado" : True}
+        resp = requests.post(f'http://161.35.104.161:3000/api/v1/Addusuarios', data= json.dumps(payload), headers= hed)
+        data = resp.json()
+        return data

@@ -1,0 +1,52 @@
+[{
+    "_id": {
+      "$oid": "63eba10a91a8b2e7ec8d406c"
+    },
+    "cod_cuenta": "0000",
+    "contrasena": "f05c5fddf445e5781b98d052faaa327f",
+    "usuario": "root",
+    "ruc": "",
+    "nombre_rol": "Administrador",
+    "nombre_cuenta": "ROOT",
+    "estado": true,
+    "clientes": []
+  },
+  {
+    "_id": {
+      "$oid": "63eba10a91a8b2e7ec8d406c"
+    },
+    "cod_cuenta": "0001",
+    "contrasena": "f05c5fddf445e5781b98d052faaa327f",
+    "usuario": "preciso",
+    "ruc": "",
+    "nombre_rol": "Administrador",
+    "nombre_cuenta": "ROOT",
+    "estado": true,
+    "clientes": [
+        {
+            "_id": {
+              "$oid": "63eba10a91a8b2e7ec8d406c"
+            },
+            "cod_cuenta": "0000",
+            "contrasena": "f05c5fddf445e5781b98d052faaa327f",
+            "usuario": "root",
+            "ruc": "",
+            "nombre_rol": "Administrador",
+            "nombre_cuenta": "ROOT",
+            "estado": true
+          },
+          {
+            "_id": {
+              "$oid": "63eba10a91a8b2e7ec8d406c"
+            },
+            "cod_cuenta": "0000",
+            "contrasena": "f05c5fddf445e5781b98d052faaa327f",
+            "usuario": "root",
+            "ruc": "",
+            "nombre_rol": "Administrador",
+            "nombre_cuenta": "ROOT",
+            "estado": true,
+            "clientes": []
+          }
+    ]
+  }]

@@ -59,3 +59,12 @@ def actualizar_cuenta():
         return data
     else:
         return redirect(url_for('login'))
+    
+@app.route('/crear_cuenta_cliente', methods=['POST'])
+def crear_cuenta_cliente():
+    if 'user' in session:
+        _userCL = UsuariosController()
+        data = _userCL.crearUsuarioCliente(request.json['data'], session['datauser']['cod_cuenta'])
+        return data
+    else:
+        return redirect(url_for('login'))

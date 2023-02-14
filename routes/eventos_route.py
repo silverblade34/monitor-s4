@@ -21,7 +21,7 @@ def editar_evento():
         session["idevento"] = request.args["idevento"]
         dataevento = _eventCL.buscarEvento(session["idevento"])
         if dataevento["status"] == True:
-            return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], cliente = session["datauser"]["nombre_cuenta"], datauser = session["datauser"])
+            return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
     else:
         return redirect(url_for('home'))
 
@@ -33,3 +33,12 @@ def func_buscarEvento():
     print(dataevento["data"])
     return dataevento["data"]
 
+
+@app.route('/tipo_evento', methods=['GET'])
+def tipo_evento():
+    if 'user' in session:
+        _eventCL = EventosController()
+        datatipoevento = _eventCL.listarTipoEventos()
+        return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento["data"])
+    else:
+        return redirect(url_for('home'))

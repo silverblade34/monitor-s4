@@ -41,6 +41,7 @@ Author: SAEROX
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{url_for('static', filename='css/tipo_evento.css')}}">
 </head>
 
 <body id="page-top">
@@ -234,14 +235,14 @@ Author: SAEROX
                             </ul>
                         </li>
                         {% if datauser.nombre_rol == "Administrador" %}
-                        <li class="active"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
+                        <li class=""><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
                             <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
                                 <a href="#dropdown-mantenimientos" aria-expanded="false"
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
                                 <ul id="dropdown-mantenimientos" class="collapse list-unstyled pt-0">
                                     <li><a href="/admincuentas">Usuarios</a></li>
-                                    <li><a class="active" href="tables-datatables.html">Datatables</a></li>
+                                    <li><a class="active" href="/tipo_evento">Tipo eventos</a></li>
                                     <li><a href="tables-tabledit.html">Tabledit</a></li>
                                 </ul>
                             </ul>
@@ -303,8 +304,6 @@ Author: SAEROX
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
     </script>
-    <script src="{{url_for('static', filename='js/act_tabla.js')}}"></script>
-    <script src="{{url_for('static', filename='js/edit_evento.js')}}"></script>
     <script src="{{url_for('static', filename='js/vendors/base/core.min.js')}}"></script>
     <!-- End Vendor Js -->
     <!-- Begin Page Vendor Js -->

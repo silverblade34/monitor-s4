@@ -412,15 +412,17 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
       .then(data => {
         console.log(data)
         Swal.fire({
-          title: "Editar cuenta",
+          title: "Editar cuenta cliente",
           html: `
           <form class="form-crearcuenta">
             <label class="form-label">Codigo de cuenta</label>
-            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}">
+            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}" disabled>
+            <label class="form-label">Codigo de cliente</label>
+            <input type="text" id="cod_cliente" class = "form-control input-text" value="${data.cod_cliente}" disabled>
             <label class="form-label">Tipo de Rol</label>
             <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.nombre_rol}" disabled>
             <label class="form-label">Empresa</label>
-            <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.nombre_cliente}">
+            <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.nombre_cliente}" disabled>
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
@@ -441,22 +443,24 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
             const codcuenta = document.getElementById("cod_cuenta").value;
+            const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
             const ruc = document.getElementById("ruc").value;
+            const nombre_rol = document.getElementById("nombre_rol").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
             const nombre_cliente = document.getElementById("nombre_cliente").value;
             return {
               id: cuentaId,
               data: {
                 cod_cuenta: codcuenta,
-                cod_cliente: "All",
+                cod_cliente: codcliente,
                 usuario: usuario,
                 contrasena: password,
                 ruc: ruc,
                 estado: estadoCheckbox,
                 nombre_cuenta: "",
-                nombre_rol: "Administrador",
+                nombre_rol: nombre_rol,
                 nombre_cliente: nombre_cliente
               }
             };

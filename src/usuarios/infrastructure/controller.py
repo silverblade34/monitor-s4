@@ -30,3 +30,8 @@ class UsuariosController:
         response = UsuariosResponse()
         data = response.responseListarCuentas()
         return data
+    
+    def crearUsuarioCliente(self, datauser, cod_cuenta):
+        response = UsuariosResponse()
+        data = response.responseCrearUsuarioCliente(datauser, cod_cuenta)
+        return data

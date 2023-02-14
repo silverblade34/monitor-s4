@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container-fluid tipo-evento">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Tipo de eventos</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class='bx bx-calendar-event'></i></a>
+                        </li>
+                        <li class="breadcrumb-item active">Administrar eventos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow tipo-evento">
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <table id="sorting-table" class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Prioridad</th>
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for evento in datatipoevento %}
+                                <tr>
+                                    <td>{{evento.cod_evento}}</td>
+                                    <td>{{evento.descripcion}}</td>
+                                    <td>{{evento.prioridad}}</td>
+                                    <td>{{evento.fecha_creacion}}</td>
+                                    {% if evento.status == True %}
+                                    <td><span class="status true">Activo</span></td>
+                                    {% else %}
+                                    <td><span class="status false">Desactivada</span></td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sorting -->
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+{% endblock %}

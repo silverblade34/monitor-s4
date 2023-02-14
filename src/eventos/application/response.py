@@ -18,3 +18,8 @@ class EventosResponse:
         resp = requests.post(f'http://161.35.104.161:3000/api/v1/Idbydnoticacion', data=json.dumps(data))
         data = resp.json()
         return data
+    
+    def responseListarTipoEventos(self):
+        resp = requests.get(f'http://192.168.1.44:3000/api/v1/allEvents')
+        data = resp.json()
+        return data
