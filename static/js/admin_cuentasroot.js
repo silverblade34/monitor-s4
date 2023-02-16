@@ -21,8 +21,6 @@ crearCuentaMaestra.addEventListener("click", function () {
     title: "Crear cuenta",
     html: `
       <form class="form-crearcuenta">
-        <label class="form-label">Codigo de cuenta</label>
-        <input type="text" id="cod_cuenta" class = "form-control input-text" placeholder="0001">
         <label class="form-label">Ruc</label>
         <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
         <label class="form-label">Empresa</label>
@@ -40,21 +38,18 @@ crearCuentaMaestra.addEventListener("click", function () {
     showCancelButton: true,
     confirmButtonText: "Crear",
     preConfirm: function () {
-      const codcuenta = document.getElementById("cod_cuenta").value;
       const usuario = document.getElementById("usuario_cuenta").value;
       const password = document.getElementById("password").value;
       const ruc = document.getElementById("ruc").value;
       const nombre_cuenta = document.getElementById("nombre_cuenta").value;
       return {
         data: {
-          cod_cuenta: codcuenta,
-          cod_cliente: "All",
+          cod_cuenta: "",
           usuario: usuario,
           contrasena: password,
           ruc: ruc,
           nombre_cuenta: nombre_cuenta,
           nombre_rol: "Administrador",
-          nombre_cliente: ""
         }
       };
     }
@@ -62,7 +57,7 @@ crearCuentaMaestra.addEventListener("click", function () {
     if (result.value) {
       const data = result.value;
       console.log(data);
-      if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+      if (!data.data.nombre_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
         Swal.fire("Error", "Todos los campos son requeridos", "error");
         return;
       }
@@ -159,11 +154,9 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
           html: `
           <form class="form-crearcuenta">
             <label class="form-label">Codigo de cuenta</label>
-            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}">
-            <label class="form-label">Tipo de Rol</label>
-            <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.nombre_rol}" disabled>
+            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}" disabled>
             <label class="form-label">Empresa</label>
-            <input type="text" id="nombre_cuenta" class = "form-control input-text" value="${data.nombre_cuenta}">
+            <input type="text" id="nombre_cuenta" class = "form-control input-text" value="${data.empresa}">
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
@@ -184,24 +177,21 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
             const codcuenta = document.getElementById("cod_cuenta").value;
+            const nombre_cuenta = document.getElementById("nombre_cuenta").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
             const ruc = document.getElementById("ruc").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
-            const nombre_cuenta = document.getElementById("nombre_cuenta").value;
-            
             return {
               id: cuentaId,
               data: {
                 cod_cuenta: codcuenta,
-                cod_cliente: "All",
+                nombre_rol: "Administrador",
                 usuario: usuario,
                 contrasena: password,
                 ruc: ruc,
                 estado: estadoCheckbox,
                 nombre_cuenta: nombre_cuenta,
-                nombre_rol: "Administrador",
-                nombre_cliente: ""
               }
             };
           }
@@ -242,6 +232,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
   });
 });
 
+
 // -------------------------Modal Crear cuenta cliente-----------------------------
 
 const crearCuentaCliente = document.getElementById("crearCuentaCliente");
@@ -258,7 +249,7 @@ crearCuentaCliente.addEventListener("click", function () {
     })
     .then(data => {
       console.log(data)
-      const options = data.map(item => `<option value="${item.cod_cuenta}">${item.nombre_cuenta}</option>`).join('');
+      const options = data.map(item => `<option value="${item.ID}">${item.empresa}</option>`).join('');
       Swal.fire({
         title: "Crear cliente",
         html: `
@@ -275,8 +266,6 @@ crearCuentaCliente.addEventListener("click", function () {
               <option value="Supervisor">Supervisor</option>
               <option value="Operador">Operador</option>
               </select>
-              <label class="form-label">Codigo de cliente</label>
-              <input type="text" id="cod_cliente" class = "form-control input-text" placeholder="Ejemplo: 0003">
               <label class="form-label">Ruc</label>
               <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
               <label class="form-label">Cliente</label>
@@ -294,21 +283,19 @@ crearCuentaCliente.addEventListener("click", function () {
         showCancelButton: true,
         confirmButtonText: "Crear",
         preConfirm: function () {
-          const codcuenta = document.getElementById("select-cuentamaestro").value;
+          const idcuenta = document.getElementById("select-cuentamaestro").value;
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
           const ruc = document.getElementById("ruc").value;
           const nombre_cliente = document.getElementById("nombre_cliente").value;
-          const cod_cliente = document.getElementById("cod_cliente").value;
           const nombre_rol = document.getElementById("select-rol").value;
           return {
             data: {
-              cod_cuenta: codcuenta,
-              cod_cliente: cod_cliente,
+              idcuenta: idcuenta,
+              cod_cliente: "",
               usuario: usuario,
               contrasena: password,
               ruc: ruc,
-              nombre_cuenta: "",
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
             }
@@ -317,13 +304,13 @@ crearCuentaCliente.addEventListener("click", function () {
       }).then(function (result) {
         if (result.value) {
           const data = result.value;
-          console.log(data);
-          if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+          console.log("Data a enviar" + data);
+          if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask
-          fetch("/crear_cuenta", {
+          fetch("/crear_cuenta_cliente", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -351,47 +338,6 @@ crearCuentaCliente.addEventListener("click", function () {
     });
 });
 
-// ----------------------------------Modal Eliminar cliente SweetAlert2-----------------------------------
-
-const btnsdeletecliente = document.querySelectorAll(".delete-cliente");
-
-btnsdeletecliente.forEach(btndeletecliente => {
-  btndeletecliente.addEventListener("click", function () {
-    Swal.fire({
-      title: 'Desea eliminar a este cliente?',
-      text: "",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Si, eliminar cuenta!'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        const cuentaId = this.dataset.cuentaId;
-
-        fetch(`/eliminar_cuenta?idusuario=${cuentaId}`, {
-          method: "GET",
-        })
-          .then(response => {
-            if (!response.ok) {
-              throw new Error("Error al eliminar cuenta");
-            }
-            return response.json();
-          })
-          .then(data => {
-            Swal.fire("Eliminado", data.message, "success");
-            setTimeout(function () {
-              location.reload();
-            }, 2000);
-          })
-          .catch(error => {
-            Swal.fire("Error", "Error al eliminar cuenta", "error");
-          });
-      }
-    });
-  });
-});
-
 
 // ----------------------------------Modal Editar cuenta cliente SweetAlert2-----------------------------------
 
@@ -400,12 +346,13 @@ const editarCuentasCliente = document.querySelectorAll(".editar-cliente");
 editarCuentasCliente.forEach(editarCuentaCliente => {
   editarCuentaCliente.addEventListener("click", function () {
     const cuentaId = this.dataset.cuentaId;
-    fetch(`/buscar_cuenta?idusuario=${cuentaId}`, {
+    const codCliente = this.dataset.codCliente;
+    fetch(`/buscar_cuenta_cliente?idcuenta=${cuentaId}&codcliente=${codCliente}`, {
       method: "GET",
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error("Error al buscar cuenta");
+          throw new Error("Error al buscar cliente");
         }
         return response.json();
       })
@@ -415,14 +362,12 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
           title: "Editar cuenta cliente",
           html: `
           <form class="form-crearcuenta">
-            <label class="form-label">Codigo de cuenta</label>
-            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}" disabled>
             <label class="form-label">Codigo de cliente</label>
             <input type="text" id="cod_cliente" class = "form-control input-text" value="${data.cod_cliente}" disabled>
-            <label class="form-label">Tipo de Rol</label>
-            <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.nombre_rol}" disabled>
             <label class="form-label">Empresa</label>
-            <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.nombre_cliente}" disabled>
+            <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.empresa}" disabled>
+            <label class="form-label">Tipo de Rol</label>
+            <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.rol}" disabled>
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
@@ -442,7 +387,6 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
           showCancelButton: true,
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
-            const codcuenta = document.getElementById("cod_cuenta").value;
             const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
@@ -453,27 +397,25 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
             return {
               id: cuentaId,
               data: {
-                cod_cuenta: codcuenta,
                 cod_cliente: codcliente,
+                nombre_cliente: nombre_cliente,
                 usuario: usuario,
                 contrasena: password,
                 ruc: ruc,
-                estado: estadoCheckbox,
-                nombre_cuenta: "",
-                nombre_rol: nombre_rol,
-                nombre_cliente: nombre_cliente
+                rol_cliente: nombre_rol,
+                estado: estadoCheckbox
               }
             };
           }
         }).then(function (result) {
           if (result.value) {
             const data = result.value;
-            if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+            if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
             }
             // Envía los datos del formulario a una ruta POST en Flask
-            fetch("/actualizar_cuenta", {
+            fetch("/actualizar_cuenta_cliente", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json"
@@ -501,5 +443,49 @@ editarCuentasCliente.forEach(editarCuentaCliente => {
       })
   });
 });
+
+// ----------------------------------Modal Eliminar cliente SweetAlert2-----------------------------------
+
+const btnsdeletecliente = document.querySelectorAll(".delete-cliente");
+
+btnsdeletecliente.forEach(btndeletecliente => {
+  btndeletecliente.addEventListener("click", function () {
+    Swal.fire({
+      title: 'Desea eliminar a este cliente?',
+      text: "",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar cliente!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const cuentaId = this.dataset.cuentaId;
+        const codCliente = this.dataset.codCliente;
+
+        fetch(`/eliminar_cuenta_cliente?idusuario=${cuentaId}&codcliente=${codCliente}`, {
+          method: "GET",
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error("Error al eliminar cuenta");
+            }
+            return response.json();
+          })
+          .then(data => {
+            Swal.fire("Eliminado", data.message, "success");
+            setTimeout(function () {
+              location.reload();
+            }, 2000);
+          })
+          .catch(error => {
+            Swal.fire("Error", "Error al eliminar cuenta", "error");
+          });
+      }
+    });
+  });
+});
+
+
 
 

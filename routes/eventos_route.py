@@ -9,8 +9,8 @@ CORS(app)
 @app.route('/listar_eventos', methods=['GET'])
 def listar_eventos():
     _eventCL = EventosController()
-    cod_cuenta = session["datauser"]["cod_cuenta"]
-    cod_cliente = session["datauser"]["cod_cliente"]
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    cod_cliente = session["cod_admin"]
     dataevento = _eventCL.listarEventos(cod_cuenta, cod_cliente)
     return dataevento
 
@@ -33,12 +33,3 @@ def func_buscarEvento():
     print(dataevento["data"])
     return dataevento["data"]
 
-
-@app.route('/tipo_evento', methods=['GET'])
-def tipo_evento():
-    if 'user' in session:
-        _eventCL = EventosController()
-        datatipoevento = _eventCL.listarTipoEventos()
-        return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento["data"])
-    else:
-        return redirect(url_for('home'))

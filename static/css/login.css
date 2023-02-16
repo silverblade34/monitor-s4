@@ -100,7 +100,6 @@ body {
 .input-field {
   max-width: 380px;
   width: 100%;
-
   height: 55px;
   background-color: #f0f0f0;
   margin: 10px 0;
@@ -127,6 +126,8 @@ body {
   font-size: 1.1rem;
   color: #8889ad;
 }
+
+
 .div-btn-ingresar{
   display: flex;
   width: 100%;
@@ -134,8 +135,8 @@ body {
 }
 
 .input-field input::placeholder {
-  color: #54546d;
-  font-weight: 500;
+  color: #a3a3cf;
+  font-weight: 700;
 }
 
 .btn {

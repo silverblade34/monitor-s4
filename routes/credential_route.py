@@ -11,14 +11,15 @@ CORS(app)
 # Por otro lado si llega al enlace por medio de un POST validara si los datos son correctos
 def login():
     if request.method == 'POST':
-        if str(request.form['username']) != "" and str(request.form['password']) != "":
+        if str(request.form['codcuenta']) != "" and str(request.form['password']) != "":
             _credentialCL = CredentialController()
-            data = _credentialCL.validarUsuario(request.form['username'], request.form['password'])
-            if data["status"] == True:
-                session['user'] = data["data"]["usuario"]
-                session["datauser"] = data["data"]
+            datauser = _credentialCL.validarUsuario(request.form['codcuenta'], request.form['password'])
+            if datauser["status"] == True:
+                session["user"] = datauser["data"]["Usuario"]
+                session["datauser"] = datauser["data"]
+                session["cod_admin"] = datauser["CodClienteAdmin"]
                 return redirect(url_for('home'))
-            elif data["status"] == False:
+            elif datauser["status"] == False:
                 return render_template('login.html', message = "Usuario no válido")
             return render_template('login.html')
         else:

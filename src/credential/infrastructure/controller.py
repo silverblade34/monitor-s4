@@ -2,8 +2,8 @@ from src.credential.application.response import ResponseCredential
 from src.credential.infrastructure.api import ApiConnection
 
 class CredentialController:
-    def validarUsuario(self, username, passwoord):
-        response = ResponseCredential()
+    def validarUsuario(self, codcuenta, passwoord):
         connectapi = ApiConnection()
-        data = connectapi.connectionApi(username, passwoord)
+        data = connectapi.connectionApi(codcuenta, passwoord)
         return data
+    

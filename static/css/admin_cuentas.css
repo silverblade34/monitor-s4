@@ -60,14 +60,20 @@
 
 #content .table-data .order table {
 	width: 100%;
+
 	border-collapse: collapse;
 }
 
 #content .table-data .order table th {
 	padding-bottom: 12px;
 	font-size: 13px;
-	text-align: left;
+	text-align: start;
 	border-bottom: 1px solid var(--grey);
+}
+
+#content .table-data .order table th:last-child{
+	text-align: right;
+	padding-right: 25px;
 }
 
 #content .table-data .order table tr {
@@ -78,16 +84,22 @@
 #content .table-data .order table td {
 	padding: 16px 0;
 	height: 100%;
+	text-align: start;
 }
 
 #content .table-data .order table tr td:first-child {
 	display: flex;
 	align-items: center;
+	text-align: center;
 	margin-top: 8px;
 	grid-gap: 12px;
 	padding-left: 6px;
 }
 
+#content .table-data .order table tr td:last-child {
+	text-align: right;
+	padding-right: 25px; /* alinea el contenido de la última columna a la derecha */
+  }
 
 #content .table-data .order table td img {
 	width: 36px;

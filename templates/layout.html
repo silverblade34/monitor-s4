@@ -93,73 +93,11 @@ Author: SAEROX
                         <li class="nav-item dropdown"><a id="notifications" rel="nofollow" data-target="#" href="#"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i
                                     class="la la-bell animated infinite swing"></i><span class="badge-pulse"></span></a>
-                            <ul aria-labelledby="notifications" class="dropdown-menu notification">
-                                <li>
-                                    <div class="notifications-header">
-                                        <div class="title">Notifications (4)</div>
-                                        <div class="notifications-overlay"></div>
-                                        <img src="{{url_for('static', filename='icons/logo-text')}}" alt="">
-                                    </div>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="message-icon">
-                                            <i class="la la-user"></i>
-                                        </div>
-                                        <div class="message-body">
-                                            <div class="message-body-heading">
-                                                New user registered
-                                            </div>
-                                            <span class="date">2 hours ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="message-icon">
-                                            <i class="la la-calendar-check-o"></i>
-                                        </div>
-                                        <div class="message-body">
-                                            <div class="message-body-heading">
-                                                New event added
-                                            </div>
-                                            <span class="date">7 hours ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="message-icon">
-                                            <i class="la la-history"></i>
-                                        </div>
-                                        <div class="message-body">
-                                            <div class="message-body-heading">
-                                                Server rebooted
-                                            </div>
-                                            <span class="date">7 hours ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                        <div class="message-icon">
-                                            <i class="la la-twitter"></i>
-                                        </div>
-                                        <div class="message-body">
-                                            <div class="message-body-heading">
-                                                You have 3 new followers
-                                            </div>
-                                            <span class="date">10 hours ago</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center">View
-                                        All Notifications</a>
-                                </li>
+                            <ul aria-labelledby="notifications" class="dropdown-menu notification" id="dropdown-menu-notification">
+                               
                             </ul>
                         </li>
-                        <li>{{ datauser.usuario}}</li>
+                        <li>{{ datauser.Usuario}}</li>
                         <!-- End Notifications -->
                         <!-- User -->
                         <li class="nav-item dropdown"><a id="user" rel="nofollow" data-target="#" href="#"
@@ -204,7 +142,7 @@ Author: SAEROX
                 <nav class="side-navbar box-scroll sidebar-scroll">
                     <!-- Begin Main Navigation -->
                     <ul class="list-unstyled">
-                        <li><a href="/home"><i class='bx bx-home'></i><span>Home</span></a>
+                        <li class="{% if codp == 'home' %} active {% endif %}"><a href="/home"><i class='bx bx-home'></i><span>Home</span></a>
                         </li>
                         <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bxs-devices'></i><span>Monitoreo</span></a>
@@ -234,16 +172,16 @@ Author: SAEROX
                                 <li><a href="#">Top 10 placas x Eventos</a></li>
                             </ul>
                         </li>
-                        {% if datauser.nombre_rol == "Administrador" %}
-                        <li class=""><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
+                        {% if datauser.Rol == "Administrador" %}
+                        <li class="{% if codp =='adm-u' or codp =='adm-tipevent' %} active {% endif %}"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
-                            <ul id="dropdown-tables" class="collapse list-unstyled pt-0">
+                            <ul id="dropdown-tables" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' %} show{% endif %} pt-0">
                                 <a href="#dropdown-mantenimientos" aria-expanded="false"
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
-                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled pt-0">
-                                    <li><a href="/admincuentas">Usuarios</a></li>
-                                    <li><a class="active" href="/tipo_evento">Tipo eventos</a></li>
-                                    <li><a href="tables-tabledit.html">Tabledit</a></li>
+                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' %} show {% endif %} pt-0">
+                                    <li><a class="{% if codp =='adm-u' %} active {% endif %}" href="/listar_usuarios">Usuarios</a></li>
+                                    <li><a class="{% if codp =='adm-tipevent' %} active {% endif %}" href="/tipo_evento">Tipo eventos</a></li>
+                                    <li><a class="{% if codp =='' %} active {% endif %}" href="tables-tabledit.html">Tabledit</a></li>
                                 </ul>
                             </ul>
                         </li>
@@ -298,7 +236,9 @@ Author: SAEROX
     <!-- End Page Content -->
     </div>
     </div>
+    
     <script src="{{url_for('static', filename='js/vendors/base/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/notificaciones.js')}}"></script>
     <!-- Carga de la API de Google Maps -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
@@ -320,9 +260,6 @@ Author: SAEROX
     <!-- Begin Page Snippets -->
     <script src="{{url_for('static', filename='js/components/tables/tables.js')}}"></script>
     <!-- End Page Snippets -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.2.2/dist/sweetalert2.min.js"
-        integrity="sha384-54y5LwpQO9Xc4gqe7bKHWp15P5leOcdupjPk33ltC/8c1e9G1Ei+l2DjwU6zPOZ0"
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
