@@ -4,8 +4,8 @@ from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 import requests
 
-from app import app
-#from __main__ import app
+#from app import app
+from __main__ import app
 app.secret_key = "hhyy526//--"
 CORS(app)
 

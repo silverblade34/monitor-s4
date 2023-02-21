@@ -11,13 +11,12 @@ RUN apk update && \
     pip install -r requirements.txt
 
 RUN apk update && apk add nginx
-
-# Instalar gunicorn
-RUN pip install gunicorn
 # Copiar todos los archivos y carpetas del proyecto
 COPY . .
 COPY nginx.conf /etc/nginx/nginx.conf
 
+# Establecer la puerta de escucha en el contenedor
+EXPOSE 5020
 
 # Ejecutar comandos
-CMD ["gunicorn", "-b", "0.0.0.0:5000", "app:app"]
+CMD ["sh", "-c", "pip install -r requirements.txt && python app.py & nginx -g 'daemon off;'"]
