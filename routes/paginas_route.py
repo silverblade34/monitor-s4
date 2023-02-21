@@ -5,9 +5,14 @@ from src.eventos.infrastructure.controller import EventosController
 import requests
 
 #from app import app
-from __main__ import app
+from __main__ import app, cache
 app.secret_key = "hhyy526//--"
 CORS(app)
+
+@app.route('/layout')
+@cache.cached(timeout=60*60*24)
+def layout():
+    return render_template('layout.html')
 
 @app.route('/', methods=['GET'])
 def index():
