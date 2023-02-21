@@ -14,10 +14,10 @@
             </div>
         </div>
     </div>
+    {% if datauser.CodCuenta == "0000" %}
     <div class="row">
         <div class="col-xl-12">
             <div id="content">
-                {% if datauser.cod_cuenta == "0000" %}
                 <div class="table-data usuarios">
                     <div class="order">
                         <div class="head">
@@ -28,23 +28,18 @@
                             <thead>
                                 <tr>
                                     <th>Empresa</th>
-                                    <th>Usuario</th>
-                                    <th>Rol</th>
-                                    <th>Codigo</th>
+                                    <th>Codigo de cuenta</th>
                                     <th>Status</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for usuario in datausuarios %}
-                                {% if usuario.cod_cliente == "All" and usuario.cod_cuenta != "0000"%}
+                                {% for usuario in datacuentas %}
                                 <tr>
                                     <td>
                                         <img src="{{url_for('static', filename='img/user-img-web.png')}}">
-                                        <div>{{usuario.nombre_cuenta}}</div>
+                                        <div>{{usuario.empresa}}</div>
                                     </td>
-                                    <td>{{usuario.usuario}}</td>
-                                    <td>{{usuario.nombre_rol}}</td>
                                     <td>{{usuario.cod_cuenta}}</td>
                                     {% if usuario.estado == True %}
                                     <td><span class="status true">Activo</span></td>
@@ -58,7 +53,6 @@
                                                 class="bx bx-x delete"></i></a>
                                     </td>
                                 </tr>
-                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>
@@ -70,61 +64,62 @@
                                 cliente</button>
                         </div>
                         <ul class="todo-list">
-                            {% for usuario in datausuarios %}
-                            {% if usuario.cod_cliente == "All" and usuario.cod_cuenta != "0000" and usuario.nombre_rol
-                            == "Administrador" %}
+                            {% for usuario in datacuentas %}
                             <li class="li completed accordion-header">
-                                <p class="accordion-title">{{usuario.usuario}}</p>
+                                <p class="accordion-title">{{usuario.empresa}}</p>
                                 <i class='bx bx-plus'></i>
                             </li>
                             <div class="accordion-body">
-                                {% for u in datausuarios %}
-                                {% if u.cod_cuenta == usuario.cod_cuenta and u.cod_cliente != "All" %}
+                                {% for cliente in usuario.clientes %}
                                 <li class="li not-completed">
-                                    <p>{{u.nombre_cliente}} / {{u.cod_cliente}} / {{u.nombre_rol}}</p>
+                                    <p>{{cliente.empresa}} / {{cliente.cod_cliente}} / {{cliente.rol}}
+                                    </p>
                                     <div>
-                                        <a href="#" class="editar-cliente" data-cuenta-id="{{u.ID}}"><i
+                                        <a href="#" class="editar-cliente" data-cuenta-id="{{usuario.ID}}"
+                                            data-cod-cliente="{{cliente.cod_cliente}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-cliente" data-cuenta-id="{{u.ID}}"><i
+                                        <a href="#" class="delete-cliente" data-cuenta-id="{{usuario.ID}}"
+                                            data-cod-cliente="{{cliente.cod_cliente}}"><i
                                                 class="bx bx-x delete"></i></a>
                                     </div>
                                 </li>
-                                {% endif %}
                                 {% endfor %}
                             </div>
-                            {% endif %}
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
-                {% elif datauser.cod_cliente == "All" and datauser.cod_cuenta != "0000" %}
+            </div>
+        </div>
+    </div>
+    <!-- ----------------Lo que se va a mostrar cuando ingrese una cuenta que no sea ROOT------------------------- -->
+    {% elif datauser.CodCliente == "All" %}
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="content">
                 <div class="table-data usuarios">
                     <div class="order">
                         <div class="head">
                             <h3>Clientes</h3>
-                            <button id="crearCliente" class="btn btn-success">Crear cliente</button>
+                            <button id="crearCliente-2" class="btn btn-success">Crear cliente</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>Empresa</th>
-                                    <th>Usuario</th>
-                                    <th>Rol</th>
-                                    <th>Codigo</th>
+                                    <th>Codigo de cliente</th>
                                     <th>Status</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for usuario in datausuarios %}
-                                {% if usuario.cod_cuenta ==  datauser.cod_cuenta and usuario.nombre_rol == "Administrador" and usuario.cod_cliente != "All" %}
+                                {% for usuario in datacuentas[0].clientes %}
+                                {% if usuario.rol == "Administrador" %}
                                 <tr>
                                     <td>
                                         <img src="{{url_for('static', filename='img/user-img-web.png')}}">
-                                        <div>{{usuario.nombre_cliente}}</div>
+                                        <div>{{usuario.empresa}}</div>
                                     </td>
-                                    <td>{{usuario.usuario}}</td>
-                                    <td>{{usuario.nombre_rol}}</td>
                                     <td>{{usuario.cod_cliente}}</td>
                                     {% if usuario.estado == True %}
                                     <td><span class="status true">Activo</span></td>
@@ -132,9 +127,11 @@
                                     <td><span class="status false">Desactivada</span></td>
                                     {% endif %}
                                     <td class="actions">
-                                        <a href="#" class="editar-cuenta" data-cuenta-id="{{usuario.ID}}"><i
+                                        <a href="#" class="editar-cliente-2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-cliente-2" data-cuenta-id="{{usuario.ID}}"><i
+                                        <a href="#" class="delete-cliente-2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-x delete"></i></a>
                                     </td>
                                 </tr>
@@ -145,26 +142,29 @@
                     </div>
                     <div class="accordion todo">
                         <div class="head">
-                            <h3>Usuarios x cliente</h3>
-                            <button id="crearCuentaCliente" class="btn btn-primary text-color-white">Crear
+                            <h3>Usuarios por clientes</h3>
+                            <button id="crearUsuarioXCliente" class="btn btn-primary text-color-white">Crear
                                 usuario</button>
                         </div>
                         <ul class="todo-list">
-                            {% for usuario in datausuarios %}
-                            {% if usuario.cod_cuenta ==  datauser.cod_cuenta and usuario.nombre_rol == "Administrador" and usuario.cod_cliente != "All" %}
+                            {% for cliente in datacuentas[0].clientes %}
+                            {% if cliente.rol == "Administrador" %}
                             <li class="li completed accordion-header">
-                                <p class="accordion-title">{{usuario.nombre_cliente}}</p>
+                                <p class="accordion-title">{{cliente.empresa}}</p>
                                 <i class='bx bx-plus'></i>
                             </li>
                             <div class="accordion-body">
-                                {% for u in datausuarios %}
-                                {% if u.cod_cliente == usuario.cod_cliente %} 
+                                {% for usuarios in datacuentas[0].clientes %}
+                                {% if usuarios.empresa == cliente.empresa %}
                                 <li class="li not-completed">
-                                    <p>{{u.nombre_cliente}} / {{u.cod_cliente}} / {{u.nombre_rol}}</p>
+                                    <p>{{usuarios.empresa}} / {{usuarios.cod_cliente}} / {{usuarios.rol}}
+                                    </p>
                                     <div>
-                                        <a href="#" class="editar-cliente" data-cuenta-id="{{u.ID}}"><i
+                                        <a href="#" class="editarUsuarioXCliente" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuarios.cod_cliente}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-cliente" data-cuenta-id="{{u.ID}}"><i
+                                        <a href="#" class="delete-clienteUsuario" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuarios.cod_cliente}}"><i
                                                 class="bx bx-x delete"></i></a>
                                     </div>
                                 </li>
@@ -176,42 +176,55 @@
                         </ul>
                     </div>
                 </div>
-                {% else %}
+            </div>
+        </div>
+    </div>
+    <!-- ----------------Lo que se va a mostrar cuando ingrese un cliente de una cuenta------------------------- -->
+    {% elif datauser.CodCliente != "All" %}
+    <div class="row">
+        <div class="col-xl-12">
+            <div id="content">
                 <div class="table-data usuarios">
                     <div class="order">
                         <div class="head">
-                            <h3>Usuarios</h3>
-                            <button id="crearCuentaMaestra" class="btn btn-success">Crear usuario</button>
+                            <h3>Clientes</h3>
+                            <button id="crearusuario-2" data-rp-empresa="{{datauser.Empresa}}" data-rp-ruc="{{datauser.Ruc}}" class="btn btn-success">Crear usuario</button>
                         </div>
                         <table>
                             <thead>
                                 <tr>
                                     <th>Empresa</th>
                                     <th>Usuario</th>
+                                    <th>Codigo usuario</th>
+                                    <th>Codigo de cuenta</th>
                                     <th>Rol</th>
                                     <th>Status</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for usuario in datausuarios %}
-                                {% if usuario.cod_cliente ==  datauser.cod_cliente %}
+                                {% for usuario in datacuentas[0].clientes %}
+                                {% if usuario.empresa == datauser.Empresa %}
                                 <tr>
                                     <td>
                                         <img src="{{url_for('static', filename='img/user-img-web.png')}}">
-                                        <div>{{usuario.nombre_cliente}}</div>
+                                        <div>{{usuario.empresa}}</div>
                                     </td>
                                     <td>{{usuario.usuario}}</td>
-                                    <td>{{usuario.nombre_rol}}</td>
+                                    <td>{{usuario.cod_cliente}}</td>
+                                    <td>{{datacuentas[0].cod_cuenta}}</td>
+                                    <td>{{usuario.rol}}</td>
                                     {% if usuario.estado == True %}
                                     <td><span class="status true">Activo</span></td>
                                     {% else %}
                                     <td><span class="status false">Desactivada</span></td>
                                     {% endif %}
                                     <td class="actions">
-                                        <a href="#" class="editar-cuenta" data-cuenta-id="{{usuario.ID}}"><i
+                                        <a href="#" class="editarUsuarioXCliente2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-cuenta" data-cuenta-id="{{usuario.ID}}"><i
+                                        <a href="#" class="delete-clienteUsuario2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                            data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-x delete"></i></a>
                                     </td>
                                 </tr>
@@ -221,12 +234,13 @@
                         </table>
                     </div>
                 </div>
-                {% endif %}
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="{{url_for('static', filename='js/admin_cuentas.js')}}"></script>
-<script src="{{url_for('static', filename='js/admin_clientes.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+<script src="{{url_for('static', filename='js/admin_cuentasroot.js')}}" defer></script>
+<script src="{{url_for('static', filename='js/admin_usuarios.js')}}" defer></script>
+<script src="{{url_for('static', filename='js/admin_clientes.js')}}" defer></script>
 {% endblock %}

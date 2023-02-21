@@ -7,7 +7,7 @@
     // ------------------------------------------------------ //
 	$(window).on("load", function () {
 		$(".loader").fadeOut();
-		$("#preloader").delay(350).fadeOut("slow");
+		$("#preloader").delay(50).fadeOut("slow");
 	});
 	
 	// ------------------------------------------------------- //

@@ -254,3 +254,24 @@ body {
   cursor: pointer;
 }
 
+
+/* Ventana de carga loader */
+
+.hidden-loader{
+	height: 100vh;
+	width: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	background-color: rgba(155, 155, 155, 0.24);
+  }
+  
+  .hidden-loader img{
+	width: 80px;
+  }
+
+/* Ventana de carga loader */

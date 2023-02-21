@@ -363,6 +363,7 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
   editarUsuarioXcliente.addEventListener("click", function () {
     const cuentaId = this.dataset.cuentaId;
     const codCliente = this.dataset.codCliente;
+    console.log("...............................1")
     fetch(`/buscar_cuenta_cliente?idcuenta=${cuentaId}&codcliente=${codCliente}`, {
       method: "GET",
     })

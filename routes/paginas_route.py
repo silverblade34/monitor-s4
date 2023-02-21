@@ -4,6 +4,7 @@ from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 import requests
 
+#from app import app
 from __main__ import app
 app.secret_key = "hhyy526//--"
 CORS(app)
@@ -33,7 +34,7 @@ def listar_usuarios():
         try:
             _userCL = UsuariosController()
             data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
-            return render_template('admin_cuentas2.html', datacuentas = data["data"], datauser = session["datauser"], codp = "adm-u")
+            return render_template('admin_cuentas.html', datacuentas = data["data"], datauser = session["datauser"], codp = "adm-u")
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -44,8 +45,13 @@ def listar_usuarios():
 @app.route('/tipo_evento', methods=['GET'])
 def tipo_evento():
     if 'user' in session:
-        _eventCL = EventosController()
-        datatipoevento = _eventCL.listarTipoEventos()
-        return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento["data"], codp = "adm-tipevent")
+        try:
+            _eventCL = EventosController()
+            datatipoevento = _eventCL.listarTipoEventos()
+            return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento["data"], codp = "adm-tipevent")
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
         return redirect(url_for('home'))

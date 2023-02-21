@@ -12,6 +12,11 @@
 </head>
 
 <body onload="randombg()">
+     <!-- Ventana de loader -->
+     <div class="hidden-loader" id="hidden-loader">
+      <img src="{{url_for('static', filename='img/gif-loader2.gif')}}" alt="">
+  </div>
+  <!-- Ventana de loader -->
   <div class="container">
     <div class="left">
       <img src="{{url_for('static', filename='icons/logo-png.png')}}" class="animation a6"
@@ -39,7 +44,7 @@
           <i class="fa fa-eye" id="password-toggle"></i>
         </div>
         <div class="div-btn-ingresar">
-          <input class="btn solid" id="btn-ingresar-preciso" type="submit" value="Ingresar" />
+          <input class="btn solid btn-ingresar-monitor" id="btn-ingresar-preciso" type="submit" value="Ingresar" />
         </div>
       </form>
     </div>

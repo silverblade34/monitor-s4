@@ -25,7 +25,6 @@ crearUsuarios2.addEventListener("click", function () {
               <label class="form-label">Rol</label>
               <select class="form-select" id="select-rol" aria-label="Default select example">
               <option selected>Seleccione un rol</option>
-              <option value="Administrador">Administrador</option>
               <option value="Supervisor">Supervisor</option>
               <option value="Operador">Operador</option>
               </select>
