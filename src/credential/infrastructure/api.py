@@ -8,7 +8,9 @@ class ApiConnection:
         hed = {"Content-Type": "application/json"}  
         hash_object = hashlib.md5(pasw.encode())
         passw = hash_object.hexdigest()
-        body = {"cod_cuenta": user, "contrasena" : passw}
+        body = {"usuario": user, "contrasena" : passw}
+        print(json.dumps(body))
         get_tramas = requests.post(url, data= json.dumps(body), headers= hed)
         rawData = get_tramas.json()
+        print(json.dumps(rawData))
         return rawData

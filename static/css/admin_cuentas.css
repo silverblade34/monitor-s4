@@ -272,7 +272,7 @@
 
 .form-crearcuenta .input-pass {
 	border: 0.5px solid rgb(155, 155, 155);
-	font-family: 'Courier New', Courier, monospace;
+	font-family: var(--poppins);
 }
 
 .form-crearcuenta textarea {

@@ -7,6 +7,7 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 CORS(app)
 import routes.credential_route
 import routes.paginas_route
+import routes.tipoeventos_route
 import routes.eventos_route
 import routes.usuarios_routes
 from routes.paginas_route import pagina_no_encontrada

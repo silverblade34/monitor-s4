@@ -19,10 +19,49 @@
     <!-- End Page Header -->
     <div class="row">
         <div class="col-xl-12">
+            {% if datauser.CodCliente == "All" %}
+                    <!-- Sorting -->
+                    <div class="widget has-shadow tipo-evento pt-4 pb-4">
+                        <div id="widget-body" class="widget-body">
+                            <div class="table-responsive">
+                                <table id="sorting-table" class="table mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Cliente</th>
+                                            <th>Código</th>
+                                            <th>Descripción</th>
+                                            <th>Prioridad</th>
+                                            <th>Fecha creación</th>
+                                            <th>Estado</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for evento in datatipoevento %}
+                                        <tr>
+                                            <td>{{evento.cod_cliente}}</td>
+                                            <td>{{evento.cod_evento}}</td>
+                                            <td>{{evento.descripcion}}</td>
+                                            <td>{{evento.prioridad}}</td>
+                                            <td>{{evento.fecha_creacion}}</td>
+                                            {% if evento.status == True %}
+                                            <td><span class="status true">Activo</span></td>
+                                            {% else %}
+                                            <td><span class="status false">Desactivada</span></td>
+                                            {% endif %}
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Sorting -->
+            {% elif datauser.CodCliente != "All" %}
             <!-- Sorting -->
             <div class="widget has-shadow tipo-evento">
                 <div id="widget-body" class="widget-body">
                     <div class="table-responsive">
+                        <button class="btn btn-success mb-3" id="crear-evento-cliente">Crear evento</button>
                         <table id="sorting-table" class="table mb-0">
                             <thead>
                                 <tr>
@@ -31,6 +70,7 @@
                                     <th>Prioridad</th>
                                     <th>Fecha creación</th>
                                     <th>Estado</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -45,6 +85,10 @@
                                     {% else %}
                                     <td><span class="status false">Desactivada</span></td>
                                     {% endif %}
+                                    <td class="actions">
+                                        <a href="#" title="Editar" class="editarTipoEvento me-2" data-cod-evento="{{evento.cod_evento}}"><i class="bx bx-edit edit"></i></a>
+                                        <a href="#" title="Ver payload" class="verPayloads" data-cod-evento="{{evento.cod_evento}}" data-cod-cliente="{{datauser.CodCliente}}" data-cod-cuenta="{{datauser.CodCuenta}}"><i class='bx bx-code' ></i></a>
+                                    </td>
                                 </tr>
                                 {% endfor %}
                             </tbody>
@@ -53,9 +97,10 @@
                 </div>
             </div>
             <!-- End Sorting -->
+            {% endif %}
         </div>
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+<script src="{{url_for('static', filename='js/tipo_eventos.js')}}" defer></script>
 {% endblock %}

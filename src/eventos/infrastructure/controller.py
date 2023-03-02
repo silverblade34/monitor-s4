@@ -11,8 +11,5 @@ class EventosController:
         data = response.responseBuscarEvento(idevento)
         return data
     
-    def listarTipoEventos(self):
-        response = EventosResponse()
-        data = response.responseListarTipoEventos()
-        return data
+
     

@@ -2,6 +2,7 @@ from flask import Flask, request, render_template, redirect, url_for, session
 from flask_cors import CORS
 from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
+from src.tipoEventos.infrastructure.controller import TipoEventosController
 import requests
 
 #from app import app
@@ -51,9 +52,11 @@ def listar_usuarios():
 def tipo_evento():
     if 'user' in session:
         try:
-            _eventCL = EventosController()
-            datatipoevento = _eventCL.listarTipoEventos()
-            return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento["data"], codp = "adm-tipevent")
+            _eventTypeCL = TipoEventosController()
+            cod_cuenta = session["datauser"]["CodCuenta"]
+            cod_cliente = session["cod_admin"]
+            datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
+            return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento, codp = "adm-tipevent")
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)

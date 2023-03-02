@@ -22,10 +22,7 @@ crearClientes2.addEventListener("click", function () {
             <form class="form-crearcuenta">
               <label class="form-label">Rol</label>
               <select class="form-select" id="select-rol" aria-label="Default select example">
-              <option selected>Seleccione un rol</option>
-              <option value="Administrador">Administrador</option>
-              <option value="Supervisor">Supervisor</option>
-              <option value="Operador">Operador</option>
+              <option value="Administrador" selected>Administrador</option>
               </select>
               <label class="form-label">Ruc</label>
               <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
@@ -273,7 +270,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
         title: "Crear usuario",
         html: `
             <form class="form-crearcuenta">
-              <label class="form-label">Cliente</label>
+              <label class="form-label">Cliente asociado</label>
               <select class="form-select" id="select-cuentacliente" aria-label="Default select example">
               <option selected>A que cliente pertenece</option>
               ${options}
@@ -281,7 +278,6 @@ crearUsuariosXcliente.addEventListener("click", function () {
               <label class="form-label">Rol</label>
               <select class="form-select" id="select-rol" aria-label="Default select example">
               <option selected>Seleccione un rol</option>
-              <option value="Administrador">Administrador</option>
               <option value="Supervisor">Supervisor</option>
               <option value="Operador">Operador</option>
               </select>

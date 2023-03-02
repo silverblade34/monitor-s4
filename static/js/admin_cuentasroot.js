@@ -17,8 +17,23 @@ for (var i = 0; i < accHeader.length; i++) {
 const crearCuentaMaestra = document.getElementById("crearCuentaMaestra");
 
 crearCuentaMaestra.addEventListener("click", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    const password1Input = document.getElementById("password");
+    const password2Input = document.getElementById("password2");
+    const password2ValidationMsg = document.getElementById("password2-validation-msg");
+
+    password2Input.addEventListener("input", function () {
+      if (password1Input.value !== password2Input.value) {
+        password2ValidationMsg.textContent = "Las contraseñas no coinciden";
+        return false;
+      } else {
+        password2ValidationMsg.textContent = "Las contraseñas coinciden";
+      }
+    });
+  });
+
   Swal.fire({
-    title: "Crear cuenta",
+    title: "Crear Cuenta",
     html: `
       <form class="form-crearcuenta">
         <label class="form-label">Ruc</label>
@@ -33,20 +48,27 @@ crearCuentaMaestra.addEventListener("click", function () {
         <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
         Ver contraseña
         </label>
+        <label class="form-label">Repetir contraseña</label>
+        <input type="password" id="password2" class="form-control input-pass" placeholder="Repetir contraseña">
+        <label class="form-label-vercontraseña">
+          <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+          Ver contraseña
+        </label>
+        <span id="password2-validation-msg"></span>
       </form>
     `,
     showCancelButton: true,
     confirmButtonText: "Crear",
     preConfirm: function () {
       const usuario = document.getElementById("usuario_cuenta").value;
-      const password = document.getElementById("password").value;
+      const passwordInput = document.getElementById("password").value;
       const ruc = document.getElementById("ruc").value;
       const nombre_cuenta = document.getElementById("nombre_cuenta").value;
       return {
         data: {
           cod_cuenta: "",
           usuario: usuario,
-          contrasena: password,
+          contrasena: passwordInput,
           ruc: ruc,
           nombre_cuenta: nombre_cuenta,
           nombre_rol: "Administrador",

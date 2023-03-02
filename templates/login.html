@@ -12,17 +12,17 @@
 </head>
 
 <body onload="randombg()">
-     <!-- Ventana de loader -->
-     <div class="hidden-loader" id="hidden-loader">
-      <img src="{{url_for('static', filename='img/gif-loader2.gif')}}" alt="">
+  <!-- Ventana de loader -->
+  <div class="hidden-loader" id="hidden-loader">
+    <img src="{{url_for('static', filename='img/gif-loader2.gif')}}" alt="">
   </div>
   <!-- Ventana de loader -->
   <div class="container">
     <div class="left">
+      <h1 class="animation a1 title">Monitor S4</h1>
       <img src="{{url_for('static', filename='icons/logo-png.png')}}" class="animation a6"
         style="margin: 0 auto 10px;width: 150px">
       <div class="header">
-        <h2 class="animation a1">Inicio de sesión</h2>
         <p class="animation a2"></p>
       </div>
       <form class="form" method="POST">
@@ -36,11 +36,11 @@
         {% endif %}
         <div class="input-field">
           <i class="fas fa-user"></i>
-          <input type="text" name="codcuenta" placeholder="Codigo de cuenta" />
+          <input type="text" name="usuario" placeholder="Usuario" />
         </div>
         <div class="input-field">
           <i class="fas fa-lock"></i>
-          <input type="password" name="password"  id="password-input" placeholder="Contraseña" />
+          <input type="password" name="password" id="password-input" placeholder="Contraseña" />
           <i class="fa fa-eye" id="password-toggle"></i>
         </div>
         <div class="div-btn-ingresar">

@@ -108,5 +108,3 @@ class UsuariosResponse:
         data = resp.json()
         return data
     
-    def responseBuscarIdCuenta(self):
-        pass

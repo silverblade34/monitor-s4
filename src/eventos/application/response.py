@@ -19,7 +19,3 @@ class EventosResponse:
         data = resp.json()
         return data
     
-    def responseListarTipoEventos(self):
-        resp = requests.get(f'http://161.35.104.161:3000/api/v1/allEvents')
-        data = resp.json()
-        return data

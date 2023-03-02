@@ -180,7 +180,9 @@ Author: SAEROX
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
                                 <ul id="dropdown-mantenimientos" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' %} show {% endif %} pt-0">
                                     <li><a class="{% if codp =='adm-u' %} active {% endif %}" href="/listar_usuarios">Usuarios</a></li>
+                                    {% if datauser.Usuario != "root" %}
                                     <li><a class="{% if codp =='adm-tipevent' %} active {% endif %}" href="/tipo_evento">Tipo eventos</a></li>
+                                    {% endif %}
                                     <li><a class="{% if codp =='' %} active {% endif %}" href="tables-tabledit.html">Tabledit</a></li>
                                 </ul>
                             </ul>

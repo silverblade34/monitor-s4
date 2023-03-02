@@ -1,6 +1,63 @@
+.widget {
+	border-radius: 20px;
+}
+
+.tipo-evento table .actions {
+	display: flex;
+	justify-content: center;
+}
+
+.tipo-evento table .actions i {
+	display: inline-block;
+	box-sizing: border-box;
+	font-size: 25px;
+	background-color: transparent;
+	border-radius: 18px;
+	padding: 7px;
+	color: #575757;
+	transition: all 0.5s;
+}
+
+.tipo-evento table .actions i:hover {
+	background-color: #575485;
+	padding: 7px;
+	color: #ffff;
+	font-size: 25px;
+	border-radius: 18px;
+}
 
 
+.tipo-evento table .status {
+	font-size: 10px;
+	padding: 6px 16px;
+	color: var(--light);
+	border-radius: 20px;
+	font-weight: 700;
+}
 
-.widget{
-    border-radius: 20px;
+.tipo-evento table .status.true {
+	background: #59c1de;
+}
+
+.tipo-evento table .status.false {
+	background: #DB504A;
+}
+
+pre {
+	background-color: #6b6b6b;
+	color: #ffffff;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 14px;
+	padding: 10px;
+	text-align: left;
+}
+
+pre .cont-btn-copy{
+	display: flex;
+	justify-content: end;
+}
+
+pre .cont-btn-copy button{
+	border: 1px solid rgb(158, 158, 158);
+	background-color: #ffffff;
 }

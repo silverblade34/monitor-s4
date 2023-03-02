@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
@@ -21,15 +23,15 @@ body {
   flex-direction: column;
   justify-content: center;
   -webkit-animation-name: left;
-          animation-name: left;
+  animation-name: left;
   -webkit-animation-duration: .8s;
-          animation-duration: .8s;
+  animation-duration: .8s;
   -webkit-animation-fill-mode: both;
-          animation-fill-mode: both;
+  animation-fill-mode: both;
   -webkit-animation-delay: .5s;
-          animation-delay: .5s;
+  animation-delay: .5s;
   margin-top: -50px;
-  
+
 }
 
 #right {
@@ -41,7 +43,8 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-#right:before{
+
+#right:before {
   content: '';
   position: fixed;
   width: 100vw;
@@ -53,7 +56,8 @@ body {
 /* Mensaje de alerta */
 .alert {
   padding: 15px 10px;
-  background-color: #f44336; /* Red */
+  background-color: #f44336;
+  /* Red */
   color: white;
   margin-bottom: 15px;
   max-width: 380px;
@@ -73,13 +77,13 @@ body {
   transition: 0.3s;
 }
 
-.header > h2 {
+.header>h2 {
   margin: 0;
   color: #535699;
   text-align: center;
 }
 
-.header > p {
+.header>p {
   margin-top: 10px;
   font-weight: normal;
   font-size: 12px;
@@ -128,7 +132,7 @@ body {
 }
 
 
-.div-btn-ingresar{
+.div-btn-ingresar {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -162,7 +166,7 @@ body {
 
 
 .animation {
--webkit-animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
   animation-name: fadeInUp;
   -webkit-animation-duration: 1s;
   animation-duration: 1s;
@@ -170,34 +174,41 @@ body {
   animation-fill-mode: both;
 }
 
+.animation.title {
+  text-align: center;
+  color: #535699;
+  font-family: 'Poppins', sans-serif;
+  font-size: 40px;
+}
+
 .a1 {
   -webkit-animation-delay: .9s;
-          animation-delay: .9s;
+  animation-delay: .9s;
 }
 
 .a2 {
   -webkit-animation-delay: 1s;
-          animation-delay: 1s;
+  animation-delay: 1s;
 }
 
 .a3 {
   -webkit-animation-delay: 1.2s;
-          animation-delay: 1.2s;
+  animation-delay: 1.2s;
 }
 
 .a4 {
   -webkit-animation-delay: 1.4s;
-          animation-delay: 1.4s;
+  animation-delay: 1.4s;
 }
 
 .a5 {
   -webkit-animation-delay: 1.6s;
-          animation-delay: 1.6s;
+  animation-delay: 1.6s;
 }
 
 .a6 {
   -webkit-animation-delay: 1.8s;
-          animation-delay: 1.8s;
+  animation-delay: 1.8s;
 }
 
 @-webkit-keyframes fadeInUp {
@@ -227,22 +238,26 @@ body {
     transform: translate3d(0, 0, 0);
   }
 }
+
 @-webkit-keyframes left {
   0% {
     opacity: 0;
     width: 0;
   }
+
   100% {
     opacity: 1;
     padding: 20px 40px;
     width: 500px;
   }
 }
+
 @keyframes left {
   0% {
     opacity: 0;
     width: 0;
   }
+
   100% {
     opacity: 1;
     padding: 20px 40px;
@@ -257,21 +272,21 @@ body {
 
 /* Ventana de carga loader */
 
-.hidden-loader{
-	height: 100vh;
-	width: 100%;
-	display: none;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 9999;
-	background-color: rgba(155, 155, 155, 0.24);
-  }
-  
-  .hidden-loader img{
-	width: 80px;
-  }
+.hidden-loader {
+  height: 100vh;
+  width: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: rgba(155, 155, 155, 0.24);
+}
+
+.hidden-loader img {
+  width: 80px;
+}
 
 /* Ventana de carga loader */
