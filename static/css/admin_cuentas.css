@@ -260,8 +260,8 @@
 
 .form-crearcuenta .form-label-vercontraseña{
 	margin-top: 6px;
-	font-size: 13px;
-	color: #464646;
+	font-size: 12px;
+	color: #777777;
 	width: 100%;
 	text-align: left;
 }
@@ -280,6 +280,18 @@
 }
 
 /* Modal de crear cuenta */
+
+
+.password2-validation-msg{
+	width: 100%;
+	font-size: 13px;
+	text-align: left;
+}
+
+#container-repetir-newpasw {
+	display: none;
+  }
+  
 
 /* Modal editar cuenta */
 

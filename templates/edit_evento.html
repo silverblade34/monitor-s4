@@ -4,11 +4,11 @@
     <div class="row">
         <div class="page-header">
             <div class="d-flex align-items-center">
-                <h2 class="page-header-title">Editar evento</h2>
+                <h2 class="page-header-title">Editar notificación</h2>
                 <div>
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item"><a href="db-default.html"><i class='bx bx-bell'></i></a></li>
-                        <li class="breadcrumb-item active">Evento</li>
+                        <li class="breadcrumb-item active">Notificación</li>
                     </ul>
                 </div>
             </div>
@@ -20,7 +20,7 @@
             <div class="widget has-shadow">
                 <div class="widget-header bordered no-actions d-flex align-items-center justify-content-between">
                     <a class="btn btn-success" href="/home"><i class='bx bx-chevron-left'></i>Regresar</a>
-                    <h4>Información general del evento</h4>
+                    <h4>Información general de la notificación</h4>
                 </div>
                 <div id="widget-body" class="widget-body">
                     <div>
@@ -41,37 +41,17 @@
                                     <input type="text" class="form-control" value="{{dataevento.placa}}" disabled>
                                 </div>
                                 <div class="col-lg-3">
-                                    <label for="">Latitud:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.latitud}}" disabled>
+                                    <label for="">Geocerca:</label>
+                                    <input type="text" class="form-control" value="{{dataevento.geocerca}}" disabled>
                                 </div>
                                 <div class="col-lg-3">
-                                    <label for="">Longitud:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.longitud}}" disabled>
-                                </div>
-                                <div class="col-lg-3 pt-3">
-                                    <label for="">Velocidad:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.velocidad}}" disabled>
-                                </div>
-                                <div class="col-lg-3 pt-3">
-                                    <label for="">Prioridad:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.prioridad}}" disabled>
-                                </div>
-                                <div class="col-lg-3 pt-3">
-                                    <label for="">Cliente:</label>
-                                    <input type="text" class="form-control" value="{{cliente}}" disabled>
-                                </div>
-                                <div class="col-lg-3 pt-3">
                                     <label for="">Fecha de recepción:</label>
                                     <input type="text" class="form-control" value="{{dataevento.fecha}}" disabled>
                                 </div>
                                 <div class="col-lg-12 pt-3">
-                                    <textarea class="textarea form-control" name="" id="" cols="30" rows="3"
-                                        disabled>{{dataevento.direccion}}</textarea>
-                                </div>
-                                <div class="col-lg-12 pt-3">
-                                    <a href="#" class="btn btn-primary">En gestión</a>
-                                    <a href="#" class="btn btn-success">Confirmado</a>
-                                    <a href="#" class="btn btn-warning">Descartado</a>
+                                    <a href="#" class="btn-comentario btn btn-primary">En gestión</a>
+                                    <a href="#" class="btn-comentario btn btn-success">Confirmado</a>
+                                    <a href="#" class="btn-comentario btn btn-warning">Descartado</a>
                                 </div>
                                 <div class="col-lg-12 pt-3">
                                     <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"
@@ -97,10 +77,21 @@
                                         <thead>
                                             <tr>
                                                 <th>Comentario</th>
+                                                <th>Estado</th>
                                                 <th>Usuario</th>
                                                 <th>Fecha</th>
                                             </tr>
                                         </thead>
+                                        <tbody>
+                                            {% for comentario in dataevento.list_comentarios %}
+                                            <tr>
+                                                <td>{{comentario.Comentario}}</td>
+                                                <td>{{comentario.DescripcionEstado}}</td>
+                                                <td></td>
+                                                <td>{{comentario.FechaEnvio}}</td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
                                     </table>
                                 </div>
                             </div>

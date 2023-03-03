@@ -184,25 +184,39 @@ verPayloads.forEach(verPayload => {
         Swal.fire({
             title: 'Detalles de evento',
             html: `
-            <pre>
             <div class="cont-btn-copy">
-            <button id="copy-btn" class="">Copiar</button>
+                <button class="copy-btn" onclick="copyToClipboard()"><i class='bx bx-copy-alt'></i> copiar</button>
             </div>
-            <code>${JSON.stringify({
-              "cod_cuenta": codCuenta,
-              "cod_cliente": codCliente,
-              "cod_evento": codEvento,
-              "placa": "%UNIT%",
-              "origen": "Sys4Log",
-              "latitud": "%LATD%",
-              "fecha": "%POS_TIME%",
-              "longitud": "%LOND%",
-              "velocidad": "%SPEED%",
-              "geocerca": "%ZONE_MIN%",
-              "grupo": "Z3",
-              "direccion": "%LOCATION%"
+            <pre><code>${JSON.stringify({
+                "cod_cuenta": codCuenta,
+                "cod_cliente": codCliente,
+                "cod_evento": codEvento,
+                "placa": "%UNIT%",
+                "origen": "Sys4Log",
+                "latitud": "%LATD%",
+                "fecha": "%POS_TIME%",
+                "longitud": "%LOND%",
+                "velocidad": "%SPEED%",
+                "geocerca": "%ZONE_MIN%",
+                "grupo": "Z3",
+                "direccion": "%LOCATION%"
             }, null, 2)}</code></pre>`,
             confirmButtonText: 'Cerrar'
-          })          
+        })
     });
 })
+
+
+function copyToClipboard() {
+    const codeElement = document.querySelector("pre code");
+    const codeText = codeElement.innerText;
+    const copyButton = document.querySelector(".copy-btn");
+    navigator.clipboard.writeText(codeText)
+        .then(() => {
+            copyButton.classList.add("copied");
+            copyButton.innerHTML = "<i class='bx bx-check'></i> Copiado";
+        })
+        .catch(err => {
+            console.error("Error al copiar al portapapeles:", err);
+        });
+}

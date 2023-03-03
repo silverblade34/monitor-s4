@@ -67,20 +67,15 @@
                             {% for usuario in datacuentas %}
                             <li class="li completed accordion-header">
                                 <p class="accordion-title">{{usuario.empresa}}</p>
-                                <i class='bx bx-plus'></i>
+                                <i class='bx bx-down-arrow-alt'></i>
                             </li>
                             <div class="accordion-body">
                                 {% for cliente in usuario.clientes %}
                                 <li class="li not-completed">
-                                    <p>{{cliente.empresa}} / {{cliente.cod_cliente}} / {{cliente.rol}}
+                                    <p>{{cliente.empresa}} | {{cliente.cod_cliente}} | {{cliente.rol}}
                                     </p>
                                     <div>
-                                        <a href="#" class="editar-cliente" data-cuenta-id="{{usuario.ID}}"
-                                            data-cod-cliente="{{cliente.cod_cliente}}"><i
-                                                class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-cliente" data-cuenta-id="{{usuario.ID}}"
-                                            data-cod-cliente="{{cliente.cod_cliente}}"><i
-                                                class="bx bx-x delete"></i></a>
+                                      
                                     </div>
                                 </li>
                                 {% endfor %}
@@ -151,7 +146,7 @@
                             {% if cliente.rol == "Administrador" %}
                             <li class="li completed accordion-header">
                                 <p class="accordion-title">{{cliente.empresa}}</p>
-                                <i class='bx bx-plus'></i>
+                                <i class='bx bx-down-arrow-alt'></i>
                             </li>
                             <div class="accordion-body">
                                 {% for usuarios in datacuentas[0].clientes %}

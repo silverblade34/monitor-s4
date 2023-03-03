@@ -52,12 +52,19 @@ pre {
 	text-align: left;
 }
 
-pre .cont-btn-copy{
+.cont-btn-copy{
+	background-color: #6b6b6b;
 	display: flex;
+	padding-top: 5px;
 	justify-content: end;
 }
 
-pre .cont-btn-copy button{
-	border: 1px solid rgb(158, 158, 158);
-	background-color: #ffffff;
+.cont-btn-copy button{
+	background-color: #313131;
+	color: #ffffff;
+	border: none;
+	font-size: 13px;
+	margin-right: 5px;
+	padding: 4px 8px;
+	border-radius: 3px;
 }
