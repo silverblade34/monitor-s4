@@ -15,26 +15,16 @@ def listar_eventos():
     dataevento = _eventCL.listarEventos(cod_cuenta, cod_cliente)
     return dataevento
 
-@app.route('/editar_evento', methods=['GET'])
-def editar_evento():
-    if 'user' in session:
-        try:
-            _eventCL = EventosController()
-            session["idevento"] = request.args["idevento"]
-            dataevento = _eventCL.buscarEvento(session["idevento"])
-            if dataevento["status"] == True:
-                return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
-        except requests.exceptions.RequestException as e:
-            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
-            print(mensaje_error)
-            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
-    else:
-        return redirect(url_for('home'))
-
 @app.route('/func_buscarEvento', methods=['GET'])
 def func_buscarEvento():
     _eventCL = EventosController()
     idevento = session["idevento"]
     dataevento = _eventCL.buscarEvento(idevento)
     return dataevento["data"]
+
+@app.route('/agregarComentario', methods=['POST'])
+def agregarComentario():
+    _eventCL = EventosController()
+    respComent = _eventCL.agregarComentario(request.json["data"])
+    return respComent["message"]
 

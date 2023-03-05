@@ -5,12 +5,10 @@ function mostrarInfoEvento() {
         success: function (data) {
             try {
                 evento = data
-                console.log(evento)
                 var lat = evento.latitud
                 var lng = evento.longitud
                 // Creación del mapa
                 var map = L.map('map').setView([lat, lng], 13);
-                console.log(map)
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 }).addTo(map);
@@ -59,33 +57,41 @@ btnAddComentarios.forEach(btnAddComentario => {
     btnAddComentario.addEventListener("click", function () {
         Swal.fire({
             title: 'Desea agregar este comentario?',
-            text: "!",
-            icon: 'warning',
+            icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminar cuenta!'
+            confirmButtonText: 'Si'
         }).then((result) => {
             if (result.isConfirmed) {
-                const cuentaId = this.dataset.cuentaId;
-
-                fetch(`/eliminar_cuenta?idusuario=${cuentaId}`, {
-                    method: "GET",
+                const idevento = this.dataset.idEvento;
+                const usuario = this.dataset.usuarioComent;
+                const desc_estado = this.dataset.typeComent;
+                const comentario = document.getElementById("textarea-comentario").value;
+                const dataenv =
+                {
+                    "data": {
+                        "id": idevento,
+                        "desc_estado": desc_estado,
+                        "usuario": usuario,
+                        "comentario": comentario
+                    }
+                }
+                fetch(`/agregarComentario`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(dataenv)
                 })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error("Error al eliminar cuenta");
-                        }
-                        return response.json();
-                    })
                     .then(data => {
-                        Swal.fire("Eliminado", data.message, "success");
+                        Swal.fire("Agregado", data, "success");
                         setTimeout(function () {
                             location.reload();
                         }, 2000);
                     })
                     .catch(error => {
-                        Swal.fire("Error", "Error al eliminar cuenta", "error");
+                        Swal.fire("Error", "Error al agregar comentario", "error");
                     });
             }
         });

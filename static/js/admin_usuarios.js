@@ -36,6 +36,13 @@ crearUsuarios2.addEventListener("click", function () {
               <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
               Ver contraseña
               </label>
+              <label class="form-label">Repetir contraseña</label>
+              <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+              <label class="form-label-vercontraseña">
+                <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+                Ver contraseña
+              </label>
+              <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </form>
           `,
         showCancelButton: true,
@@ -43,6 +50,7 @@ crearUsuarios2.addEventListener("click", function () {
         preConfirm: function () {
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
+          const passwordInput2 = document.getElementById("password2").value;
           const nombre_rol = document.getElementById("select-rol").value;
           return {
             data: {
@@ -50,6 +58,7 @@ crearUsuarios2.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              contrasena2: passwordInput2,
               ruc: ruc,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
@@ -62,6 +71,9 @@ crearUsuarios2.addEventListener("click", function () {
           console.log("Data a enviar" + data);
           if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
+            return;
+          } else if (data.data.contrasena != data.data.contrasena2) {
+            Swal.fire("Error", "Las contraseñas no coinciden", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask

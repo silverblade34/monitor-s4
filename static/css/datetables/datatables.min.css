@@ -317,8 +317,9 @@ div.table-responsive .prioridad.BOTPAN span {
 }
 
 .widget-body .datos-evento .mapa-evento {
-    height: 400px;
+    height: 500px;
     width: 100%;
+    z-index: 999;
 }
 
 div.table-responsive .prioridad.DESRUT span {

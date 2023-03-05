@@ -234,6 +234,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             const nombre_cuenta = document.getElementById("nombre_cuenta").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
+            const passwordInput2 = document.getElementById("password2").value;
             const ruc = document.getElementById("ruc").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
             return {
@@ -243,6 +244,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
                 nombre_rol: "Administrador",
                 usuario: usuario,
                 contrasena: password,
+                contrasena2: passwordInput2,
                 ruc: ruc,
                 estado: estadoCheckbox,
                 nombre_cuenta: nombre_cuenta,
@@ -254,6 +256,9 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             const data = result.value;
             if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
+              return;
+            } else if (data.data.contrasena != data.data.contrasena2) {
+              Swal.fire("Error", "Las contraseñas no coinciden", "error");
               return;
             }
             // Envía los datos del formulario a una ruta POST en Flask

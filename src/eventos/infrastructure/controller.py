@@ -11,5 +11,10 @@ class EventosController:
         data = response.responseBuscarEvento(idevento)
         return data
     
+    def agregarComentario(self, datacomentario):
+        response = EventosResponse()
+        data = response.responseAgregarComentario(datacomentario) 
+        return data
+    
 
     

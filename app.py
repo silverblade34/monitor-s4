@@ -1,8 +1,8 @@
 from flask import Flask
-from flask_cors import CORS 
-app = Flask(__name__)
+from flask_cors import CORS  
+app = Flask(__name__) 
 from flask_caching import Cache
-cache = Cache(app, config={'CACHE_TYPE': 'simple'})
+cache = Cache(app, config={'CACHE_TYPE': 'simple'}) 
 
 CORS(app)
 import routes.credential_route

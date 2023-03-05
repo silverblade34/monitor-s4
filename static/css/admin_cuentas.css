@@ -16,7 +16,6 @@
 }
 
 .container-fluid.cuentas {
-	background-color: var(--grey);
 	padding-bottom: 180px;
 }
 
@@ -56,6 +55,9 @@
 #content .table-data .order {
 	flex-grow: 1;
 	flex-basis: 500px;
+	box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
 }
 
 #content .table-data .order table {
@@ -71,7 +73,7 @@
 	border-bottom: 1px solid var(--grey);
 }
 
-#content .table-data .order table th:last-child{
+#content .table-data .order table th:last-child {
 	text-align: right;
 	padding-right: 25px;
 }
@@ -98,8 +100,9 @@
 
 #content .table-data .order table tr td:last-child {
 	text-align: right;
-	padding-right: 25px; /* alinea el contenido de la última columna a la derecha */
-  }
+	padding-right: 25px;
+	/* alinea el contenido de la última columna a la derecha */
+}
 
 #content .table-data .order table td img {
 	width: 36px;
@@ -124,7 +127,7 @@
 	background: #59c1de;
 }
 
-#content .table-data .order table tr td .status.false{
+#content .table-data .order table tr td .status.false {
 	background: #DB504A;
 }
 
@@ -136,6 +139,7 @@
 #content .table-data .todo {
 	flex-grow: 1;
 	flex-basis: 300px;
+
 }
 
 #content .table-data .todo .todo-list {
@@ -214,7 +218,9 @@
 /* Acordeon */
 .accordion {
 	width: 100%;
-	overflow: hidden;
+	box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
+	-webkit-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
 }
 
 .accordion-header {
@@ -250,7 +256,7 @@
 	text-align: left;
 }
 
-.form-crearcuenta .form-select{
+.form-crearcuenta .form-select {
 	width: 100%;
 	padding: 10px;
 	font-size: 14px;
@@ -258,7 +264,7 @@
 	border-radius: 5px;
 }
 
-.form-crearcuenta .form-label-vercontraseña{
+.form-crearcuenta .form-label-vercontraseña {
 	margin-top: 6px;
 	font-size: 12px;
 	color: #777777;
@@ -282,7 +288,7 @@
 /* Modal de crear cuenta */
 
 
-.password2-validation-msg{
+.password2-validation-msg {
 	width: 100%;
 	font-size: 13px;
 	text-align: left;
@@ -290,8 +296,8 @@
 
 #container-repetir-newpasw {
 	display: none;
-  }
-  
+}
+
 
 /* Modal editar cuenta */
 
@@ -300,9 +306,10 @@
 	min-height: 1.3125rem;
 	padding-left: 1.5em;
 	justify-content: left;
-	margin-bottom: 0.125rem; }
-  
-  .form-check-input {
+	margin-bottom: 0.125rem;
+}
+
+.form-check-input {
 	width: 1em;
 	height: 1em;
 	margin-top: 0.25em;
@@ -312,53 +319,77 @@
 	background-position: center;
 	background-size: contain;
 	border: 1px solid rgba(0, 0, 0, 0.25);
-	appearance: none;}
-	.form-check-input[type="checkbox"] {
-	  border-radius: 0.25em; }
-	.form-check-input[type="radio"] {
-	  border-radius: 50%; }
-	.form-check-input:active {
-	  filter: brightness(90%); }
-	.form-check-input:focus {
-	  border-color: #ade7e2;
-	  outline: 0;
-	  box-shadow: 0 0 0 0.25rem rgba(91, 207, 197, 0.25); }
-	.form-check-input:checked {
-	  background-color: #5bcfc5;
-	  border-color: #5bcfc5; }
-	.form-check-input[type="checkbox"]:indeterminate {
-	  background-color: #5bcfc5;
-	  border-color: #5bcfc5;
-	  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e"); }
-	.form-check-input:disabled {
-	  pointer-events: none;
-	  filter: none;
-	  opacity: 0.5; }
-	.form-check-input[disabled] ~ .form-check-label, .form-check-input:disabled ~ .form-check-label {
-	  opacity: 0.5; }
-  
-  .form-switch {
-	padding-left: 2.5em; }
+	appearance: none;
+}
+
+.form-check-input[type="checkbox"] {
+	border-radius: 0.25em;
+}
+
+.form-check-input[type="radio"] {
+	border-radius: 50%;
+}
+
+.form-check-input:active {
+	filter: brightness(90%);
+}
+
+.form-check-input:focus {
+	border-color: #ade7e2;
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(91, 207, 197, 0.25);
+}
+
+.form-check-input:checked {
+	background-color: #5bcfc5;
+	border-color: #5bcfc5;
+}
+
+.form-check-input[type="checkbox"]:indeterminate {
+	background-color: #5bcfc5;
+	border-color: #5bcfc5;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/%3e%3c/svg%3e");
+}
+
+.form-check-input:disabled {
+	pointer-events: none;
+	filter: none;
+	opacity: 0.5;
+}
+
+.form-check-input[disabled]~.form-check-label,
+.form-check-input:disabled~.form-check-label {
+	opacity: 0.5;
+}
+
+.form-switch {
+	padding-left: 2.5em;
+}
+
+.form-switch .form-check-input {
+	width: 2em;
+	margin-left: -2.5em;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+	background-position: left center;
+	border-radius: 2em;
+	transition: background-position 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
 	.form-switch .form-check-input {
-	  width: 2em;
-	  margin-left: -2.5em;
-	  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
-	  background-position: left center;
-	  border-radius: 2em;
-	  transition: background-position 0.15s ease-in-out; }
-	  @media (prefers-reduced-motion: reduce) {
-		.form-switch .form-check-input {
-		  transition: none; } }
-	  .form-switch .form-check-input:focus {
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ade7e2'/%3e%3c/svg%3e"); }
-	  .form-switch .form-check-input:checked {
-		background-position: right center;
-		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e"); }
-  
-  
+		transition: none;
+	}
+}
+
+.form-switch .form-check-input:focus {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23ade7e2'/%3e%3c/svg%3e");
+}
+
+.form-switch .form-check-input:checked {
+	background-position: right center;
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+
 
 /* Modal editar cuenta */
-
-
-
-

@@ -36,6 +36,13 @@ crearClientes2.addEventListener("click", function () {
               <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
               Ver contraseña
               </label>
+              <label class="form-label">Repetir contraseña</label>
+              <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+              <label class="form-label-vercontraseña">
+                <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+                Ver contraseña
+              </label>
+              <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </form>
           `,
         showCancelButton: true,
@@ -43,6 +50,7 @@ crearClientes2.addEventListener("click", function () {
         preConfirm: function () {
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
+          const passwordInput2 = document.getElementById("password2").value;
           const ruc = document.getElementById("ruc").value;
           const nombre_cliente = document.getElementById("nombre_cliente").value;
           const nombre_rol = document.getElementById("select-rol").value;
@@ -52,6 +60,7 @@ crearClientes2.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              contrasena2: passwordInput2,
               ruc: ruc,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
@@ -64,6 +73,9 @@ crearClientes2.addEventListener("click", function () {
           console.log("Data a enviar" + data);
           if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
+            return;
+          } else if (data.data.contrasena != data.data.contrasena2) {
+            Swal.fire("Error", "Las contraseñas no coinciden", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask
@@ -127,11 +139,16 @@ editarClientes2.forEach(editarCliente2 => {
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
-            <input type="password" id="password" class = "form-control input-pass" value="${data.contrasena}">
+            <input type="password" id="password" class = "form-control input-pass" oninput="mostrarContainerPass()" value="${data.contrasena}">
             <label class="form-label-vercontraseña">
             <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
             Ver contraseña
             </label>
+            <div id="container-repetir-newpasw">
+            <label class="form-label">Repetir nueva contraseña</label>
+            <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+            <span id="password2-validation-msg" class="password2-validation-msg"></span>
+            </div>
             <label class="form-label">Ruc</label>
             <input type="text" id="ruc" class = "form-control input-text" value="${data.ruc}">
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
@@ -146,6 +163,7 @@ editarClientes2.forEach(editarCliente2 => {
             const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
+            const passwordInput2 = document.getElementById("password2").value;
             const ruc = document.getElementById("ruc").value;
             const nombre_rol = document.getElementById("nombre_rol").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
@@ -157,6 +175,7 @@ editarClientes2.forEach(editarCliente2 => {
                 nombre_cliente: nombre_cliente,
                 usuario: usuario,
                 contrasena: password,
+                contrasena2: passwordInput2,
                 ruc: ruc,
                 rol_cliente: nombre_rol,
                 estado: estadoCheckbox
@@ -168,6 +187,9 @@ editarClientes2.forEach(editarCliente2 => {
             const data = result.value;
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
+              return;
+            } else if (data.data.contrasena != data.data.contrasena2) {
+              Swal.fire("Error", "Las contraseñas no coinciden", "error");
               return;
             }
             // Envía los datos del formulario a una ruta POST en Flask
@@ -258,12 +280,11 @@ crearUsuariosXcliente.addEventListener("click", function () {
       return response.json();
     })
     .then(data => {
-      const options = data.clientes.map(item => 
-        {
-          if (item.rol === "Administrador"){
-            return `<option value="${item.empresa}" data-ruc="${item.ruc}" >${item.empresa}</option>`
-          }
-        })
+      const options = data.clientes.map(item => {
+        if (item.rol === "Administrador") {
+          return `<option value="${item.empresa}" data-ruc="${item.ruc}" >${item.empresa}</option>`
+        }
+      })
         .join('');
       const idcuenta = data.ID
       Swal.fire({
@@ -284,8 +305,13 @@ crearUsuariosXcliente.addEventListener("click", function () {
               <label class="form-label">Usuario</label>
               <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
               <label class="form-label">Contraseña</label>
-              <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
+              <input type="password" id="password" oninput="mostrarContainerPass()" class = "form-control input-pass" placeholder="Ingrese contraseña">
               <label class="form-label-vercontraseña">
+              <div id="container-repetir-newpasw">
+              <label class="form-label">Repetir nueva contraseña</label>
+              <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+              <span id="password2-validation-msg" class="password2-validation-msg"></span>
+              </div>
               <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
               Ver contraseña
               </label>
@@ -298,6 +324,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
           const nombre_cliente = document.getElementById("select-cuentacliente").value;
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
+          const passwordInput2 = document.getElementById("password2").value;
           const selectedOption = selectcliente.options[selectcliente.selectedIndex];
           const ruc = selectedOption.getAttribute('data-ruc');
           const nombre_rol = document.getElementById("select-rol").value;
@@ -307,6 +334,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              contrasena2: passwordInput2,
               ruc: ruc,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
@@ -319,6 +347,9 @@ crearUsuariosXcliente.addEventListener("click", function () {
           console.log("Data a enviar" + data);
           if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
+            return;
+          } else if (data.data.contrasena != data.data.contrasena2) {
+            Swal.fire("Error", "Las contraseñas no coinciden", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask
@@ -359,7 +390,6 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
   editarUsuarioXcliente.addEventListener("click", function () {
     const cuentaId = this.dataset.cuentaId;
     const codCliente = this.dataset.codCliente;
-    console.log("...............................1")
     fetch(`/buscar_cuenta_cliente?idcuenta=${cuentaId}&codcliente=${codCliente}`, {
       method: "GET",
     })
@@ -380,11 +410,16 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
-            <input type="password" id="password" class = "form-control input-pass" value="${data.contrasena}">
+            <input type="password" id="password" oninput="mostrarContainerPass()" class = "form-control input-pass" value="${data.contrasena}">
             <label class="form-label-vercontraseña">
             <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
             Ver contraseña
             </label>
+            <div id="container-repetir-newpasw">
+            <label class="form-label">Repetir nueva contraseña</label>
+            <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+            <span id="password2-validation-msg" class="password2-validation-msg"></span>
+            </div>
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
             <label class="form-label">Estado</label>
             <input class="form-check-input" type="checkbox" id="estado-cuenta" ${data.estado === true ? 'checked' : ''}>
@@ -397,6 +432,7 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
             //const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
+            const passwordInput2 = document.getElementById("password2").value;
             //const ruc = document.getElementById("ruc").value;
             const nombre_rol = document.getElementById("nombre_rol").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
@@ -408,6 +444,7 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
                 nombre_cliente: data.empresa,
                 usuario: usuario,
                 contrasena: password,
+                contrasena2: passwordInput2,
                 ruc: data.ruc,
                 rol_cliente: nombre_rol,
                 estado: estadoCheckbox
@@ -419,6 +456,9 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
             const data = result.value;
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
+              return;
+            } else if (data.data.contrasena != data.data.contrasena2) {
+              Swal.fire("Error", "Las contraseñas no coinciden", "error");
               return;
             }
             // Envía los datos del formulario a una ruta POST en Flask

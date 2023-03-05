@@ -63,3 +63,20 @@ def tipo_evento():
             return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
         return redirect(url_for('home'))
+
+@app.route('/editar_evento', methods=['GET'])
+def editar_evento():
+    if 'user' in session:
+        try:
+            _eventCL = EventosController()
+            session["idevento"] = request.args["idevento"]
+            dataevento = _eventCL.buscarEvento(session["idevento"])
+            print(dataevento)
+            if dataevento["status"] == True:
+                return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
+    else:
+        return redirect(url_for('home'))

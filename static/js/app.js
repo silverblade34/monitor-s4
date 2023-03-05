@@ -1,8 +1,8 @@
 function randombg() {
   var random = Math.floor(Math.random() * 3) + 0;
   var bigSize = [
-    "url('https://www.centralgps.cl/wp-content/uploads/2020/01/rastreo-gps-centralgps.jpg')", 
-    "url('https://www.movertis.com/wp-content/uploads/2020/08/Como-funciona-el-sistema-GPS.jpg')",
+    "url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/12/iveco-camion-autonomo-2565959.jpg?tf=3840x')", 
+    "url('https://localizadorgpstracker.com.mx/wp-content/uploads/2018/06/beneficios-de-gps-para-empresas.jpg')",
     "url('https://images7.alphacoders.com/311/thumb-1920-311833.jpg')",
     "url('https://img.freepik.com/foto-gratis/hombre-vista-lateral-coche-entregando-paquete_23-2148889990.jpg?w=740&t=st=1676157659~exp=1676158259~hmac=63e702e9e3df38d7faca0122199c6b7b4da4163e6ef90a55e0fa208622bd4d46')",
   ];

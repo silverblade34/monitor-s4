@@ -49,9 +49,9 @@
                                     <input type="text" class="form-control" value="{{dataevento.fecha}}" disabled>
                                 </div>
                                 <div class="col-lg-12 pt-3">
-                                    <a href="#" class="btn-comentario btn btn-primary">En gestión</a>
-                                    <a href="#" class="btn-comentario btn btn-success">Confirmado</a>
-                                    <a href="#" class="btn-comentario btn btn-warning">Descartado</a>
+                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En gestión">En gestión</button>
+                                    <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
+                                    <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
                                 </div>
                                 <div class="col-lg-12 pt-3">
                                     <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"
@@ -87,7 +87,7 @@
                                             <tr>
                                                 <td>{{comentario.Comentario}}</td>
                                                 <td>{{comentario.DescripcionEstado}}</td>
-                                                <td></td>
+                                                <td>{{comentario.usuario}}</td>
                                                 <td>{{comentario.FechaEnvio}}</td>
                                             </tr>
                                             {% endfor %}
@@ -102,5 +102,6 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
 <script src="{{url_for('static', filename='js/edit_evento.js')}}" defer></script>
 {% endblock %}
