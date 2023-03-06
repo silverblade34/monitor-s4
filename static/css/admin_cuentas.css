@@ -256,6 +256,9 @@
 	text-align: left;
 }
 
+.form-crearcuenta .form-label span {
+	font-size: 12px;
+}
 .form-crearcuenta .form-select {
 	width: 100%;
 	padding: 10px;
@@ -292,7 +295,16 @@
 	width: 100%;
 	font-size: 13px;
 	text-align: left;
+	display: none;
 }
+
+.usuario-validation-msg{
+	width: 100%;
+	font-size: 13px;
+	text-align: left;
+	display: none;
+}
+
 
 #container-repetir-newpasw {
 	display: none;

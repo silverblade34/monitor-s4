@@ -16,7 +16,7 @@ function actualizarTabla() {
                     '<td>' + evento.fecha + '</td>' +
                     '<td>' + evento.velocidad + '</td>' +
                     '<td class="direccion">' + evento.direccion + '</td>' +
-                    '<td><span style="width:100px;">' + evento.estado + '</span></td>' +
+                    '<td><span style="width:100px;">' + evento.DescripcionEstado + '</span></td>' +
                     '<td>' + evento.fecha_ultima_accion + '</td>' +
                     '<td class="prioridad ' + evento.cod_evento + '"> <span class="badge-text badge-text-small info"></span></td>' +
                     '<td class="td-actions">' +

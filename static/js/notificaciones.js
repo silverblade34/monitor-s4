@@ -106,6 +106,10 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
             <div id="container-repetir-newpasw">
             <label class="form-label">Repetir nueva contraseña</label>
             <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+            <label class="form-label-vercontraseña">
+            <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+            Ver contraseña
+          </label>
             <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </div>
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">

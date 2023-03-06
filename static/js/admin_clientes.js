@@ -29,7 +29,8 @@ crearClientes2.addEventListener("click", function () {
               <label class="form-label">Cliente</label>
               <input type="text" id="nombre_cliente" class = "form-control input-text" placeholder="Nombre del cliente">
               <label class="form-label">Usuario</label>
-              <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <span id="usuario_mensaje" class="usuario-validation-msg"></span>
               <label class="form-label">Contraseña</label>
               <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
               <label class="form-label-vercontraseña">
@@ -52,6 +53,7 @@ crearClientes2.addEventListener("click", function () {
           const password = document.getElementById("password").value;
           const passwordInput2 = document.getElementById("password2").value;
           const ruc = document.getElementById("ruc").value;
+          const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const nombre_cliente = document.getElementById("nombre_cliente").value;
           const nombre_rol = document.getElementById("select-rol").value;
           return {
@@ -62,6 +64,7 @@ crearClientes2.addEventListener("click", function () {
               contrasena: password,
               contrasena2: passwordInput2,
               ruc: ruc,
+              mensajecontent: mensajecontent,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
             }
@@ -76,6 +79,12 @@ crearClientes2.addEventListener("click", function () {
             return;
           } else if (data.data.contrasena != data.data.contrasena2) {
             Swal.fire("Error", "Las contraseñas no coinciden", "error");
+            return;
+          } else if (data.data.usuario.length <= 3) {
+            Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
+            return;
+          } else if (data.data.mensajecontent == "Este usuario ya se ha creado") {
+            Swal.fire("Error", "Este usuario ya se ha creado, los usuarios deben ser unicos", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask
@@ -136,7 +145,7 @@ editarClientes2.forEach(editarCliente2 => {
             <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.empresa}" disabled>
             <label class="form-label">Tipo de Rol</label>
             <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.rol}" disabled>
-            <label class="form-label">Usuario</label>
+            <label class="form-label">Usuario<span>(mínimo 3 caracteres)</span></label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
             <input type="password" id="password" class = "form-control input-pass" oninput="mostrarContainerPass()" value="${data.contrasena}">
@@ -147,6 +156,10 @@ editarClientes2.forEach(editarCliente2 => {
             <div id="container-repetir-newpasw">
             <label class="form-label">Repetir nueva contraseña</label>
             <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+            <label class="form-label-vercontraseña">
+                <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+                Ver contraseña
+            </label>
             <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </div>
             <label class="form-label">Ruc</label>
@@ -303,18 +316,21 @@ crearUsuariosXcliente.addEventListener("click", function () {
               <option value="Operador">Operador</option>
               </select>
               <label class="form-label">Usuario</label>
-              <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <span id="usuario_mensaje" class="usuario-validation-msg"></span>
               <label class="form-label">Contraseña</label>
               <input type="password" id="password" oninput="mostrarContainerPass()" class = "form-control input-pass" placeholder="Ingrese contraseña">
               <label class="form-label-vercontraseña">
-              <div id="container-repetir-newpasw">
-              <label class="form-label">Repetir nueva contraseña</label>
-              <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
-              <span id="password2-validation-msg" class="password2-validation-msg"></span>
-              </div>
               <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password').type = this.checked ? 'text' : 'password'">
               Ver contraseña
               </label>
+              <label class="form-label">Repetir contraseña</label>
+              <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+              <label class="form-label-vercontraseña">
+                <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+                Ver contraseña
+              </label>
+              <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </form>
           `,
         showCancelButton: true,
@@ -326,6 +342,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
           const password = document.getElementById("password").value;
           const passwordInput2 = document.getElementById("password2").value;
           const selectedOption = selectcliente.options[selectcliente.selectedIndex];
+          const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const ruc = selectedOption.getAttribute('data-ruc');
           const nombre_rol = document.getElementById("select-rol").value;
           return {
@@ -336,6 +353,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
               contrasena: password,
               contrasena2: passwordInput2,
               ruc: ruc,
+              mensajecontent: mensajecontent,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
             }
@@ -350,6 +368,12 @@ crearUsuariosXcliente.addEventListener("click", function () {
             return;
           } else if (data.data.contrasena != data.data.contrasena2) {
             Swal.fire("Error", "Las contraseñas no coinciden", "error");
+            return;
+          } else if (data.data.usuario.length <= 3) {
+            Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
+            return;
+          } else if (data.data.mensajecontent == "Este usuario ya se ha creado") {
+            Swal.fire("Error", "Este usuario ya se ha creado, los usuarios deben ser unicos", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask
@@ -418,6 +442,10 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
             <div id="container-repetir-newpasw">
             <label class="form-label">Repetir nueva contraseña</label>
             <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
+            <label class="form-label-vercontraseña">
+            <input type="checkbox" class="form-checkbox" onclick="document.getElementById('password2').type = this.checked ? 'text' : 'password'">
+            Ver contraseña
+            </label>
             <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </div>
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">

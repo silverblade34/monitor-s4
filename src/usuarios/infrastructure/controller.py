@@ -52,4 +52,9 @@ class UsuariosController:
         data = response.responseDeleteUsuarioCliente(idusuario, codcliente)
         return data
     
+    def validarusuarioUnico(self, usuario):
+        response = UsuariosResponse()
+        data = response.validarusuarioUnico(usuario)
+        return data
+    
 

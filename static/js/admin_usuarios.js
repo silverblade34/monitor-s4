@@ -28,8 +28,9 @@ crearUsuarios2.addEventListener("click", function () {
               <option value="Supervisor">Supervisor</option>
               <option value="Operador">Operador</option>
               </select>
-              <label class="form-label">Usuario</label>
-              <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <label class="form-label">Usuario<span>(mínimo 3 caracteres)</span></label>
+              <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+              <span id="usuario_mensaje" class="usuario-validation-msg"></span>
               <label class="form-label">Contraseña</label>
               <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
               <label class="form-label-vercontraseña">
@@ -51,6 +52,7 @@ crearUsuarios2.addEventListener("click", function () {
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
           const passwordInput2 = document.getElementById("password2").value;
+          const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const nombre_rol = document.getElementById("select-rol").value;
           return {
             data: {
@@ -59,6 +61,7 @@ crearUsuarios2.addEventListener("click", function () {
               usuario: usuario,
               contrasena: password,
               contrasena2: passwordInput2,
+              mensajecontent: mensajecontent,
               ruc: ruc,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente
@@ -74,6 +77,12 @@ crearUsuarios2.addEventListener("click", function () {
             return;
           } else if (data.data.contrasena != data.data.contrasena2) {
             Swal.fire("Error", "Las contraseñas no coinciden", "error");
+            return;
+          } else if (data.data.usuario.length <= 3) {
+            Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
+            return;
+          } else if (data.data.mensajecontent == "Este usuario ya se ha creado") {
+            Swal.fire("Error", "Este usuario ya se ha creado, los usuarios deben ser unicos", "error");
             return;
           }
           // Envía los datos del formulario a una ruta POST en Flask

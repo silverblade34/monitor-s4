@@ -108,3 +108,9 @@ class UsuariosResponse:
         data = resp.json()
         return data
     
+    def validarusuarioUnico(self, usuario):
+        payload =  {"usuario" : usuario}
+        resp = requests.get(f'http://161.35.104.161:3000/api/v1/repeatUser', data= json.dumps(payload))
+        data = resp.json()
+        return data
+    

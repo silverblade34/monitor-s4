@@ -19,20 +19,49 @@ function checkPasswordMatch() {
   const password2ValidationMsg = document.getElementById("password2-validation-msg");
 
   if (password1Input.value !== password2Input.value) {
+    password2ValidationMsg.style.display = "block";
     password2ValidationMsg.textContent = "Las contraseñas no coinciden";
     password2ValidationMsg.style.color = "red";
     return false;
   } else {
+    password2ValidationMsg.style.display = "block";
     password2ValidationMsg.textContent = "Las contraseñas coinciden";
     password2ValidationMsg.style.color = "green";
   }
 }
-// -----------------------------------MOSTRAR CONTAINER PASSWOORD -------------------------------
+// -----------------------------------MOSTRAR CONTAINER PASSWOORD ---------------------------------
 function mostrarContainerPass() {
   const container = document.getElementById("container-repetir-newpasw");
   container.style.display = "block";
 }
 
+// ----------------------------------- VALIDAR USUARIO UNICO --------------------------------------
+function validarUsuarioUnico() {
+  const nameusuario = document.getElementById("usuario_cuenta").value;
+  // Actualizar el mensaje debajo del input
+  const mensaje = document.getElementById("usuario_mensaje");
+  if (nameusuario.length >= 3) {
+    fetch(`/validarUsuarioUnico?nameusuario=${nameusuario}`, {
+      method: "GET"
+    })
+      .then(response => response.json())
+      .then(data => {
+        mensaje.textContent = data.message;
+        if (data.status == true){
+          mensaje.style.color = "green";
+          mensaje.style.display = "block";
+        }else if (data.status == false){
+          mensaje.style.color = "red";
+          mensaje.style.display = "block";
+        }
+      })
+      .catch(error => console.error(error));
+  }else{
+    mensaje.textContent = "El usuario debe contener mínimo 3 caracteres";
+    mensaje.style.color = "red";
+    mensaje.style.display = "block";
+  }
+}
 
 // ----------------------------------Modal Crear cuenta SweetAlert2-----------------------------------
 
@@ -62,8 +91,9 @@ crearCuentaMaestra.addEventListener("click", function () {
         <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
         <label class="form-label">Empresa</label>
         <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
-        <label class="form-label">Usuario</label>
-        <input type="text" id="usuario_cuenta" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+        <label class="form-label">Usuario <span>(mínimo 3 caracteres)</span></label>
+        <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
+        <span id="usuario_mensaje" class="usuario-validation-msg"></span>
         <label class="form-label">Contraseña</label>
         <input type="password" id="password" class = "form-control input-pass" placeholder="Ingrese contraseña">
         <label class="form-label-vercontraseña">
@@ -86,6 +116,7 @@ crearCuentaMaestra.addEventListener("click", function () {
       const passwordInput = document.getElementById("password").value;
       const passwordInput2 = document.getElementById("password2").value;
       const ruc = document.getElementById("ruc").value;
+      const mensajecontent = document.getElementById("usuario_mensaje").textContent;
       const nombre_cuenta = document.getElementById("nombre_cuenta").value;
       return {
         data: {
@@ -94,6 +125,7 @@ crearCuentaMaestra.addEventListener("click", function () {
           contrasena: passwordInput,
           contrasena2: passwordInput2,
           ruc: ruc,
+          mensajecontent: mensajecontent,
           nombre_cuenta: nombre_cuenta,
           nombre_rol: "Administrador",
         }
@@ -108,6 +140,12 @@ crearCuentaMaestra.addEventListener("click", function () {
         return;
       } else if (data.data.contrasena != data.data.contrasena2) {
         Swal.fire("Error", "Las contraseñas no coinciden", "error");
+        return;
+      } else if (data.data.usuario.length <= 3) {
+        Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
+        return;
+      } else if (data.data.mensajecontent == "Este usuario ya se ha creado"){
+        Swal.fire("Error", "Este usuario ya se ha creado, los usuarios deben ser unicos", "error");
         return;
       }
       // Envía los datos del formulario a una ruta POST en Flask

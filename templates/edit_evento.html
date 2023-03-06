@@ -49,7 +49,7 @@
                                     <input type="text" class="form-control" value="{{dataevento.fecha}}" disabled>
                                 </div>
                                 <div class="col-lg-12 pt-3">
-                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En gestión">En gestión</button>
+                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En gestión</button>
                                     <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
                                     <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
                                 </div>
@@ -85,10 +85,10 @@
                                         <tbody>
                                             {% for comentario in dataevento.list_comentarios %}
                                             <tr>
-                                                <td>{{comentario.Comentario}}</td>
-                                                <td>{{comentario.DescripcionEstado}}</td>
+                                                <td>{{comentario.comentario}}</td>
+                                                <td>{{comentario.descripcion_estado}}</td>
                                                 <td>{{comentario.usuario}}</td>
-                                                <td>{{comentario.FechaEnvio}}</td>
+                                                <td>{{comentario.fecha_envio}}</td>
                                             </tr>
                                             {% endfor %}
                                         </tbody>
