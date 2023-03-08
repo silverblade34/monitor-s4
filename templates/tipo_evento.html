@@ -19,7 +19,7 @@
     <!-- End Page Header -->
     <div class="row">
         <div class="col-xl-12">
-            {% if datauser.CodCliente == "All" %}
+            {% if datauser.CodCliente == "All" and datatipoevento != None %}
                     <!-- Sorting -->
                     <div class="widget has-shadow tipo-evento pt-4 pb-4">
                         <div id="widget-body" class="widget-body">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <!-- End Sorting -->
-            {% elif datauser.CodCliente != "All" %}
+            {% elif datauser.CodCliente != "All" and datatipoevento != None  %}
             <!-- Sorting -->
             <div class="widget has-shadow tipo-evento">
                 <div id="widget-body" class="widget-body">
@@ -97,6 +97,28 @@
                 </div>
             </div>
             <!-- End Sorting -->
+            {% elif datatipoevento == None %}
+            <!-- Sorting -->
+            <div class="widget has-shadow tipo-evento">
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <table id="sorting-table" class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Prioridad</th>
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             {% endif %}
         </div>
     </div>

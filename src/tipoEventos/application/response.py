@@ -20,17 +20,21 @@ class TipoEventosResponse:
         
     def responseListarTipoEventos(self, cod_cuenta, cod_cliente):
         data = self.requestEventos(cod_cuenta, cod_cliente)
-        if len(data['data']) == 1:
-            result = data['data'][0]["eventos"]
-            return result
+        print(data)
+        if data["data"] is not None:
+            if len(data['data']) == 1:
+                result = data['data'][0]["eventos"]
+                return result
+            else:
+                listeventos = []
+                for eventclient in data['data']:
+                    for eventos in eventclient["eventos"]:
+                        eventoobject = eventos
+                        eventoobject["cod_cliente"] = eventclient["cod_cliente"]
+                        listeventos.append(eventoobject)
+                return listeventos
         else:
-            listeventos = []
-            for eventclient in data['data']:
-                for eventos in eventclient["eventos"]:
-                    eventoobject = eventos
-                    eventoobject["cod_cliente"] = eventclient["cod_cliente"]
-                    listeventos.append(eventoobject)
-            return listeventos
+            return None
     
     def requestEventos(self,cod_cuenta, cod_cliente):
         dataEnviar = {

@@ -55,7 +55,9 @@ def tipo_evento():
             _eventTypeCL = TipoEventosController()
             cod_cuenta = session["datauser"]["CodCuenta"]
             cod_cliente = session["cod_admin"]
+            print("--------------------1")
             datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
+            print(datatipoevento)
             return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento, codp = "adm-tipevent")
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."

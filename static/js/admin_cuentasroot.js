@@ -68,21 +68,6 @@ function validarUsuarioUnico() {
 const crearCuentaMaestra = document.getElementById("crearCuentaMaestra");
 
 crearCuentaMaestra.addEventListener("click", function () {
-  document.addEventListener("DOMContentLoaded", function () {
-    const password1Input = document.getElementById("password");
-    const password2Input = document.getElementById("password2");
-    const password2ValidationMsg = document.getElementById("password2-validation-msg");
-
-    password2Input.addEventListener("input", function () {
-      if (password1Input.value !== password2Input.value) {
-        password2ValidationMsg.textContent = "Las contraseñas no coinciden";
-        return false;
-      } else {
-        password2ValidationMsg.textContent = "Las contraseñas coinciden";
-      }
-    });
-  });
-
   Swal.fire({
     title: "Crear Cuenta",
     html: `
