@@ -14,7 +14,7 @@ class TipoEventosResponse:
                 "usuario": cod_cliente,
                 "status": True
                 }
-        resp = requests.post(f'http://192.168.1.44:3000/api/v1/createEvents', data = json.dumps(data))
+        resp = requests.post(f'http://161.35.104.161:3000/api/v1/createEvents', data = json.dumps(data))
         data = resp.json()
         return data
         
