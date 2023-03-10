@@ -13,7 +13,8 @@ def listar_eventos():
     cod_cuenta = session["datauser"]["CodCuenta"]
     cod_cliente = session["cod_admin"]
     dataevento = _eventCL.listarEventos(cod_cuenta, cod_cliente)
-    return dataevento
+    dataresp = {"listnot": dataevento, "datausuario":{"cod_cliente":cod_cliente, "cod_cuenta" : cod_cuenta} }
+    return dataresp
 
 @app.route('/func_buscarEvento', methods=['GET'])
 def func_buscarEvento():

@@ -58,5 +58,16 @@ class TipoEventosResponse:
         print(json.dumps(dataEvento))
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/editEvents', data=json.dumps(dataEvento))
         data = resp.json()
-        print(data)
         return data
+    
+    def responseObtenerSiglas(self, cod_cliente, cod_cuenta):
+        hed = {"Content-Type": "application/json"}
+        payload = {"cod_cuenta":cod_cuenta}
+        resp = requests.post(f'http://161.35.104.161:3000/api/v1/listAccounts', data= json.dumps(payload), headers= hed)
+        data = resp.json()
+        siglas={}
+        for clientes in data["data"][0]["clientes"]:
+            if clientes["cod_cliente"] == cod_cliente:
+                siglas["sigla_cliente"] = clientes["sigla"]
+                siglas["sigla_cuenta"] = data["data"][0]["sigla"]
+                return siglas

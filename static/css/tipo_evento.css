@@ -2,6 +2,11 @@
 	border-radius: 20px;
 }
 
+.tipo-evento thead{
+	background-color: #c46868;
+    color: #ffffff;
+}
+
 .tipo-evento table .actions {
 	display: flex;
 	justify-content: center;

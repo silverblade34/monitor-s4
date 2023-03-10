@@ -76,6 +76,8 @@ crearCuentaMaestra.addEventListener("click", function () {
         <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
         <label class="form-label">Empresa</label>
         <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
+        <label class="form-label">Abreviatura empresa</label>
+        <input type="text" id="abrev_name" class = "form-control input-text" placeholder="Nombre corto empresa">
         <label class="form-label">Usuario <span>(mínimo 3 caracteres)</span></label>
         <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
         <span id="usuario_mensaje" class="usuario-validation-msg"></span>

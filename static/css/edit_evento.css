@@ -1,0 +1,35 @@
+.widget-body .datos-evento {
+    padding-left: 10px;
+}
+
+.widget-body .datos-evento .mapa-evento {
+    height: 500px;
+    width: 100%;
+    z-index: 999;
+}
+
+.widget-body .datos-evento .container-datos{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.widget-body .datos-evento .cont-resp-prede{
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    gap: 5px;
+    padding-left: 3px;
+    margin-right: 10px;
+}
+
+.widget-body .datos-evento .table-comentarios thead{
+    background-color: #c46868;
+    color: #ffffff;
+}
+
+.widget-body .datos-evento .table-comentarios td{
+    border: 1px solid #bebebe;
+}
+.widget-body .datos-evento .table-comentarios th{
+    border: 1px solid #bebebe;
+}

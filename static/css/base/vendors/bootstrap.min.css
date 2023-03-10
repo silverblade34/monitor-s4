@@ -9947,3 +9947,14 @@
          border-color: #dee2e6
      }
  }
+
+ /* PERSONALIZACIONES(EDITAR NOTIFICACION) */
+ label.label-edit-not {
+    font-size: 12px;
+}
+
+input.input-edit-not{
+    font-size: 12px;
+}
+
+  /* PERSONALIZACIONES(EDITAR NOTIFICACION) */

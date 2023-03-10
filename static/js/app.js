@@ -1,9 +1,9 @@
 function randombg() {
   var random = Math.floor(Math.random() * 3) + 0;
   var bigSize = [
-    "url('https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/12/iveco-camion-autonomo-2565959.jpg?tf=3840x')", 
-    "url('https://www.lamiradanorte.com/wp-content/uploads/2022/09/GPS-tracker-3.jpg')",
-    "url('https://images7.alphacoders.com/311/thumb-1920-311833.jpg')",
+    "url('https://gesab.com/wp-content/uploads/2019/02/cabecera-centro-control-web.jpg')", 
+    "url('https://cdn.shopify.com/s/files/1/0949/6208/files/F_CM_C2.JPG')",
+    "url('https://integracionav.com/wp-content/uploads/2020/03/centro-de-monitoreo-1.jpeg')",
     "url('https://mercadovial.tv/wp-content/uploads/2022/09/Electricos_3-scaled.jpg')",
   ];
   document.getElementById("right").style.backgroundImage = bigSize[random];

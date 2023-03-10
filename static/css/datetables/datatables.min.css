@@ -1,5 +1,6 @@
 table.dataTable {
     clear: both;
+    font-size: 12px;
     margin-top: 6px !important;
     margin-bottom: 6px !important;
     max-width: none !important;
@@ -11,6 +12,10 @@ table.dataTable th {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
 
+}
+
+table.dataTable tr {
+    height: 30px;
 }
 
 table.dataTable td.dataTables_empty,
@@ -240,66 +245,44 @@ div.table-responsive>div.dataTables_wrapper>div.row>div[class^="col-"]:last-chil
     padding-right: 0
 }
 
-div.table-responsive tr:hover {
-    background-color: #f0f0f0;
+div.table-responsive tbody tr:hover {
+    background-color: #d1d1d1 !important;
 }
 
-div.table-responsive thead {
-    background-color: #f0f0f0;
+div.table-responsive tbody tr:nth-child(even) {
+    background-color: #e7e7e7;
 }
 
-div.table-responsive .prioridad {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-}
 
 div.table-responsive .direccion {
     min-width: 180px;
 }
+div.table-responsive .pr{
+    text-align: center;
+}
 
-div.table-responsive .prioridad span {
+div.table-responsive .pr span {
     margin-top: 10px;
     padding: 2px 0;
     border-radius: 15px;
 }
 
-div.table-responsive .prioridad.APPTAL span {
-    padding: 2px 0;
-    border-radius: 15px;
-    background-color: #ffa126;
-}
-
-div.table-responsive .prioridad.APPTAP span {
-    margin-top: 10px;
-    padding: 2px 0;
-    border-radius: 15px;
-    background-color: #ffa126;
-}
-
-div.table-responsive .prioridad.PAR7MIN span {
-    margin-top: 10px;
-    padding: 2px 0;
-    border-radius: 15px;
-    background-color: #ffa126;
-}
-
-div.table-responsive .prioridad.SALPER span {
-    margin-top: 10px;
-    padding: 2px 0;
-    border-radius: 15px;
-    background-color: #ffa126;
-}
-
-
-div.table-responsive .prioridad.DESBAT span {
+div.table-responsive .pr.REGULAR span {
     margin-top: 10px;
     padding: 2px 0;
     border-radius: 15px;
     background-color: #15b996;
 }
 
-div.table-responsive .prioridad.BOTPAN span {
+
+div.table-responsive .pr.URGENTE span {
+    margin-top: 10px;
+    padding: 2px 0;
+    border-radius: 15px;
+    background-color: #ffa126;
+}
+
+div.table-responsive .pr.CRITICO span {
     margin-top: 10px;
     padding: 2px 0;
     border-radius: 15px;
@@ -311,22 +294,22 @@ div.table-responsive .prioridad.BOTPAN span {
 }
 
 .widget {
-    box-shadow: 0px 0px 24px -1px rgba(0,0,0,0.24);
--webkit-box-shadow: 0px 0px 24px -1px rgba(0,0,0,0.24);
--moz-box-shadow: 0px 0px 24px -1px rgba(0,0,0,0.24);
+    box-shadow: 0px 0px 24px -1px rgba(0, 0, 0, 0.24);
+    -webkit-box-shadow: 0px 0px 24px -1px rgba(0, 0, 0, 0.24);
+    -moz-box-shadow: 0px 0px 24px -1px rgba(0, 0, 0, 0.24);
+}
+.widget-body .datos-evento {
+    padding-left: 10px;
+}
+
+.widget-body .datos-evento .formulario-datos p{
+    font-size: 9px;
 }
 
 .widget-body .datos-evento .mapa-evento {
     height: 500px;
     width: 100%;
     z-index: 999;
-}
-
-div.table-responsive .prioridad.DESRUT span {
-    margin-top: 10px;
-    padding: 2px 0;
-    border-radius: 15px;
-    background-color: #c22d41;
 }
 
 @keyframes dtb-spinner {

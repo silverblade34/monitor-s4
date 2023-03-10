@@ -19,17 +19,75 @@
     <div class="row">
         <div class="col-xl-12">
             <!-- Sorting -->
-            <div class="widget has-shadow">
+            <div class="widget has-shadow widget-notificaciones">
                 <div class="widget-header bordered no-actions d-flex align-items-center">
                     <h4>Consultar notificación</h4>
                 </div>
+                <ul class="accordion">
+                    <li>
+                        <div class="accordion-button"> <span><i class='bx bx-filter'></i> Seleccionar columnas</span><i
+                                class='bx bx-chevron-down icon-arrow'></i></div>
+                        <div class="accordion-content">
+                            {% if datauser.CodCuenta == "0000" %}
+                            <span><input type="checkbox" id="chk_cod_cuenta" checked data-column="0"> Sigla
+                                cuenta</span>
+                            <span><input type="checkbox" id="chk_cod_cliente" checked data-column="1"> Sigla
+                                cliente</span>
+                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="2"> Código
+                                evento</span>
+                            <span><input type="checkbox" id="chk_placa" checked data-column="3"> Placa</span>
+                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="4"> Fecha
+                                recepción</span>
+                            <span><input type="checkbox" id="chk_velocidad" checked data-column="5"> Velocidad</span>
+                            <span><input type="checkbox" id="chk_direccion" checked data-column="6"> Dirección</span>
+                            <span><input type="checkbox" id="chk_estado" checked data-column="7"> Estado</span>
+                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="8"> Fecha ultima
+                                acción</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Prioridad</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="10"> Acciones</span>
+                            {% elif datauser.CodCliente == "All" %}
+                            <span><input type="checkbox" id="chk_cod_cliente" checked data-column="0"> Sigla
+                                cliente</span>
+                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="1"> Código
+                                evento</span>
+                            <span><input type="checkbox" id="chk_placa" checked data-column="2"> Placa</span>
+                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="3"> Fecha
+                                recepción</span>
+                            <span><input type="checkbox" id="chk_velocidad" checked data-column="4"> Velocidad</span>
+                            <span><input type="checkbox" id="chk_direccion" checked data-column="5"> Dirección</span>
+                            <span><input type="checkbox" id="chk_estado" checked data-column="6"> Estado</span>
+                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="7"> Fecha ultima
+                                acción</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Prioridad</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Acciones</span>
+                            {% else %}
+                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="0"> Código
+                                evento</span>
+                            <span><input type="checkbox" id="chk_placa" checked data-column="1"> Placa</span>
+                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="2"> Fecha
+                                recepción</span>
+                            <span><input type="checkbox" id="chk_velocidad" checked data-column="3"> Velocidad</span>
+                            <span><input type="checkbox" id="chk_direccion" checked data-column="4"> Dirección</span>
+                            <span><input type="checkbox" id="chk_estado" checked data-column="5"> Estado</span>
+                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="6"> Fecha ultima
+                                acción</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="7"> Prioridad</span>
+                            <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Acciones</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                </ul>
                 <div id="widget-body" class="widget-body">
                     <div class="table-responsive">
-                        <table id="sorting-table" class="table mb-0">
+                        <table id="sorting-table" class="table table-notifications mb-0">
                             <thead>
                                 <tr>
-                                    <th>Código cuenta</th>
-                                    <th>Código cliente</th>
+                                    {% if datauser.CodCuenta == "0000" %}
+                                    <th>Sigla cuenta</th>
+                                    <th>Sigla cliente</th>
+                                    {% elif datauser.CodCliente == "All" %}
+                                    <th>Sigla cliente</th>
+                                    {% endif %}
                                     <th>Código evento</th>
                                     <th>Placa</th>
                                     <th>Fecha recepción</th>
@@ -55,7 +113,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 {% if msgerror %}
 <script defer>
-    window.onload = function() {
+    window.onload = function () {
         Swal.fire({
             title: "Error",
             text: "{{ msgerror }}",
@@ -64,5 +122,5 @@
     };
 </script>
 {% endif %}
-<script src="{{url_for('static', filename='js/act_tabla.js')}}" defer></script>
+<script src="{{url_for('static', filename='js/tabla_notificaciones.js')}}" defer></script>
 {% endblock %}

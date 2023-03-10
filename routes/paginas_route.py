@@ -26,7 +26,7 @@ def index():
 def home():
     if 'user' in session:
         if 'idevento' in session:
-            session.pop('idevento', None) 
+            session.pop('idevento', None)
         return render_template('index.html', datauser = session["datauser"], codp = "home")
     else:
         return redirect(url_for('login'))

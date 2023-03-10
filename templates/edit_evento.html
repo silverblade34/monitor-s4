@@ -26,29 +26,43 @@
                     <div>
                         <p>Localización Geocerca</p>
                     </div>
-                    <div id="datos-evento" class="datos-evento">
-                        <div id="map" class="mapa-evento">
+                    <div id="datos-evento" class="datos-evento row">
+                        <div id="map" class="mapa-evento col-lg-6">
 
                         </div>
-                        <form action="" id="formulario-datos" class="pt-5">
+                        <form action="" id="formulario-datos" class="col-lg-6">
                             <div class="row">
-                                <div class="col-lg-3">
-                                    <label for="">Código del Evento:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.cod_evento}}" disabled>
+                                <div class="container-datos col-lg-12 row">
+                                    <div class="col-lg-4">
+                                        <label for=""  class="label-edit-not">Código del Evento:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.cod_evento}}" disabled>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="" class="label-edit-not">Placa:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.placa}}" disabled>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="" class="label-edit-not">Geocerca:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.geocerca}}" disabled>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="" class="label-edit-not">Fecha de recepción:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.fecha}}" disabled>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label for=""  class="label-edit-not">Prioridad:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.Prioridad}}" disabled>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <label for="" class="label-edit-not">Cliente:</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.origen}}" disabled>
+                                    </div>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label for="">Placa:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.placa}}" disabled>
+                                <div class="col-lg-12 pt-2">
+                                    <h5><i class='bx bxs-comment-detail'></i> Registrar comentarios</h5>
                                 </div>
-                                <div class="col-lg-3">
-                                    <label for="">Geocerca:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.geocerca}}" disabled>
-                                </div>
-                                <div class="col-lg-3">
-                                    <label for="">Fecha de recepción:</label>
-                                    <input type="text" class="form-control" value="{{dataevento.fecha}}" disabled>
-                                </div>
-                                <div class="col-lg-12 pt-3">
+                                <div class="col-lg-12 pt-2">
                                     <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En gestión</button>
                                     <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
                                     <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
@@ -57,7 +71,7 @@
                                     <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"
                                         rows="3" placeholder="Agregue un comentario"></textarea>
                                 </div>
-                                <div class="col-lg-12 pt-3">
+                                <div class="col-lg-12 cont-resp-prede pt-3">
                                     <button type="button" class="btn btn-outline-info"
                                         id="btn-textarea-1">No/Programada</button>
                                     <button type="button" class="btn btn-outline-info"
@@ -71,31 +85,31 @@
                                     <button type="button" class="btn btn-outline-info"
                                         id="btn-textarea-6">Prueba/Cencon</button>
                                 </div>
-                                <div class="col-lg-12 pt-3">
-                                    <p>Comentarios</p>
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Comentario</th>
-                                                <th>Estado</th>
-                                                <th>Usuario</th>
-                                                <th>Fecha</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {% for comentario in dataevento.list_comentarios %}
-                                            <tr>
-                                                <td>{{comentario.comentario}}</td>
-                                                <td>{{comentario.descripcion_estado}}</td>
-                                                <td>{{comentario.usuario}}</td>
-                                                <td>{{comentario.fecha_envio}}</td>
-                                            </tr>
-                                            {% endfor %}
-                                        </tbody>
-                                    </table>
-                                </div>
                             </div>
                         </form>
+                        <div class="col-lg-12 pt-3">
+                            <p>Comentarios</p>
+                            <table class="table table-comentarios">
+                                <thead>
+                                    <tr>
+                                        <th>Comentario</th>
+                                        <th>Estado</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for comentario in dataevento.list_comentarios %}
+                                    <tr>
+                                        <td>{{comentario.comentario}}</td>
+                                        <td>{{comentario.descripcion_estado}}</td>
+                                        <td>{{comentario.usuario}}</td>
+                                        <td>{{comentario.fecha_envio}}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

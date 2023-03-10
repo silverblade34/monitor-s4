@@ -181,28 +181,43 @@ verPayloads.forEach(verPayload => {
         const codEvento = this.dataset.codEvento;
         const codCliente = this.dataset.codCliente;
         const codCuenta = this.dataset.codCuenta;
-        Swal.fire({
-            title: 'Detalles de evento',
-            html: `
-            <div class="cont-btn-copy">
-                <button class="copy-btn" onclick="copyToClipboard()"><i class='bx bx-copy-alt'></i> copiar</button>
-            </div>
-            <pre><code>${JSON.stringify({
-                "cod_cuenta": codCuenta,
-                "cod_cliente": codCliente,
-                "cod_evento": codEvento,
-                "placa": "%UNIT%",
-                "origen": "Sys4Log",
-                "latitud": "%LATD%",
-                "fecha": "%POS_TIME%",
-                "longitud": "%LOND%",
-                "velocidad": "%SPEED%",
-                "geocerca": "%ZONE_MIN%",
-                "grupo": "Z3",
-                "direccion": "%LOCATION%"
-            }, null, 2)}</code></pre>`,
-            confirmButtonText: 'Cerrar'
+        fetch(`/obtener_siglas?cod_cliente=${codCliente}`, {
+            method: "GET",
         })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Error al buscar cliente");
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data)
+                Swal.fire({
+                    title: 'Detalles de evento',
+                    html: `
+                    <div class="cont-btn-copy">
+                        <button class="copy-btn" onclick="copyToClipboard()"><i class='bx bx-copy-alt'></i> copiar</button>
+                    </div>
+                    <pre><code>${JSON.stringify({
+                        "cod_cuenta": codCuenta,
+                        "cod_cliente": codCliente,
+                        "cod_evento": codEvento,
+                        "sigla_cuenta" : data.sigla_cuenta,
+                        "sigla_cliente" : data.sigla_cliente,
+                        "prioridad" : "",
+                        "placa": "%UNIT%",
+                        "origen": "Sys4Log",
+                        "latitud": "%LATD%",
+                        "fecha": "%POS_TIME%",
+                        "longitud": "%LOND%",
+                        "velocidad": "%SPEED%",
+                        "geocerca": "%ZONE_MIN%",
+                        "grupo": "Z3",
+                        "direccion": "%LOCATION%"
+                    }, null, 2)}</code></pre>`,
+                    confirmButtonText: 'Cerrar'
+                })
+            })
     });
 })
 

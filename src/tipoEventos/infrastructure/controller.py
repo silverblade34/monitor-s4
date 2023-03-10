@@ -19,3 +19,8 @@ class TipoEventosController:
         response = TipoEventosResponse()
         data = response.actualizarTipoEventos(dataEvento)
         return data
+    
+    def obtenerSiglas(self, cod_cliente, cod_cuenta):
+        response = TipoEventosResponse()
+        data = response.responseObtenerSiglas(cod_cliente, cod_cuenta)
+        return data

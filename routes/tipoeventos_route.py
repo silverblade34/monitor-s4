@@ -28,3 +28,10 @@ def actualizar_tipoevento():
     _eventTypeCL = TipoEventosController()
     dataresp = _eventTypeCL.actualizarTipoEventos(request.json["data"])
     return dataresp
+
+@app.route('/obtener_siglas', methods=['GET'])
+def obtener_siglas():
+    _eventTypeCL = TipoEventosController()
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    dataresp = _eventTypeCL.obtenerSiglas(request.args["cod_cliente"], cod_cuenta)
+    return dataresp

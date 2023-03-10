@@ -87,8 +87,8 @@ btnAddComentarios.forEach(btnAddComentario => {
                     .then(data => {
                         Swal.fire("Agregado", data, "success");
                         setTimeout(function () {
-                            location.reload();
-                        }, 2000);
+                            window.location.href = "/home";
+                        }, 1000);
                     })
                     .catch(error => {
                         Swal.fire("Error", "Error al agregar comentario", "error");

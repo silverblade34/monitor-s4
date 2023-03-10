@@ -17,7 +17,7 @@ body {
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.5;
-    color: #98a8b4;
+    color: #434547;
     background-color: #f9f9f9
 }
 
@@ -291,7 +291,7 @@ header.page-header {
 
 table {
     font-size: 1rem;
-    color: #98a8b4
+    color: #6d7377
 }
 
 .content-inner {
@@ -2898,9 +2898,9 @@ ul.social-network li {
     vertical-align: middle;
     border: 0 none;
     padding: 20px 12px 20px 12px;
-    color: #5d5386;
     font-weight: 600
 }
+
 
 .table td {
     border-top: 0;
@@ -2909,9 +2909,6 @@ ul.social-network li {
     font-weight: 500
 }
 
-.table-hover tbody tr:hover {
-    background: rgba(52, 40, 104, .04)
-}
 
 .table-bordered th,
 .table-bordered td {
