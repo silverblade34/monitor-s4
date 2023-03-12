@@ -223,16 +223,25 @@ verPayloads.forEach(verPayload => {
 
 
 function copyToClipboard() {
-    const codeElement = document.getElementById('payload-noti')
+    const codeElement = document.getElementById("payload-noti");
     const codeText = codeElement.innerText;
-    const copyButton = document.querySelector(".copy-btn");
     
-    navigator.clipboard.writeText(codeText)
-        .then(() => {
-            copyButton.classList.add("copied");
-            copyButton.innerHTML = "<i class='bx bx-check'></i> Copiado";
-        })
-        .catch(err => {
-            console.error("Error al copiar al portapapeles:", err);
-        });
-}
+    // Seleccionar el texto del elemento
+    const range = document.createRange();
+    range.selectNode(codeElement);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    
+    // Copiar el contenido seleccionado al portapapeles
+    try {
+      document.execCommand("copy");
+      const copyButton = document.querySelector(".copy-btn");
+      copyButton.classList.add("copied");
+      copyButton.innerHTML = "<i class='bx bx-check'></i> Copiado";
+    } catch (err) {
+      console.error("Error al copiar al portapapeles:", err);
+    } finally {
+      // Limpiar la selección de texto
+      window.getSelection().removeAllRanges();
+    }
+  }
