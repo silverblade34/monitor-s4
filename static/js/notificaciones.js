@@ -34,7 +34,7 @@ function actualizarNotificaciones() {
           $('#dropdown-menu-notification').append(fila);
         }
         cola = '<li>' +
-          '<a rel="nofollow" href="/home" class="dropdown-item all-notifications text-center">View' +
+          '<a rel="nofollow" href="/notificaciones" class="dropdown-item all-notifications text-center">View' +
           'All Notifications</a>' +
           '</li>';
       } else {
@@ -56,7 +56,7 @@ function actualizarNotificaciones() {
           $('#dropdown-menu-notification').append(fila);
         }
         cola = '<li>' +
-          '<a rel="nofollow" href="/home" class="dropdown-item all-notifications text-center">View' +
+          '<a rel="nofollow" href="/notificaciones" class="dropdown-item all-notifications text-center">View' +
           'All Notifications</a>' +
           '</li>';
       }
@@ -88,6 +88,7 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
         return response.json();
       })
       .then(data => {
+        const contrasenaant = data.contrasena
         console.log(data)
         Swal.fire({
           title: "Editar cuenta cliente",
@@ -149,9 +150,11 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
-            } else if (data.data.contrasena != data.data.contrasena2) {
-              Swal.fire("Error", "Las contraseñas no coinciden", "error");
-              return;
+            } else if (data.data.contrasena != contrasenaant) {
+              if (data.data.contrasena != data.data.contrasena2) {
+                Swal.fire("Error", "Las contraseñas no coinciden", "error");
+                return;
+              }
             }
             // Envía los datos del formulario a una ruta POST en Flask
             fetch("/actualizar_cuenta_cliente", {

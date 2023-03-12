@@ -47,16 +47,16 @@ function validarUsuarioUnico() {
       .then(response => response.json())
       .then(data => {
         mensaje.textContent = data.message;
-        if (data.status == true){
+        if (data.status == true) {
           mensaje.style.color = "green";
           mensaje.style.display = "block";
-        }else if (data.status == false){
+        } else if (data.status == false) {
           mensaje.style.color = "red";
           mensaje.style.display = "block";
         }
       })
       .catch(error => console.error(error));
-  }else{
+  } else {
     mensaje.textContent = "El usuario debe contener mínimo 3 caracteres";
     mensaje.style.color = "red";
     mensaje.style.display = "block";
@@ -131,7 +131,7 @@ crearCuentaMaestra.addEventListener("click", function () {
       } else if (data.data.usuario.length <= 3) {
         Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
         return;
-      } else if (data.data.mensajecontent == "Este usuario ya se ha creado"){
+      } else if (data.data.mensajecontent == "Este usuario ya se ha creado") {
         Swal.fire("Error", "Este usuario ya se ha creado, los usuarios deben ser unicos", "error");
         return;
       }
@@ -223,6 +223,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
       })
       .then(data => {
         console.log(data)
+        const contrasenaant = data.contrasena
         Swal.fire({
           title: "Editar cuenta",
           html: `
@@ -282,9 +283,11 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
-            } else if (data.data.contrasena != data.data.contrasena2) {
-              Swal.fire("Error", "Las contraseñas no coinciden", "error");
-              return;
+            } else if (data.data.contrasena != contrasenaant) {
+              if (data.data.contrasena != data.data.contrasena2) {
+                Swal.fire("Error", "Las contraseñas no coinciden", "error");
+                return;
+              }
             }
             // Envía los datos del formulario a una ruta POST en Flask
             fetch("/actualizar_cuenta", {

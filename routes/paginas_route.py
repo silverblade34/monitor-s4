@@ -18,16 +18,16 @@ def layout():
 @app.route('/', methods=['GET'])
 def index():
     if 'user' in session:
-        return redirect(url_for('home'))
+        return redirect(url_for('notificaciones'))
     else:
         return redirect(url_for('login'))
 
-@app.route('/home', methods=['GET'])
-def home():
+@app.route('/notificaciones', methods=['GET'])
+def notificaciones():
     if 'user' in session:
         if 'idevento' in session:
             session.pop('idevento', None)
-        return render_template('index.html', datauser = session["datauser"], codp = "home")
+        return render_template('notificaciones.html', datauser = session["datauser"], codp = "notificaciones")
     else:
         return redirect(url_for('login'))
 
@@ -44,7 +44,7 @@ def listar_usuarios():
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
-            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
         return redirect(url_for('login'))
     
@@ -62,9 +62,9 @@ def tipo_evento():
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
-            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('notificaciones'))
 
 @app.route('/editar_evento', methods=['GET'])
 def editar_evento():
@@ -75,10 +75,10 @@ def editar_evento():
             dataevento = _eventCL.buscarEvento(session["idevento"])
             print(dataevento)
             if dataevento["status"] == True:
-                return render_template("edit_evento.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
+                return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
-            return render_template('index.html', datauser = session["datauser"], msgerror = mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('home'))
+        return redirect(url_for('notificaciones'))

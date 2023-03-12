@@ -154,10 +154,10 @@ Author: SAEROX
                         </li>
                     </ul>
                     <ul class="list-unstyled">
-                        <li class="{% if codp == 'home' %} active {% endif %}"><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i
+                        <li class="{% if codp == 'notificaciones' %} active {% endif %}"><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-bell'></i><span>Eventos</span></a>
-                            <ul id="dropdown-ui" class="collapse list-unstyled pt-0">
-                                <li><a class="{% if codp =='adm-u' %} active {% endif %}" href="/home">Consultar registrar</a></li>
+                            <ul id="dropdown-ui" class="collapse list-unstyled {% if codp == 'notificaciones' %} show {% endif %} pt-0">
+                                <li><a class="{% if codp == 'notificaciones' %} active {% endif %}" href="/notificaciones">Consultar registrar</a></li>
                             </ul>
                         </li>
                         <li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i

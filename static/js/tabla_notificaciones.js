@@ -1,6 +1,7 @@
 var columnasVisibles = [];
 var searchValue = '';
-
+  
+// FUNCION ACTUALIZAR E INSERTAR DATOS A LA TABLA
 function actualizarTabla() {
     $.ajax({
         url: '/listar_eventos',
@@ -70,7 +71,7 @@ function actualizarTabla() {
             }
             $('#sorting-table').DataTable({
                 "order": [[2, "desc"]],
-                "stateSave": true,
+                "stateSave": false,
                 "search": {
                     "search": searchValue // aplica el valor de búsqueda guardado
                 },
@@ -106,7 +107,7 @@ function actualizarTabla() {
 $(document).ready(function () {
     actualizarTabla();
 });
-// setInterval(actualizarTabla, 10000);
+setInterval(actualizarTabla, 10000);
 
 
 // ACORDEON TABLA NOTIFICACIONES

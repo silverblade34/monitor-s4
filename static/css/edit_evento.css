@@ -16,7 +16,8 @@
 
 .widget-body .datos-evento .cont-resp-prede{
     display: grid;
-    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-columns: 23% 23% 23% 23%;
+    justify-content: center;
     gap: 5px;
     padding-left: 3px;
     margin-right: 10px;

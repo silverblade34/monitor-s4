@@ -27,5 +27,5 @@ def func_buscarEvento():
 def agregarComentario():
     _eventCL = EventosController()
     respComent = _eventCL.agregarComentario(request.json["data"])
-    return respComent["message"]
+    return respComent
 

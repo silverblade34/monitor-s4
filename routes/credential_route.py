@@ -19,7 +19,7 @@ def login():
                 session["user"] = datauser["data"]["Usuario"]
                 session["datauser"] = datauser["data"]
                 session["cod_admin"] = datauser["CodClienteAdmin"]
-                return redirect(url_for('home'))
+                return redirect(url_for('notificaciones'))
             elif datauser["status"] == False:
                 return render_template('login.html', message = "Usuario no válido")
             return render_template('login.html')

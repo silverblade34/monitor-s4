@@ -56,11 +56,11 @@ const btnAddComentarios = document.querySelectorAll(".btn-comentario");
 btnAddComentarios.forEach(btnAddComentario => {
     btnAddComentario.addEventListener("click", function () {
         Swal.fire({
-            title: 'Desea agregar este comentario?',
+            title: '¿Desea agregar este comentario?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
+            cancelButtonColor: '#9b9b9b',
             confirmButtonText: 'Si'
         }).then((result) => {
             if (result.isConfirmed) {
@@ -84,11 +84,24 @@ btnAddComentarios.forEach(btnAddComentario => {
                     },
                     body: JSON.stringify(dataenv)
                 })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Error al actualizar agregar al comentario");
+                        }
+                        return response.json();
+                    })
                     .then(data => {
-                        Swal.fire("Agregado", data, "success");
-                        setTimeout(function () {
-                            window.location.href = "/home";
-                        }, 1000);
+                        Swal.fire({
+                            title: "Agregado",
+                            text: data.message,
+                            icon: "success",
+                            showCancelButton: false, // muestra el botón de confirmación
+                            confirmButtonText: "Aceptar",
+                        }).then((result) => {
+                            if (result.isConfirmed) { // si se hizo clic en el botón de confirmación
+                                window.location.href = "/notificaciones"; // redirige a la página deseada
+                            }
+                        });
                     })
                     .catch(error => {
                         Swal.fire("Error", "Error al agregar comentario", "error");

@@ -97,8 +97,10 @@ class UsuariosResponse:
                             contrasenafin = contrasena
         payload = { "id": id, "cod_cliente": data["cod_cliente"] ,"empresa": data["nombre_cliente"].upper(), "usuario": data["usuario"], "contrasena": contrasenafin,"ruc": data["ruc"],
                    "rol": data["rol_cliente"], "estado" : data["estado"]}
+        print(json.dumps(payload))
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/editClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
+        print(data)
         return data
     
     def responseDeleteUsuarioCliente(self, idusuario, codcliente):

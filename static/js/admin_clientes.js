@@ -134,6 +134,7 @@ editarClientes2.forEach(editarCliente2 => {
         return response.json();
       })
       .then(data => {
+        const contrasenaant = data.contrasena
         console.log(data)
         Swal.fire({
           title: "Editar cuenta cliente",
@@ -201,9 +202,11 @@ editarClientes2.forEach(editarCliente2 => {
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
-            } else if (data.data.contrasena != data.data.contrasena2) {
-              Swal.fire("Error", "Las contraseñas no coinciden", "error");
-              return;
+            } else if (data.data.contrasena != contrasenaant) {
+              if (data.data.contrasena != data.data.contrasena2) {
+                Swal.fire("Error", "Las contraseñas no coinciden", "error");
+                return;
+              }
             }
             // Envía los datos del formulario a una ruta POST en Flask
             fetch("/actualizar_cuenta_cliente", {
@@ -425,6 +428,7 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
       })
       .then(data => {
         console.log(data)
+        const contrasenaant = data.contrasena
         Swal.fire({
           title: "Editar cuenta cliente",
           html: `
@@ -485,9 +489,11 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
-            } else if (data.data.contrasena != data.data.contrasena2) {
-              Swal.fire("Error", "Las contraseñas no coinciden", "error");
-              return;
+            } else if (data.data.contrasena != contrasenaant) {
+              if (data.data.contrasena != data.data.contrasena2) {
+                Swal.fire("Error", "Las contraseñas no coinciden", "error");
+                return;
+              }
             }
             // Envía los datos del formulario a una ruta POST en Flask
             fetch("/actualizar_cuenta_cliente", {

@@ -198,7 +198,7 @@ verPayloads.forEach(verPayload => {
                     <div class="cont-btn-copy">
                         <button class="copy-btn" onclick="copyToClipboard()"><i class='bx bx-copy-alt'></i> copiar</button>
                     </div>
-                    <pre><code>${JSON.stringify({
+                    <pre><code id="payload-noti">${JSON.stringify({
                         "cod_cuenta": codCuenta,
                         "cod_cliente": codCliente,
                         "cod_evento": codEvento,
@@ -223,9 +223,10 @@ verPayloads.forEach(verPayload => {
 
 
 function copyToClipboard() {
-    const codeElement = document.querySelector("pre code");
+    const codeElement = document.getElementById('payload-noti')
     const codeText = codeElement.innerText;
     const copyButton = document.querySelector(".copy-btn");
+    
     navigator.clipboard.writeText(codeText)
         .then(() => {
             copyButton.classList.add("copied");
