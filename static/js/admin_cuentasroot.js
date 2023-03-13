@@ -76,8 +76,8 @@ crearCuentaMaestra.addEventListener("click", function () {
         <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
         <label class="form-label">Empresa</label>
         <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
-        <label class="form-label">Abreviatura empresa</label>
-        <input type="text" id="abrev_name" class = "form-control input-text" placeholder="Nombre corto empresa">
+        <label class="form-label">Sigla</label>
+        <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
         <label class="form-label">Usuario <span>(mínimo 3 caracteres)</span></label>
         <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
         <span id="usuario_mensaje" class="usuario-validation-msg"></span>
@@ -100,6 +100,7 @@ crearCuentaMaestra.addEventListener("click", function () {
     confirmButtonText: "Crear",
     preConfirm: function () {
       const usuario = document.getElementById("usuario_cuenta").value;
+      const sigla = document.getElementById("sigla").value;
       const passwordInput = document.getElementById("password").value;
       const passwordInput2 = document.getElementById("password2").value;
       const ruc = document.getElementById("ruc").value;
@@ -111,6 +112,7 @@ crearCuentaMaestra.addEventListener("click", function () {
           usuario: usuario,
           contrasena: passwordInput,
           contrasena2: passwordInput2,
+          sigla: sigla,
           ruc: ruc,
           mensajecontent: mensajecontent,
           nombre_cuenta: nombre_cuenta,
@@ -121,8 +123,7 @@ crearCuentaMaestra.addEventListener("click", function () {
   }).then(function (result) {
     if (result.value) {
       const data = result.value;
-      console.log(data);
-      if (!data.data.nombre_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+      if (!data.data.nombre_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc  || !data.data.sigla) {
         Swal.fire("Error", "Todos los campos son requeridos", "error");
         return;
       } else if (data.data.contrasena != data.data.contrasena2) {
@@ -175,7 +176,7 @@ btnsdeletecuenta.forEach(btndeletecuenta => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#9b9b9b',
       confirmButtonText: 'Si, eliminar cuenta!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -222,7 +223,6 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
         return response.json();
       })
       .then(data => {
-        console.log(data)
         const contrasenaant = data.contrasena
         Swal.fire({
           title: "Editar cuenta",
@@ -232,6 +232,8 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}" disabled>
             <label class="form-label">Empresa</label>
             <input type="text" id="nombre_cuenta" class = "form-control input-text" value="${data.empresa}">
+            <label class="form-label">Sigla</label>
+            <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
@@ -257,6 +259,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
             const codcuenta = document.getElementById("cod_cuenta").value;
+            const sigla = document.getElementById("sigla").value;
             const nombre_cuenta = document.getElementById("nombre_cuenta").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const password = document.getElementById("password").value;
@@ -270,6 +273,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
                 nombre_rol: "Administrador",
                 usuario: usuario,
                 contrasena: password,
+                sigla: sigla,
                 contrasena2: passwordInput2,
                 ruc: ruc,
                 estado: estadoCheckbox,
@@ -280,7 +284,7 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
         }).then(function (result) {
           if (result.value) {
             const data = result.value;
-            if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
+            if (!data.data.cod_cuenta || !data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.sigla) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
             } else if (data.data.contrasena != contrasenaant) {

@@ -127,6 +127,22 @@
 	background: #DB504A;
 }
 
+.li.not-completed .status{
+	font-size: 10px;
+	padding: 6px 16px;
+	color: var(--light);
+	border-radius: 20px;
+	font-weight: 700;
+}
+
+.li.not-completed .status.true {
+	background: #59c1de;
+}
+
+.li.not-completed .status.false {
+	background: #DB504A;
+}
+
 #content .table-data .order table tr td .status.pending {
 	background: var(--orange);
 }

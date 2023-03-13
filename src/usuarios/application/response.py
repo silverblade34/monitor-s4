@@ -23,7 +23,7 @@ class UsuariosResponse:
         hash_object = hashlib.md5(datauser["contrasena"].encode())
         contrasena = hash_object.hexdigest()
         payload = {"cod_cuenta": datauser["cod_cuenta"],"cod_cliente": "All", "contrasena" : contrasena, "usuario" : datauser["usuario"], "ruc" : datauser["ruc"], "empresa": datauser["nombre_cuenta"].upper(),
-        "rol": datauser["nombre_rol"], "estado" : True, "clientes": []}
+        "rol": datauser["nombre_rol"],"sigla" : datauser["sigla"].upper(), "estado" : True, "clientes": []}
         resp = requests.post(f'http://161.35.104.161:3000/api/v1/createAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
@@ -52,7 +52,7 @@ class UsuariosResponse:
                     contrasenafin = usuario["contrasena"]
                 else:
                     contrasenafin = contrasena
-        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"],"ruc": data["ruc"],
+        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),"ruc": data["ruc"],
                    "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
         print(json.dumps(payload))
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/editAccount', data= json.dumps(payload), headers= hed)
@@ -68,7 +68,7 @@ class UsuariosResponse:
         hed = {"Content-Type": "application/json"}
         hash_object = hashlib.md5(datauser["contrasena"].encode())
         contrasena = hash_object.hexdigest()
-        payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, "usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
+        payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
         "empresa": datauser["nombre_cliente"].upper(), "rol": datauser["nombre_rol"], "estado" : True}
         resp = requests.post(f'http://161.35.104.161:3000/api/v1/createClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
@@ -95,7 +95,7 @@ class UsuariosResponse:
                             contrasenafin = cliente["contrasena"]
                         else:
                             contrasenafin = contrasena
-        payload = { "id": id, "cod_cliente": data["cod_cliente"] ,"empresa": data["nombre_cliente"].upper(), "usuario": data["usuario"], "contrasena": contrasenafin,"ruc": data["ruc"],
+        payload = { "id": id, "cod_cliente": data["cod_cliente"] ,"empresa": data["nombre_cliente"].upper(), "usuario": data["usuario"], "sigla" : data["sigla"].upper() , "contrasena": contrasenafin,"ruc": data["ruc"],
                    "rol": data["rol_cliente"], "estado" : data["estado"]}
         print(json.dumps(payload))
         resp = requests.put(f'http://161.35.104.161:3000/api/v1/editClient', data= json.dumps(payload), headers= hed)

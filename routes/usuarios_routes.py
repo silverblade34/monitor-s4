@@ -93,6 +93,7 @@ def mostrar_idcuenta():
     _userCL = UsuariosController()
     data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
     datacuenta = data["data"][0]
+    print(datacuenta)
     return datacuenta
 
 @app.route('/validarUsuarioUnico', methods=['GET'])

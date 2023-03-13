@@ -71,13 +71,19 @@
                             </li>
                             <div class="accordion-body">
                                 {% for cliente in usuario.clientes %}
-                                <li class="li not-completed">
-                                    <p>{{cliente.empresa}} | {{cliente.cod_cliente}} | {{cliente.rol}}
-                                    </p>
-                                    <div>
-                                      
-                                    </div>
-                                </li>
+                                    {% if cliente.rol == "Administrador" %}
+                                    <li class="li not-completed">
+                                        <p>{{cliente.empresa}} | {{cliente.cod_cliente}}
+                                        </p>
+                                        <div>
+                                            {% if cliente.estado == True %}
+                                            <span class="status true">Activo</span>
+                                            {% else %}
+                                            <span class="status false">Desactivada</span>
+                                            {% endif %}
+                                        </div>
+                                    </li>
+                                    {% endif %}
                                 {% endfor %}
                             </div>
                             {% endfor %}
@@ -152,7 +158,7 @@
                                 {% for usuarios in datacuentas[0].clientes %}
                                 {% if usuarios.empresa == cliente.empresa %}
                                 <li class="li not-completed">
-                                    <p>{{usuarios.empresa}} / {{usuarios.cod_cliente}} / {{usuarios.rol}}
+                                    <p>USUARIO: {{usuarios.usuario}} | ROL: {{usuarios.rol}}
                                     </p>
                                     <div>
                                         <a href="#" class="editarUsuarioXCliente" data-cuenta-id="{{datacuentas[0].ID}}"
@@ -183,7 +189,7 @@
                     <div class="order">
                         <div class="head">
                             <h3>Clientes</h3>
-                            <button id="crearusuario-2" data-rp-empresa="{{datauser.Empresa}}" data-rp-ruc="{{datauser.Ruc}}" class="btn btn-success">Crear usuario</button>
+                            <button id="crearusuario-2" data-rp-empresa="{{datauser.Empresa}}" data-rp-ruc="{{datauser.Ruc}}" data-rp-sigla="{{datauser.sigla}}" class="btn btn-success">Crear usuario</button>
                         </div>
                         <table>
                             <thead>

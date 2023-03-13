@@ -29,7 +29,6 @@ const hiddenLoa = document.getElementById("hidden-loader");
 
 btns.forEach(btn => {
 	btn.addEventListener("click", function(){
-		console.log("----------------------------1")
 		// Mostrando el div
 		hiddenLoa.style.display = "flex";
 	});

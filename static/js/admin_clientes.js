@@ -14,7 +14,6 @@ crearClientes2.addEventListener("click", function () {
       return response.json();
     })
     .then(data => {
-      console.log(data)
       const idcuenta = data.ID
       Swal.fire({
         title: "Crear cliente",
@@ -28,6 +27,8 @@ crearClientes2.addEventListener("click", function () {
               <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
               <label class="form-label">Cliente</label>
               <input type="text" id="nombre_cliente" class = "form-control input-text" placeholder="Nombre del cliente">
+              <label class="form-label">Sigla</label>
+              <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
               <label class="form-label">Usuario</label>
               <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
               <span id="usuario_mensaje" class="usuario-validation-msg"></span>
@@ -51,6 +52,7 @@ crearClientes2.addEventListener("click", function () {
         preConfirm: function () {
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
+          const sigla = document.getElementById("sigla").value;
           const passwordInput2 = document.getElementById("password2").value;
           const ruc = document.getElementById("ruc").value;
           const mensajecontent = document.getElementById("usuario_mensaje").textContent;
@@ -62,6 +64,7 @@ crearClientes2.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              sigla: sigla,
               contrasena2: passwordInput2,
               ruc: ruc,
               mensajecontent: mensajecontent,
@@ -73,8 +76,7 @@ crearClientes2.addEventListener("click", function () {
       }).then(function (result) {
         if (result.value) {
           const data = result.value;
-          console.log("Data a enviar" + data);
-          if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
+          if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta || !data.data.sigla) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
             return;
           } else if (data.data.contrasena != data.data.contrasena2) {
@@ -135,7 +137,6 @@ editarClientes2.forEach(editarCliente2 => {
       })
       .then(data => {
         const contrasenaant = data.contrasena
-        console.log(data)
         Swal.fire({
           title: "Editar cuenta cliente",
           html: `
@@ -144,6 +145,8 @@ editarClientes2.forEach(editarCliente2 => {
             <input type="text" id="cod_cliente" class = "form-control input-text" value="${data.cod_cliente}" disabled>
             <label class="form-label">Empresa</label>
             <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.empresa}" disabled>
+            <label class="form-label">Sigla</label>
+            <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
             <label class="form-label">Tipo de Rol</label>
             <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.rol}" disabled>
             <label class="form-label">Usuario<span>(mínimo 3 caracteres)</span></label>
@@ -176,6 +179,7 @@ editarClientes2.forEach(editarCliente2 => {
           preConfirm: function () {
             const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
+            const sigla = document.getElementById("sigla").value;
             const password = document.getElementById("password").value;
             const passwordInput2 = document.getElementById("password2").value;
             const ruc = document.getElementById("ruc").value;
@@ -188,6 +192,7 @@ editarClientes2.forEach(editarCliente2 => {
                 cod_cliente: codcliente,
                 nombre_cliente: nombre_cliente,
                 usuario: usuario,
+                sigla: sigla,
                 contrasena: password,
                 contrasena2: passwordInput2,
                 ruc: ruc,
@@ -250,7 +255,7 @@ deletecliente.forEach(deletecliente => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#9b9b9b',
       confirmButtonText: 'Si, eliminar cliente!'
     }).then((result) => {
       if (result.isConfirmed) {
@@ -298,7 +303,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
     .then(data => {
       const options = data.clientes.map(item => {
         if (item.rol === "Administrador") {
-          return `<option value="${item.empresa}" data-ruc="${item.ruc}" >${item.empresa}</option>`
+          return `<option value="${item.empresa}" data-ruc="${item.ruc}" data-sigla="${item.sigla}">${item.empresa}</option>`
         }
       })
         .join('');
@@ -347,6 +352,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
           const selectedOption = selectcliente.options[selectcliente.selectedIndex];
           const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const ruc = selectedOption.getAttribute('data-ruc');
+          const sigla = selectedOption.getAttribute('data-sigla');
           const nombre_rol = document.getElementById("select-rol").value;
           return {
             data: {
@@ -354,6 +360,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              sigla: sigla,
               contrasena2: passwordInput2,
               ruc: ruc,
               mensajecontent: mensajecontent,
@@ -365,8 +372,7 @@ crearUsuariosXcliente.addEventListener("click", function () {
       }).then(function (result) {
         if (result.value) {
           const data = result.value;
-          console.log("Data a enviar" + data);
-          if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
+          if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta || !data.data.sigla) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
             return;
           } else if (data.data.contrasena != data.data.contrasena2) {
@@ -427,7 +433,6 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
         return response.json();
       })
       .then(data => {
-        console.log(data)
         const contrasenaant = data.contrasena
         Swal.fire({
           title: "Editar cuenta cliente",
@@ -474,6 +479,7 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
               data: {
                 cod_cliente: data.cod_cliente,
                 nombre_cliente: data.empresa,
+                sigla: data.sigla,
                 usuario: usuario,
                 contrasena: password,
                 contrasena2: passwordInput2,
@@ -537,7 +543,7 @@ deleteclienteUsuario2.forEach(deleteclienteUser2 => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#9b9b9b',
       confirmButtonText: 'Si, eliminar usuario!'
     }).then((result) => {
       if (result.isConfirmed) {

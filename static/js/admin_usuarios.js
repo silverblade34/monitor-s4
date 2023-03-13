@@ -14,9 +14,9 @@ crearUsuarios2.addEventListener("click", function () {
       return response.json();
     })
     .then(data => {
-      console.log(data)
       const nombre_cliente = this.dataset.rpEmpresa;
       const ruc = this.dataset.rpRuc;
+      const sigla = this.dataset.rpSigla;
       const idcuenta = data.ID
       Swal.fire({
         title: "Crear usuario",
@@ -60,6 +60,7 @@ crearUsuarios2.addEventListener("click", function () {
               cod_cliente: "",
               usuario: usuario,
               contrasena: password,
+              sigla: sigla,
               contrasena2: passwordInput2,
               mensajecontent: mensajecontent,
               ruc: ruc,
@@ -71,7 +72,6 @@ crearUsuarios2.addEventListener("click", function () {
       }).then(function (result) {
         if (result.value) {
           const data = result.value;
-          console.log("Data a enviar" + data);
           if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
             return;
@@ -127,7 +127,7 @@ deleteclienteUsuario3.forEach(deleteclienteUser3 => {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#9b9b9b',
       confirmButtonText: 'Si, eliminar usuario!'
     }).then((result) => {
       if (result.isConfirmed) {

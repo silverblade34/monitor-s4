@@ -89,7 +89,6 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
       })
       .then(data => {
         const contrasenaant = data.contrasena
-        console.log(data)
         Swal.fire({
           title: "Editar cuenta cliente",
           html: `
@@ -135,6 +134,7 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
               data: {
                 cod_cliente: data.cod_cliente,
                 nombre_cliente: data.empresa,
+                sigla: data.sigla,
                 usuario: usuario,
                 contrasena: password,
                 contrasena2: passwordInput2,

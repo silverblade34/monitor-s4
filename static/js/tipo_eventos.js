@@ -38,7 +38,6 @@ btnCrearEvento.addEventListener("click", function () {
     }).then(function (result) {
         if (result.value) {
             const data = result.value;
-            console.log(data);
             if (!data.data.codevento || !data.data.descripcion || !data.data.prioridad) {
                 Swal.fire("Error", "Todos los campos son requeridos", "error");
                 return;
@@ -79,7 +78,6 @@ const editarTipoEventos = document.querySelectorAll(".editarTipoEvento");
 editarTipoEventos.forEach(editarTipoEvento => {
     editarTipoEvento.addEventListener("click", function () {
         const codEvento = this.dataset.codEvento;
-        console.log(codEvento)
         fetch(`/buscartipo_evento?codevento=${codEvento}`, {
             method: "GET",
         })
@@ -90,7 +88,6 @@ editarTipoEventos.forEach(editarTipoEvento => {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 const idevento = data.id
                 const fecha_creacion = data.fecha_creacion
                 const usuario = data.usuario
@@ -136,7 +133,6 @@ editarTipoEventos.forEach(editarTipoEvento => {
                 }).then(function (result) {
                     if (result.value) {
                         const data = result.value;
-                        console.log(data.data)
                         if (!data.data.cod_evento || !data.data.descripcion) {
                             Swal.fire("Error", "Todos los campos son requeridos", "error");
                             return;
@@ -191,7 +187,6 @@ verPayloads.forEach(verPayload => {
                 return response.json();
             })
             .then(data => {
-                console.log(data)
                 Swal.fire({
                     title: 'Detalles de evento',
                     html: `

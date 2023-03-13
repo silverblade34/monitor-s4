@@ -8,7 +8,6 @@ function actualizarTabla() {
         method: 'GET',
         success: function (data) {
             // Procesa los datos recibidos y actualiza la tabla
-            console.log(data)
             var table = $('#sorting-table').DataTable();
             columnasVisibles.forEach(function (visibilidad, index) {
                 table.column(index).visible(visibilidad);
