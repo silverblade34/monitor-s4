@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block body %}
+<!-- Begin Preloader -->
+<div class="container-fluid tipo-evento">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Respuestas predefinidas</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class='bx bx-calendar-event'></i></a>
+                        </li>
+                        <li class="breadcrumb-item active">Respuestas notificaciones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow tipo-evento pt-4 pb-4">
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <button class="btn btn-success mb-3" id="crear-resp-notificacion">Crear nuevo</button>
+                        <table id="sorting-table" class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Cliente</th>
+                                    <th>Código</th>
+                                    <th>Descripción</th>
+                                    <th>Prioridad</th>
+                                    <th>Fecha creación</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sorting -->
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{url_for('static', filename='js/tipo_eventos.js')}}" defer></script>
+{% endblock %}

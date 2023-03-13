@@ -177,6 +177,7 @@ verPayloads.forEach(verPayload => {
         const codEvento = this.dataset.codEvento;
         const codCliente = this.dataset.codCliente;
         const codCuenta = this.dataset.codCuenta;
+        const prioridad = this.dataset.eventPrioridad;
         fetch(`/obtener_siglas?cod_cliente=${codCliente}`, {
             method: "GET",
         })
@@ -199,7 +200,7 @@ verPayloads.forEach(verPayload => {
                         "cod_evento": codEvento,
                         "sigla_cuenta" : data.sigla_cuenta,
                         "sigla_cliente" : data.sigla_cliente,
-                        "prioridad" : "",
+                        "prioridad" : prioridad,
                         "placa": "%UNIT%",
                         "origen": "Sys4Log",
                         "latitud": "%LATD%",

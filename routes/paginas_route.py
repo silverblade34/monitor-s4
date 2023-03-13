@@ -55,7 +55,6 @@ def tipo_evento():
             _eventTypeCL = TipoEventosController()
             cod_cuenta = session["datauser"]["CodCuenta"]
             cod_cliente = session["cod_admin"]
-            print("--------------------1")
             datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
             print(datatipoevento)
             return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento, codp = "adm-tipevent")
@@ -76,6 +75,35 @@ def editar_evento():
             print(dataevento)
             if dataevento["status"] == True:
                 return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
+    else:
+        return redirect(url_for('notificaciones'))
+    
+@app.route('/reporte_notificaciones', methods=['GET'])
+def reporte_notificaciones():
+    if 'user' in session:
+        try:
+            _eventCL = EventosController()
+            cod_cuenta = session["datauser"]["CodCuenta"]
+            cod_cliente = session["cod_admin"]
+            datanoti = _eventCL.listarNotiReporte(cod_cuenta, cod_cliente)
+            return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti")
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
+    else:
+        return redirect(url_for('notificaciones'))
+    
+@app.route('/adminrespuestas_notificaciones', methods=['GET'])
+def adminrespuestas_notificaciones():
+    if 'user' in session:
+        try:
+            _eventCL = EventosController()
+            return render_template("adminrespuestas_notificaciones.html", datauser = session["datauser"], codp = "resp-noti")
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)

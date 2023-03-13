@@ -87,7 +87,7 @@
                                     {% endif %}
                                     <td class="actions">
                                         <a href="#" title="Editar" class="editarTipoEvento me-2" data-cod-evento="{{evento.cod_evento}}"><i class="bx bx-edit edit"></i></a>
-                                        <a href="#" title="Ver payload" class="verPayloads" data-cod-evento="{{evento.cod_evento}}" data-cod-cliente="{{datauser.CodCliente}}" data-cod-cuenta="{{datauser.CodCuenta}}"><i class='bx bx-code' ></i></a>
+                                        <a href="#" title="Ver payload" class="verPayloads" data-event-prioridad="{{evento.prioridad}}" data-cod-evento="{{evento.cod_evento}}" data-cod-cliente="{{datauser.CodCliente}}" data-cod-cuenta="{{datauser.CodCuenta}}"><i class='bx bx-code' ></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}

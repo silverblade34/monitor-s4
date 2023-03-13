@@ -42,6 +42,7 @@ Author: SAEROX
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="{{url_for('static', filename='css/tipo_evento.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/reporte_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/tabla_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/edit_evento.css')}}">
 </head>
@@ -162,28 +163,33 @@ Author: SAEROX
                         </li>
                         <li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-bar-chart-square'></i><span>Reportes</span></a>
-                            <ul id="dropdown-icons" class="collapse list-unstyled pt-0">
-                                <li><a href="#">Listado de eventos x cliente</a></li>
-                                <li><a href="#">Listado de eventos x cliente x turno</a></li>
+                            <ul id="dropdown-icons" class="collapse list-unstyled {% if codp == 'report-noti' %} show {% endif %} pt-0">
+                                {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
+                                <li><a href="/reporte_notificaciones" class="{% if codp == 'report-noti' %} active {% endif %}">Notificaciones</a></li>
+                                {% endif %}
+                                <!-- <li><a href="#">Listado de eventos x cliente x turno</a></li> -->
                             </ul>
                         </li>
                         <li><a href="#dropdown-forms" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-file'></i><span>Reporte KPIs</span></a>
                             <ul id="dropdown-forms" class="collapse list-unstyled pt-0">
-                                <li><a href="#">Top five Reports</a></li>
-                                <li><a href="#">Top 10 placas x Eventos</a></li>
+                                <!-- <li><a href="#">Top five Reports</a></li>
+                                <li><a href="#">Top 10 placas x Eventos</a></li> -->
                             </ul>
                         </li>
                         {% if datauser.Rol == "Administrador" %}
-                        <li class="{% if codp =='adm-u' or codp =='adm-tipevent' %} active {% endif %}"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
+                        <li class="{% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} active {% endif %}"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
-                            <ul id="dropdown-tables" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' %} show{% endif %} pt-0">
+                            <ul id="dropdown-tables" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show{% endif %} pt-0">
                                 <a href="#dropdown-mantenimientos" aria-expanded="false"
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
-                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' %} show {% endif %} pt-0">
+                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show {% endif %} pt-0">
                                     <li><a class="{% if codp =='adm-u' %} active {% endif %}" href="/listar_usuarios">Usuarios</a></li>
                                     {% if datauser.Usuario != "root" %}
                                     <li><a class="{% if codp =='adm-tipevent' %} active {% endif %}" href="/tipo_evento">Tipo eventos</a></li>
+                                    {% endif %}
+                                    {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
+                                    <li><a class="{% if codp =='resp-noti' %} active {% endif %}" href="/adminrespuestas_notificaciones">Respuestas predefinidas</a></li>
                                     {% endif %}
                                 </ul>
                             </ul>

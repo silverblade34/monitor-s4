@@ -1,4 +1,5 @@
 import requests, json, hashlib
+from config import API_SERVER
 
 class UsuariosResponse:
     def __init__(self):
@@ -6,7 +7,7 @@ class UsuariosResponse:
     def responseListarUsuarios(self, cod_cuenta):
         hed = {"Content-Type": "application/json"}
         payload = {"cod_cuenta":cod_cuenta}
-        resp = requests.post(f'http://161.35.104.161:3000/api/v1/listAccounts', data= json.dumps(payload), headers= hed)
+        resp = requests.post(f'{API_SERVER}/api/v1/listAccounts', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
     
@@ -24,14 +25,14 @@ class UsuariosResponse:
         contrasena = hash_object.hexdigest()
         payload = {"cod_cuenta": datauser["cod_cuenta"],"cod_cliente": "All", "contrasena" : contrasena, "usuario" : datauser["usuario"], "ruc" : datauser["ruc"], "empresa": datauser["nombre_cuenta"].upper(),
         "rol": datauser["nombre_rol"],"sigla" : datauser["sigla"].upper(), "estado" : True, "clientes": []}
-        resp = requests.post(f'http://161.35.104.161:3000/api/v1/createAccount', data= json.dumps(payload), headers= hed)
+        resp = requests.post(f'{API_SERVER}/api/v1/createAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
     
     def responseDeleteUsuario(self, idusuario):
         hed = {"Content-Type": "application/json"}
         payload =  {"id" : idusuario}
-        resp = requests.delete(f'http://161.35.104.161:3000/api/v1/deleteAccount', data= json.dumps(payload), headers= hed)
+        resp = requests.delete(f'{API_SERVER}/api/v1/deleteAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
     
@@ -55,7 +56,7 @@ class UsuariosResponse:
         payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),"ruc": data["ruc"],
                    "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
         print(json.dumps(payload))
-        resp = requests.put(f'http://161.35.104.161:3000/api/v1/editAccount', data= json.dumps(payload), headers= hed)
+        resp = requests.put(f'{API_SERVER}/api/v1/editAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
 
@@ -70,7 +71,7 @@ class UsuariosResponse:
         contrasena = hash_object.hexdigest()
         payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
         "empresa": datauser["nombre_cliente"].upper(), "rol": datauser["nombre_rol"], "estado" : True}
-        resp = requests.post(f'http://161.35.104.161:3000/api/v1/createClient', data= json.dumps(payload), headers= hed)
+        resp = requests.post(f'{API_SERVER}/api/v1/createClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
     
@@ -98,7 +99,7 @@ class UsuariosResponse:
         payload = { "id": id, "cod_cliente": data["cod_cliente"] ,"empresa": data["nombre_cliente"].upper(), "usuario": data["usuario"], "sigla" : data["sigla"].upper() , "contrasena": contrasenafin,"ruc": data["ruc"],
                    "rol": data["rol_cliente"], "estado" : data["estado"]}
         print(json.dumps(payload))
-        resp = requests.put(f'http://161.35.104.161:3000/api/v1/editClient', data= json.dumps(payload), headers= hed)
+        resp = requests.put(f'{API_SERVER}/api/v1/editClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
         print(data)
         return data
@@ -106,13 +107,13 @@ class UsuariosResponse:
     def responseDeleteUsuarioCliente(self, idusuario, codcliente):
         hed = {"Content-Type": "application/json"}
         payload =  {"id" : idusuario, "cod_cliente": codcliente}
-        resp = requests.delete(f'http://161.35.104.161:3000/api/v1/deleteClient', data= json.dumps(payload), headers= hed)
+        resp = requests.delete(f'{API_SERVER}/api/v1/deleteClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
     
     def validarusuarioUnico(self, usuario):
         payload =  {"usuario" : usuario}
-        resp = requests.get(f'http://161.35.104.161:3000/api/v1/repeatUser', data= json.dumps(payload))
+        resp = requests.get(f'{API_SERVER}/api/v1/repeatUser', data= json.dumps(payload))
         data = resp.json()
         return data
     

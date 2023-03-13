@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Reporte Notificaciones</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class='bx bx-calendar-event'></i></a>
+                        </li>
+                        <li class="breadcrumb-item active">Reporte Notificaciones</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow widget-notificaciones">
+                <div class="widget-header bordered no-actions d-flex align-items-center">
+                    <h4>Generar reporte</h4>
+                </div>
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <div class="container-form-filtros">
+                            <form id="myForm" class="form-inline me-2">
+                                <label for="fecha-desde">Fecha desde:</label>
+                                <input type="date" id="fecha-desde" name="fecha_desde" class="form-control mx-sm-3 mb-2">
+                                <label for="fecha-hasta">Fecha hasta:</label>
+                                <input type="date" id="fecha-hasta" name="fecha_hasta" class="form-control mx-sm-3 mb-2">
+                                <label for="placa">Placa:</label>
+                                <input type="text" id="placa" name="placa" class="form-control mx-sm-3 mb-2">
+                                <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+                            </form>
+                        </div>
+                        <table id="table-reporte-notificaciones" class="table table-notifications mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Código evento</th>
+                                    <th>Placa</th>
+                                    <th>Fecha recepción</th>
+                                    <th>Velocidad</th>
+                                    <th><span style="width:100px;">Dirección</span></th>
+                                    <th>Estado</th>
+                                    <th>Fecha ultima acción</th>
+                                    <th>Descripción estado</th>
+                                    <th>Prioridad</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for notificacion in datanoti %}
+                                <tr>
+                                    <td>{{notificacion.cod_evento}}</td>
+                                    <td>{{notificacion.placa}}</td>
+                                    <td>{{notificacion.fecha}}</td>
+                                    <td>{{notificacion.velocidad}}</td>
+                                    <td><span style="width:100px;">{{notificacion.direccion}}</span></td>
+                                    <td>{{notificacion.estado}}</td>
+                                    <td>{{notificacion.fecha_ultima_accion}}</td>
+                                    <td>{{notificacion.descripcion_estado}}</td>
+                                    <td>{{notificacion.prioridad}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+<script src="{{url_for('static', filename='js/reporte_notificaciones.js')}}" defer></script>
+{% endblock %}

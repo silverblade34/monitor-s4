@@ -1,5 +1,7 @@
 import requests, json
 from datetime import datetime
+from config import API_SERVER
+
 class TipoEventosResponse:
     def responseCrearTipoEvento(self,cod_cuenta, cod_cliente, dataform):
         datarequest = self.requestEventos(cod_cuenta, cod_cliente)
@@ -14,7 +16,7 @@ class TipoEventosResponse:
                 "usuario": cod_cliente,
                 "status": True
                 }
-        resp = requests.post(f'http://161.35.104.161:3000/api/v1/createEvents', data = json.dumps(data))
+        resp = requests.post(f'{API_SERVER}/api/v1/createEvents', data = json.dumps(data))
         data = resp.json()
         return data
         
@@ -41,7 +43,7 @@ class TipoEventosResponse:
                 "cod_cuenta": cod_cuenta,
                 "cod_cliente": cod_cliente
                 }
-        resp = requests.get(f'http://161.35.104.161:3000/api/v1/allEvents', data=json.dumps(dataEnviar))
+        resp = requests.get(f'{API_SERVER}/api/v1/allEvents', data=json.dumps(dataEnviar))
         data = resp.json()
         return data
     
@@ -56,14 +58,14 @@ class TipoEventosResponse:
     
     def actualizarTipoEventos(self, dataEvento):
         print(json.dumps(dataEvento))
-        resp = requests.put(f'http://161.35.104.161:3000/api/v1/editEvents', data=json.dumps(dataEvento))
+        resp = requests.put(f'{API_SERVER}/api/v1/editEvents', data=json.dumps(dataEvento))
         data = resp.json()
         return data
     
     def responseObtenerSiglas(self, cod_cliente, cod_cuenta):
         hed = {"Content-Type": "application/json"}
         payload = {"cod_cuenta":cod_cuenta}
-        resp = requests.post(f'http://161.35.104.161:3000/api/v1/listAccounts', data= json.dumps(payload), headers= hed)
+        resp = requests.post(f'{API_SERVER}/api/v1/listAccounts', data= json.dumps(payload), headers= hed)
         data = resp.json()
         siglas={}
         for clientes in data["data"][0]["clientes"]:

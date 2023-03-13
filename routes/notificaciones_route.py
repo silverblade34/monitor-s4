@@ -29,3 +29,17 @@ def agregarComentario():
     respComent = _eventCL.agregarComentario(request.json["data"])
     return respComent
 
+
+@app.route('/filtrar_reporte_notificaciones', methods=['GET'])
+def filtrar_reporte_notificaciones():
+    _eventCL = EventosController()
+    fecha_desde = request.args.get('fecha_desde')
+    fecha_hasta = request.args.get('fecha_hasta')
+    placa = request.args.get('placa')
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    cod_cliente = session["cod_admin"]
+    print(fecha_desde)
+    respNoti = _eventCL.listarNotiReporteFiltros(cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa)
+    return json.dumps(respNoti)
+
+

@@ -1,16 +1,15 @@
 from flask import Flask, request, json
 import requests, hashlib
+from config import API_SERVER
 
 class ApiConnection:
     @staticmethod
     def connectionApi(user, pasw):
-        url = 'http://161.35.104.161:3000/api/v1/login'
+        url = f'{API_SERVER}/api/v1/login'
         hed = {"Content-Type": "application/json"}  
         hash_object = hashlib.md5(pasw.encode())
         passw = hash_object.hexdigest()
         body = {"usuario": user, "contrasena" : passw}
-        print(json.dumps(body))
         get_tramas = requests.post(url, data= json.dumps(body), headers= hed)
         rawData = get_tramas.json()
-        print(json.dumps(rawData))
         return rawData
