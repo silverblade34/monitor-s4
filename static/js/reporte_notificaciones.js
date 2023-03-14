@@ -29,11 +29,13 @@ $(document).ready(function () {
 
         var fecha_desde = $('#fecha-desde').val();
         var fecha_hasta = $('#fecha-hasta').val();
+        var select_eventos = $('#select-eventos').val();
+        var select_estados = $('#select-estados').val();
         var placa = $('#placa').val();
 
         table.clear().draw();
 
-        fetch('/filtrar_reporte_notificaciones?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta + '&placa=' + placa)
+        fetch('/filtrar_reporte_notificaciones?fecha_desde=' + fecha_desde + '&fecha_hasta=' + fecha_hasta + '&placa=' + placa + '&select_eventos=' + select_eventos + '&select_estados='  + select_estados)
             .then(response => response.json())
             .then(data => {
                 console.log(data)
@@ -44,9 +46,10 @@ $(document).ready(function () {
                         data[i].fecha,
                         data[i].velocidad,
                         data[i].direccion,
-                        data[i].estado,
+                        data[i].geocerca,
                         data[i].fecha_ultima_accion,
-                        data[i].prioridad
+                        data[i].DescripcionEstado,
+                        data[i].Prioridad
                     ]).draw();
                 }
             });

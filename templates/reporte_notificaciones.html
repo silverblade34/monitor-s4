@@ -26,13 +26,42 @@
                     <div class="table-responsive">
                         <div class="container-form-filtros">
                             <form id="myForm" class="form-inline me-2">
-                                <label for="fecha-desde">Fecha desde:</label>
-                                <input type="date" id="fecha-desde" name="fecha_desde" class="form-control mx-sm-3 mb-2">
-                                <label for="fecha-hasta">Fecha hasta:</label>
-                                <input type="date" id="fecha-hasta" name="fecha_hasta" class="form-control mx-sm-3 mb-2">
-                                <label for="placa">Placa:</label>
-                                <input type="text" id="placa" name="placa" class="form-control mx-sm-3 mb-2">
-                                <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+                                <div class="mr-3">
+                                    <label for="fecha-desde">Fecha desde:</label>
+                                    <input type="date" id="fecha-desde" name="fecha_desde"
+                                        class="form-control mb-2">
+                                </div>
+                                <div class="mr-3">
+                                    <label for="fecha-hasta">Fecha hasta:</label>
+                                    <input type="date" id="fecha-hasta" name="fecha_hasta"
+                                        class="form-control mb-2">
+                                </div>
+                                <div class="mr-3">
+                                    <label for="placa">Placa:</label>
+                                    <input type="text" id="placa" name="placa" class="form-control  mb-2">
+                                </div>
+                                <div class="mr-3">
+                                    <label for="estados">Tipo evento</label>
+                                    <select name="select-eventos" class="form-control mb-2" id="select-eventos">
+                                        <option value="">Selecciona</option>
+                                        {% for evento in datatipoevento %}
+                                        <option value="{{evento.cod_evento}}">{{evento.cod_evento}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="mr-3">
+                                    <label for="estados">Estados</label>
+                                    <select name="select-estados" class="form-control mb-2" id="select-estados">
+                                        <option value="" selected>Selecciona</option>
+                                        <option value="Sin Atender">Sin Atender</option>
+                                        <option value="En Gestion">En gestión</option>
+                                        <option value="Confirmado">Confirmado</option>
+                                        <option value="Descartado">Descartado</option>
+                                    </select>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+                                </div>
                             </form>
                         </div>
                         <table id="table-reporte-notificaciones" class="table table-notifications mb-0">
@@ -43,7 +72,7 @@
                                     <th>Fecha recepción</th>
                                     <th>Velocidad</th>
                                     <th><span style="width:100px;">Dirección</span></th>
-                                    <th>Estado</th>
+                                    <th>Geocerca</th>
                                     <th>Fecha ultima acción</th>
                                     <th>Descripción estado</th>
                                     <th>Prioridad</th>
@@ -57,10 +86,10 @@
                                     <td>{{notificacion.fecha}}</td>
                                     <td>{{notificacion.velocidad}}</td>
                                     <td><span style="width:100px;">{{notificacion.direccion}}</span></td>
-                                    <td>{{notificacion.estado}}</td>
+                                    <td>{{notificacion.geocerca}}</td>
                                     <td>{{notificacion.fecha_ultima_accion}}</td>
-                                    <td>{{notificacion.descripcion_estado}}</td>
-                                    <td>{{notificacion.prioridad}}</td>
+                                    <td>{{notificacion.DescripcionEstado}}</td>
+                                    <td>{{notificacion.Prioridad}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

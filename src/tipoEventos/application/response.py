@@ -22,7 +22,6 @@ class TipoEventosResponse:
         
     def responseListarTipoEventos(self, cod_cuenta, cod_cliente):
         data = self.requestEventos(cod_cuenta, cod_cliente)
-        print(data)
         if data["data"] is not None:
             if len(data['data']) == 1:
                 result = data['data'][0]["eventos"]

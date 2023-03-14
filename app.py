@@ -10,6 +10,7 @@ import routes.paginas_route
 import routes.tipoeventos_route
 import routes.notificaciones_route
 import routes.usuarios_routes
+import routes.respuestasnoti_route
 from routes.paginas_route import pagina_no_encontrada
 
 if __name__ == '__main__':

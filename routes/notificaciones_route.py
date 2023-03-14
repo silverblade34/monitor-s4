@@ -36,10 +36,11 @@ def filtrar_reporte_notificaciones():
     fecha_desde = request.args.get('fecha_desde')
     fecha_hasta = request.args.get('fecha_hasta')
     placa = request.args.get('placa')
+    eventos = request.args.get('select_eventos')
+    estados = request.args.get('select_estados')
     cod_cuenta = session["datauser"]["CodCuenta"]
     cod_cliente = session["cod_admin"]
-    print(fecha_desde)
-    respNoti = _eventCL.listarNotiReporteFiltros(cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa)
+    respNoti = _eventCL.listarNotiReporteFiltros(cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa, eventos, estados)
     return json.dumps(respNoti)
 
 

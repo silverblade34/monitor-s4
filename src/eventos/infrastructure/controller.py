@@ -18,12 +18,12 @@ class EventosController:
     
     def listarNotiReporte(self, cod_cuenta, cod_cliente):
         response = EventosResponse()
-        data = response.responseDataReporte(cod_cuenta, cod_cliente) 
+        data = response.responseDataEventos(cod_cuenta, cod_cliente) 
         return data
     
-    def listarNotiReporteFiltros(self, cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa):
+    def listarNotiReporteFiltros(self, cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa, eventos, estados):
         response = EventosResponse()
-        data = response.responseDataReporteFiltros(cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa) 
+        data = response.responseDataReporteFiltros(cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa, eventos, estados) 
         return data
     
 

@@ -3,6 +3,7 @@ from flask_cors import CORS
 from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 from src.tipoEventos.infrastructure.controller import TipoEventosController
+from src.respuestas.infrastructure.controller import RespuestasController
 import requests
 
 #from app import app
@@ -71,10 +72,13 @@ def editar_evento():
         try:
             _eventCL = EventosController()
             session["idevento"] = request.args["idevento"]
+            _respuCL = RespuestasController()
+            cod_cliente = session["cod_admin"]
+            dataresp = _respuCL.listarRespuestas(cod_cliente)
             dataevento = _eventCL.buscarEvento(session["idevento"])
             print(dataevento)
             if dataevento["status"] == True:
-                return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"])
+                return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], dataresp = dataresp)
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -90,7 +94,12 @@ def reporte_notificaciones():
             cod_cuenta = session["datauser"]["CodCuenta"]
             cod_cliente = session["cod_admin"]
             datanoti = _eventCL.listarNotiReporte(cod_cuenta, cod_cliente)
-            return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti")
+            _eventTypeCL = TipoEventosController()
+            cod_cuenta = session["datauser"]["CodCuenta"]
+            cod_cliente = session["cod_admin"]
+            datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
+            print(datatipoevento)
+            return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti", datatipoevento= datatipoevento)
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -102,8 +111,10 @@ def reporte_notificaciones():
 def adminrespuestas_notificaciones():
     if 'user' in session:
         try:
-            _eventCL = EventosController()
-            return render_template("adminrespuestas_notificaciones.html", datauser = session["datauser"], codp = "resp-noti")
+            _respuCL = RespuestasController()
+            cod_cliente = session["cod_admin"]
+            dataresp = _respuCL.listarRespuestas(cod_cliente)
+            return render_template("adminrespuestas_notificaciones.html", datauser = session["datauser"], codp = "resp-noti", dataresp = dataresp)
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)

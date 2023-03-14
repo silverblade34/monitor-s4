@@ -20,22 +20,31 @@
     <div class="row">
         <div class="col-xl-12">
             <!-- Sorting -->
-            <div class="widget has-shadow tipo-evento pt-4 pb-4">
+            <div class="widget has-shadow pt-4 pb-4">
                 <div id="widget-body" class="widget-body">
                     <div class="table-responsive">
-                        <button class="btn btn-success mb-3" id="crear-resp-notificacion">Crear nuevo</button>
-                        <table id="sorting-table" class="table mb-0">
+                        <button class="btn btn-success mb-3" id="crear-resp-notificacion" data-id-resp="{{dataresp._id}}">Crear nuevo</button>
+                        <table id="table-respuestas-predefinidas" class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th>Cliente</th>
-                                    <th>Código</th>
-                                    <th>Descripción</th>
-                                    <th>Prioridad</th>
-                                    <th>Fecha creación</th>
-                                    <th>Estado</th>
+                                    <th>Sigla</th>
+                                    <th>Texto</th>
+                                    <th>Acción</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for resp in dataresp.respuestas %}
+                                <tr>
+                                    <td>{{resp.sigla}}</td>
+                                    <td>{{resp.text}}</td>
+                                    <td class="actions">
+                                        <a href="#" class="editarRespPre" data-id-resp="{{dataresp._id}}" data-cod-resp="{{resp.codigo}}"><i
+                                                class="bx bx-edit edit"></i></a>
+                                        <a href="#" class="eliminarRespPre" data-id-resp="{{dataresp._id}}" data-cod-resp="{{resp.codigo}}"><i
+                                                class="bx bx-x delete"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -46,5 +55,5 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="{{url_for('static', filename='js/tipo_eventos.js')}}" defer></script>
+<script src="{{url_for('static', filename='js/respuestas_predefinidas.js')}}" defer></script>
 {% endblock %}

@@ -31,50 +31,44 @@ class EventosResponse:
         resp = requests.post(f'{API_SERVER}/api/v1/addComment', data=json.dumps(dataEnviar))
         data = resp.json()
         return data
-    
-    def responseDataReporte(self, cod_cuenta, cod_cliente):
-        dataEnviar = {
-                "cod_cuenta": cod_cuenta,
-                "cod_cliente": cod_cliente,
-                "estado": 1 
-                }
-        resp = requests.get(f'{API_SERVER}/api/v1/allNotifications', data=json.dumps(dataEnviar))
-        data = resp.json()
-        if data is not None:
-            return data
-        else:
-            return []
         
-    def responseDataReporteFiltros(self, cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa):
-        dataEnviar = {
-                "cod_cuenta": cod_cuenta,
-                "cod_cliente": cod_cliente,
-                "estado": 1 
-                }
-        resp = requests.get(f'{API_SERVER}/api/v1/allNotifications', data=json.dumps(dataEnviar))
-        data = resp.json()
-        listNoti = []
-        if data is not None:
-            if placa != "" and fecha_desde == "" and fecha_hasta == "":
-                for noti in data:
-                    if noti["placa"] == placa.upper():
-                        listNoti.append(noti)
-                return listNoti
-            elif fecha_desde != "" and fecha_hasta != "" and placa == "" :
-                listfechas = self.obtener_elementos_por_rango_de_fechas(data, fecha_desde, fecha_hasta)
-                return listfechas     
-            elif fecha_desde != "" and fecha_hasta != "" and placa != "":
-                listfechas = self.obtener_elementos_por_rango_de_fechas(data, fecha_desde, fecha_hasta)
-                for noti in listfechas:
-                    if noti["placa"] == placa.upper():
-                        listNoti.append(noti)
-                return listNoti
-            else:
-                return data
-        else:
-            return []
+    def responseDataReporteFiltros(self, cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa, cod_evento, descripcion_estado):
+        dataNotificaciones = self.responseDataEventos(cod_cuenta, cod_cliente)
+        parametros_filtrar = {
+            "cod_cuenta" : cod_cuenta,
+            "cod_cliente" : cod_cliente,
+            "fecha_desde" : fecha_desde,
+            "fecha_hasta" : fecha_hasta,
+            "placa" : placa,
+            "descripcion_estado": descripcion_estado,
+            "cod_evento" : cod_evento
+        }
+        datos_filtrados = self.filtrar_por_parametros(dataNotificaciones, parametros_filtrar)
+        print(json.dumps(datos_filtrados))
+        return datos_filtrados
         
     def obtener_elementos_por_rango_de_fechas(self, lista, fecha_desde, fecha_hasta):
         return [elemento for elemento in lista if fecha_desde <= elemento['fecha'] <= fecha_hasta]
+    
+
+    def filtrar_por_parametros(self, lista, parametros_filtrar):
+        def filtro(diccionario):
+            if parametros_filtrar["cod_cuenta"] != "" and diccionario["cod_cuenta"] != parametros_filtrar["cod_cuenta"]:
+                return False
+            if parametros_filtrar["cod_cliente"] != "" and diccionario["cod_cliente"] != parametros_filtrar["cod_cliente"]:
+                return False
+            if parametros_filtrar["fecha_desde"] != "" and diccionario["fecha"] < parametros_filtrar["fecha_desde"]:
+                return False
+            if parametros_filtrar["fecha_hasta"] != "" and diccionario["fecha"] > parametros_filtrar["fecha_hasta"]:
+                return False
+            if parametros_filtrar["placa"] != "" and diccionario["placa"] != parametros_filtrar["placa"]:
+                return False
+            if parametros_filtrar["descripcion_estado"] != "" and diccionario["DescripcionEstado"] != parametros_filtrar["descripcion_estado"]:
+                return False
+            if parametros_filtrar["cod_evento"] != "" and diccionario["cod_evento"] != parametros_filtrar["cod_evento"]:
+                return False
+            return True
+
+        return list(filter(filtro, lista))
 
     
