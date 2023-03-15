@@ -2904,7 +2904,7 @@ ul.social-network li {
 
 .table td {
     border-top: 0;
-    padding: .85rem;
+    padding: 2px .85rem;
     vertical-align: middle;
     font-weight: 500
 }

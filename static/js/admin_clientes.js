@@ -18,17 +18,11 @@ crearClientes2.addEventListener("click", function () {
       Swal.fire({
         title: "Crear cliente",
         html: `
-            <form class="form-crearcuenta">
+            <form class="form-crearcuenta" enctype="multipart/form-data">
               <label class="form-label">Rol</label>
               <select class="form-select" id="select-rol" aria-label="Default select example">
               <option value="Administrador" selected>Administrador</option>
               </select>
-              <label class="form-label">Ruc</label>
-              <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
-              <label class="form-label">Cliente</label>
-              <input type="text" id="nombre_cliente" class = "form-control input-text" placeholder="Nombre del cliente">
-              <label class="form-label">Sigla</label>
-              <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
               <label class="form-label">Usuario</label>
               <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
               <span id="usuario_mensaje" class="usuario-validation-msg"></span>
@@ -45,6 +39,19 @@ crearClientes2.addEventListener("click", function () {
                 Ver contraseña
               </label>
               <span id="password2-validation-msg" class="password2-validation-msg"></span>
+              <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Registrar Datos del cliente (Obligatorio)</span>
+              <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+              <div id="acordeon-contactos" class="acordeon-contactos cliente">
+              <label class="form-label">Ruc</label>
+              <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
+              <label class="form-label">Cliente</label>
+              <input type="text" id="nombre_cliente" class = "form-control input-text" placeholder="Nombre del cliente">
+              <label class="form-label">Sigla</label>
+              <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
+              <label class="form-label">Logo</label>
+              <input type="file" id="logo" accept=".png" class="form-control input-file mb-3">
+              </div>
+              </div>
             </form>
           `,
         showCancelButton: true,
@@ -58,6 +65,8 @@ crearClientes2.addEventListener("click", function () {
           const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const nombre_cliente = document.getElementById("nombre_cliente").value;
           const nombre_rol = document.getElementById("select-rol").value;
+
+          var fileLogo = document.getElementById("logo").files[0];
           return {
             data: {
               idcuenta: idcuenta,
@@ -69,13 +78,16 @@ crearClientes2.addEventListener("click", function () {
               ruc: ruc,
               mensajecontent: mensajecontent,
               nombre_rol: nombre_rol,
-              nombre_cliente: nombre_cliente
+              nombre_cliente: nombre_cliente,
+              fileLogo: fileLogo
             }
           };
         }
       }).then(function (result) {
         if (result.value) {
           const data = result.value;
+          const fileLogo = data.data.fileLogo;
+          const usuario = data.data.usuario;
           if (!data.data.usuario || !data.data.contrasena || !data.data.ruc || !data.data.idcuenta || !data.data.sigla) {
             Swal.fire("Error", "Todos los campos son requeridos", "error");
             return;
@@ -99,11 +111,30 @@ crearClientes2.addEventListener("click", function () {
           })
             .then(response => {
               if (!response.ok) {
-                throw new Error("Error al crear cuenta");
+                throw new Error("Error al establecer conexión con el servidor");
               }
               return response.json();
             })
             .then(data => {
+              // Enviar la imagen al servidor mediante AJAX
+              // Crear un objeto FormData
+              const formData = new FormData();
+              formData.append('usuario', usuario);
+              formData.append('file', fileLogo);
+
+              // Enviar la imagen al servidor mediante fetch
+              fetch('/guardarImageCliente', {
+                method: 'POST',
+                body: formData
+              })
+              .then(response => {
+                // Manejar la respuesta del servidor
+              })
+              .catch(error => {
+                // Manejar el error
+                console.error(error);
+                Swal.fire("Error", "La imagen no se cargó correctamente al servidor", "error");
+              });
               Swal.fire("Agregado", data.message + "!", "success");
               setTimeout(function () {
                 location.reload();

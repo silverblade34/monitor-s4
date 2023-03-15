@@ -1,10 +1,10 @@
-from flask import Flask, request, render_template, redirect, url_for, session
-from flask_cors import CORS
+from flask import Flask, request, render_template, redirect, url_for, session 
+from flask_cors import CORS 
 from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 from src.tipoEventos.infrastructure.controller import TipoEventosController
 from src.respuestas.infrastructure.controller import RespuestasController
-import requests
+import requests 
 
 #from app import app
 from __main__ import app, cache
@@ -77,6 +77,7 @@ def editar_evento():
             dataresp = _respuCL.listarRespuestas(cod_cliente)
             dataevento = _eventCL.buscarEvento(session["idevento"])
             print(dataevento)
+            print(dataresp)
             if dataevento["status"] == True:
                 return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], dataresp = dataresp)
         except requests.exceptions.RequestException as e:

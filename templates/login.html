@@ -51,7 +51,18 @@
     <div id="right"></div>
   </div>
   <!-- Javascript file -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
   <script src="{{url_for('static', filename='js/app.js')}}"></script>
+  {% if msgerror %}
+  <script defer>
+    window.onload = function () {
+      Swal.fire({
+        title: "Error",
+        text: "{{ msgerror }}",
+        icon: "error"
+      });
+    };
+  </script>
+  {% endif %}
 </body>
-
 </html>

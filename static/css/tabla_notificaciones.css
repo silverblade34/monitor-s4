@@ -14,6 +14,10 @@
     border: 1px solid black !important;
 }
 
+.table-responsive .table-notifications tr{
+  height: 20px !important;
+}
+
 .table-responsive .table-notifications td, .table-responsive .table-notifications th {
     border: 1px solid #ddd;
 }
@@ -33,15 +37,10 @@
     background-color: none !important;
     box-shadow: none !important;
 }
-/* Ocultar el contenido de la sección por defecto */
-.widget-notificaciones .accordion .accordion-content {
-    display: none;
-    color: #433b4e;
-  }
   
-  /* Estilo del botón o enlace */
- .widget-notificaciones .accordion-button {
-    background-color: #ffcc32;
+  /* Estilo del acordeon de los filtros de columnas */
+ .widget-notificaciones .accordion-filtros-columnas {
+    background-color: #6a66a0;
     border: none;
     padding: 10px 30px;
     width: 100%;
@@ -54,32 +53,26 @@
     border-radius: 10px;
   }
 
-  .widget-notificaciones .accordion-button i{
+  .widget-notificaciones .accordion-filtros-columnas i{
     font-size: 20px;
   }
   /* Agregar animaciones de transición */
-  .widget-notificaciones .accordion .accordion-content {
-    transition: all 0.9s ease !important;
-    padding: 20px;
-    background-color: #f3f3f3;
-    overflow: hidden;
+  .widget-notificaciones .accordion .accordion-content-filtros-columnas{
+    padding: 0 15px;
+    margin: 0 7px;
+    background-color: #e7e7e7;
     border-radius: 0 0 10px 10px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.8s;
   }
   
-  .widget-notificaciones .accordion .accordion-content span{
+  .widget-notificaciones .accordion .accordion-content-filtros-columnas.abierto{
+    max-height: 100px;
+  }
+  .widget-notificaciones .accordion .accordion-content-filtros-columnas span{
     padding: 0 10px;
   }
   
-  /* Mostrar el contenido de la sección cuando se haga clic en el botón o enlace correspondiente */
-  .widget-notificaciones .accordion .active .accordion-content {
-    display: block;
-  }
-  
-  .widget-notificaciones .accordion .active i.icon-arrow{
-    transform: rotate(180deg);
-  }
 
-  .widget-notificaciones .accordion .active .accordion-button{
-    border-radius: 10px 10px 0 0;
-  }
 

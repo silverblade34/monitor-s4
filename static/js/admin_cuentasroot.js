@@ -11,6 +11,36 @@ for (var i = 0; i < accHeader.length; i++) {
     }
   });
 };
+
+// ----------------------------------MODAL CONTACTOS ACORDEON--------------------------
+
+function abrirAcordeonContactos() {
+  const acordeon = document.getElementById("acordeon-contactos");
+  const icono = document.querySelector(".icon-arrow-2");
+
+  if (acordeon.classList.contains("abierto")) {
+    acordeon.classList.remove("abierto");
+    icono.classList.remove("rotate");
+  } else {
+    acordeon.classList.add("abierto");
+    icono.classList.add("rotate");
+  }
+}
+
+// ----------------------------------MODAL DATOS EMPRESA ACORDEON--------------------------
+function abrirAcordeonDatosEmpresa() {
+  const acordeon = document.getElementById("acordeon-datos-empresa");
+  const icono = document.querySelector(".icon-arrow-3");
+
+  if (acordeon.classList.contains("abierto")) {
+    acordeon.classList.remove("abierto");
+    icono.classList.remove("rotate");
+  } else {
+    acordeon.classList.add("abierto");
+    icono.classList.add("rotate");
+  }
+}
+
 //----------------------------------VALIDAR CONTRASEÑA AL CREAR CUENTA---------------------------------
 
 function checkPasswordMatch() {
@@ -72,12 +102,6 @@ crearCuentaMaestra.addEventListener("click", function () {
     title: "Crear Cuenta",
     html: `
       <form class="form-crearcuenta">
-        <label class="form-label">Ruc</label>
-        <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
-        <label class="form-label">Empresa</label>
-        <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
-        <label class="form-label">Sigla</label>
-        <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
         <label class="form-label">Usuario <span>(mínimo 3 caracteres)</span></label>
         <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
         <span id="usuario_mensaje" class="usuario-validation-msg"></span>
@@ -94,6 +118,38 @@ crearCuentaMaestra.addEventListener("click", function () {
           Ver contraseña
         </label>
         <span id="password2-validation-msg" class="password2-validation-msg"></span>
+        <div type="button" id="btn-contacto" onclick="abrirAcordeonDatosEmpresa()" class="btn-agregar-contactos mt-1"><span>Agregar Datos Empresa (Obligatorio)</span>
+        <i class='bx bx-chevron-down icon-arrow-3'></i></div>
+        <div id="acordeon-datos-empresa" class="acordeon-datosEmpresa">
+        <label class="form-label">Ruc</label>
+        <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
+        <label class="form-label">Empresa</label>
+        <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa">
+        <div class="pb-3">
+          <label class="form-label">Sigla</label>
+          <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
+        </div>
+        </div>
+        <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Agregar Contactos</span>
+        <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+        <div id="acordeon-contactos" class="acordeon-contactos">
+          <div class="form-g pt-1">
+            <label>Nombre de contacto 1</label>
+            <input type="text" class="form-control" id="namecontacto1" name="namecontacto1" placeholder="Nombre de contacto">
+          </div>
+          <div class="form-g pt-1">
+            <label>Número Contacto 1</label>
+            <input type="text" class="form-control" id="contacto1" name="contacto1" placeholder="Ejemplo: +51 999 888 777">
+          </div>
+          <div class="form-g pt-1">
+          <label>Nombre de contacto 2</label>
+          <input type="text" class="form-control" id="namecontacto2" name="namecontacto2" placeholder="Nombre de contacto">
+          </div>
+          <div class="form-g pt-1 pb-3">
+            <label>Número Contacto 2</label>
+            <input type="text" class="form-control" id="contacto2" name="contacto2" placeholder="Ejemplo: +51 999 888 777">
+          </div>
+        </div>
       </form>
     `,
     showCancelButton: true,
@@ -106,6 +162,11 @@ crearCuentaMaestra.addEventListener("click", function () {
       const ruc = document.getElementById("ruc").value;
       const mensajecontent = document.getElementById("usuario_mensaje").textContent;
       const nombre_cuenta = document.getElementById("nombre_cuenta").value;
+
+      const namecontacto1 = document.getElementById("namecontacto1").value;
+      const contacto1 = document.getElementById("contacto1").value;
+      const namecontacto2 = document.getElementById("namecontacto2").value;
+      const contacto2 = document.getElementById("contacto2").value;
       return {
         data: {
           cod_cuenta: "",
@@ -117,6 +178,10 @@ crearCuentaMaestra.addEventListener("click", function () {
           mensajecontent: mensajecontent,
           nombre_cuenta: nombre_cuenta,
           nombre_rol: "Administrador",
+          namecontacto1: namecontacto1,
+          contacto1: contacto1,
+          namecontacto2: namecontacto2,
+          contacto2: contacto2,
         }
       };
     }
@@ -223,17 +288,12 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
         return response.json();
       })
       .then(data => {
-        const contrasenaant = data.contrasena
+        const contrasenaant = data.contrasena;
+        const codcuenta = data.cod_cuenta;
         Swal.fire({
           title: "Editar cuenta",
           html: `
           <form class="form-crearcuenta">
-            <label class="form-label">Codigo de cuenta</label>
-            <input type="text" id="cod_cuenta" class = "form-control input-text" value="${data.cod_cuenta}" disabled>
-            <label class="form-label">Empresa</label>
-            <input type="text" id="nombre_cuenta" class = "form-control input-text" value="${data.empresa}">
-            <label class="form-label">Sigla</label>
-            <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
             <label class="form-label">Usuario</label>
             <input type="text" id="usuario_cuenta" class = "form-control input-text" value="${data.usuario}">
             <label class="form-label">Contraseña</label>
@@ -247,8 +307,38 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             <input type="password" id="password2" class="form-control input-pass" oninput="checkPasswordMatch()" placeholder="Repetir contraseña">
             <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </div>
+            <div type="button" id="btn-contacto" onclick="abrirAcordeonDatosEmpresa()" class="btn-agregar-contactos mt-2"><span>Datos de la Empresa</span>
+            <i class='bx bx-chevron-down icon-arrow-3'></i></div>
+            <div id="acordeon-datos-empresa" class="acordeon-datosEmpresa">
             <label class="form-label">Ruc</label>
-            <input type="text" id="ruc" class = "form-control input-text" value="${data.ruc}">
+            <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa" value="${data.ruc}">
+            <label class="form-label">Empresa</label>
+            <input type="text" id="nombre_cuenta" class = "form-control input-text" placeholder="Nombre de la empresa" value="${data.empresa}">
+            <div class="pb-3">
+              <label class="form-label">Sigla</label>
+              <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa" value="${data.sigla}">
+            </div>
+            </div>
+            <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Contactos asociados</span>
+            <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+            <div id="acordeon-contactos" class="acordeon-contactos">
+              <div class="form-g pt-1">
+                <label>Nombre de contacto 1</label>
+                <input type="text" class="form-control" id="namecontacto1" name="namecontacto1" placeholder="Nombre de contacto" value="${data.nombre_contacto1}">
+              </div>
+              <div class="form-g pt-1">
+                <label>Número Contacto 1</label>
+                <input type="text" class="form-control" id="contacto1" name="contacto1" placeholder="Ejemplo: +51 999 888 777" value="${data.telefono_contacto1}">
+              </div>
+              <div class="form-g pt-1">
+              <label>Nombre de contacto 2</label>
+              <input type="text" class="form-control" id="namecontacto2" name="namecontacto2" placeholder="Nombre de contacto" value="${data.nombre_contacto2}">
+              </div>
+              <div class="form-g pt-1 pb-3">
+                <label>Número Contacto 2</label>
+                <input type="text" class="form-control" id="contacto2" name="contacto2" placeholder="Ejemplo: +51 999 888 777" value="${data.telefono_contacto2}">
+              </div>
+            </div>
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
             <label class="form-label">Estado</label>
             <input class="form-check-input" type="checkbox" id="estado-cuenta" ${data.estado === true ? 'checked' : ''}>
@@ -258,7 +348,6 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
           showCancelButton: true,
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
-            const codcuenta = document.getElementById("cod_cuenta").value;
             const sigla = document.getElementById("sigla").value;
             const nombre_cuenta = document.getElementById("nombre_cuenta").value;
             const usuario = document.getElementById("usuario_cuenta").value;
@@ -266,6 +355,11 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
             const passwordInput2 = document.getElementById("password2").value;
             const ruc = document.getElementById("ruc").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
+
+            const namecontacto1 = document.getElementById("namecontacto1").value;
+            const contacto1 = document.getElementById("contacto1").value;
+            const namecontacto2 = document.getElementById("namecontacto2").value;
+            const contacto2 = document.getElementById("contacto2").value;
             return {
               id: cuentaId,
               data: {
@@ -278,6 +372,11 @@ editarCuentasMaestra.forEach(editarCuentaMaestra => {
                 ruc: ruc,
                 estado: estadoCheckbox,
                 nombre_cuenta: nombre_cuenta,
+
+                namecontacto1: namecontacto1,
+                contacto1: contacto1,
+                namecontacto2: namecontacto2,
+                contacto2: contacto2,
               }
             };
           }

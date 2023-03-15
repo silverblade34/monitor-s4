@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_cors import CORS
-from src.credential.infrastructure.controller import CredentialController 
+from src.credential.infrastructure.controller import CredentialController
+import requests 
 
 #from app import app
 from __main__ import app
@@ -12,19 +13,24 @@ CORS(app)
 # Por otro lado si llega al enlace por medio de un POST validara si los datos son correctos
 def login():
     if request.method == 'POST':
-        if str(request.form['usuario']) != "" and str(request.form['password']) != "":
-            _credentialCL = CredentialController()
-            datauser = _credentialCL.validarUsuario(request.form['usuario'], request.form['password'])
-            if datauser["status"] == True:
-                session["user"] = datauser["data"]["Usuario"]
-                session["datauser"] = datauser["data"]
-                session["cod_admin"] = datauser["CodClienteAdmin"]
-                return redirect(url_for('notificaciones'))
-            elif datauser["status"] == False:
-                return render_template('login.html', message = "Usuario no válido")
-            return render_template('login.html')
-        else:
-            return render_template('login.html', message = "Usuario o contraseña sin completar")
+        try:
+            if str(request.form['usuario']) != "" and str(request.form['password']) != "":
+                _credentialCL = CredentialController()
+                datauser = _credentialCL.validarUsuario(request.form['usuario'], request.form['password'])
+                if datauser["status"] == True:
+                    session["user"] = datauser["data"]["Usuario"]
+                    session["datauser"] = datauser["data"]
+                    session["cod_admin"] = datauser["CodClienteAdmin"]
+                    return redirect(url_for('notificaciones'))
+                elif datauser["status"] == False:
+                    return render_template('login.html', message = "Usuario no válido")
+                return render_template('login.html')
+            else:
+                return render_template('login.html', message = "Usuario o contraseña sin completar")
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('login.html', msgerror = mensaje_error)
     else:
         return render_template('login.html')
     

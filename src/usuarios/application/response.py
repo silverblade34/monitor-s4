@@ -1,5 +1,7 @@
 import requests, json, hashlib
 from config import API_SERVER
+#from werkzeug.utils import secure_filename 
+import os
 
 class UsuariosResponse:
     def __init__(self):
@@ -24,7 +26,8 @@ class UsuariosResponse:
         hash_object = hashlib.md5(datauser["contrasena"].encode())
         contrasena = hash_object.hexdigest()
         payload = {"cod_cuenta": datauser["cod_cuenta"],"cod_cliente": "All", "contrasena" : contrasena, "usuario" : datauser["usuario"], "ruc" : datauser["ruc"], "empresa": datauser["nombre_cuenta"].upper(),
-        "rol": datauser["nombre_rol"],"sigla" : datauser["sigla"].upper(), "estado" : True, "clientes": []}
+        "rol": datauser["nombre_rol"],"sigla" : datauser["sigla"].upper(), "nombre_contacto1": datauser["namecontacto1"], "telefono_contacto1": datauser["contacto1"], "nombre_contacto2": datauser["namecontacto2"],
+          "telefono_contacto2": datauser["contacto2"], "estado" : True,  "clientes": []}
         resp = requests.post(f'{API_SERVER}/api/v1/createAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
         return data
@@ -53,8 +56,8 @@ class UsuariosResponse:
                     contrasenafin = usuario["contrasena"]
                 else:
                     contrasenafin = contrasena
-        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),"ruc": data["ruc"],
-                   "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
+        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),"nombre_contacto1": data["namecontacto1"], "telefono_contacto1": data["contacto1"], "nombre_contacto2": data["namecontacto2"],
+          "telefono_contacto2": data["contacto2"], "ruc": data["ruc"], "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
         print(json.dumps(payload))
         resp = requests.put(f'{API_SERVER}/api/v1/editAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
@@ -73,6 +76,7 @@ class UsuariosResponse:
         "empresa": datauser["nombre_cliente"].upper(), "rol": datauser["nombre_rol"], "estado" : True}
         resp = requests.post(f'{API_SERVER}/api/v1/createClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
+        print(data)
         return data
     
     def responseBuscarUsuarioCliente(self, datacuentas, idcuenta, codcliente):
@@ -117,3 +121,7 @@ class UsuariosResponse:
         data = resp.json()
         return data
     
+    def guardarImage(self, file, usuario):
+        # filename = secure_filename(usuario + '.' + file.filename.split('.')[-1])
+        # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        pass

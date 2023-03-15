@@ -72,18 +72,10 @@
                                         rows="3" placeholder="Agregue un comentario"></textarea>
                                 </div>
                                 <div class="col-lg-12 cont-resp-prede pt-3">
-                                    <button type="button" class="btn btn-outline-info"
-                                        id="btn-textarea-1">No/Programada</button>
-                                    <button type="button" class="btn btn-outline-info"
-                                        id="btn-textarea-2">Fuera/Servicio</button>
-                                    <button type="button" class="btn btn-outline-info"
-                                        id="btn-textarea-3">Falla/Sensor</button>
-                                    <button type="button" class="btn btn-outline-info"
-                                        id="btn-textarea-4">Intervención</button>
-                                    <button type="button" class="btn btn-outline-info" id="btn-textarea-5">Prueba
-                                        nocturna</button>
-                                    <button type="button" class="btn btn-outline-info"
-                                        id="btn-textarea-6">Prueba/Cencon</button>
+                                    {% for respuesta in dataresp.respuestas %}
+                                    <button type="button" class="btn btn-info"
+                                        id="btn-textarea-1"  onclick="rellenarTextarea('{{ respuesta.text }}')">{{respuesta.sigla}}</button>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </form>

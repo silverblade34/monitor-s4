@@ -110,13 +110,20 @@ setInterval(actualizarTabla, 10000);
 
 
 // ACORDEON TABLA NOTIFICACIONES
-var accordionButtons = document.querySelectorAll('.accordion-button');
 
-for (var i = 0; i < accordionButtons.length; i++) {
-  accordionButtons[i].addEventListener('click', function() {
-    this.parentNode.classList.toggle('active');
-  });
+function acordeonFiltroColumnasTabla(){
+    const acordeon = document.getElementById("accordion-content-filtros-columnas");
+    const icono = document.querySelector(".icon-arrow-1");
+
+    if (acordeon.classList.contains("abierto")) {
+        acordeon.classList.remove("abierto");
+        icono.classList.remove("rotate");
+    } else {
+        acordeon.classList.add("abierto");
+        icono.classList.add("rotate");
+    }
 }
+
 
 // OCULTAR COLUMNAS DE NOTIFICACIONES
 $('input[type="checkbox"]').on('change', function() {

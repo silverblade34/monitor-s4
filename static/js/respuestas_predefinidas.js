@@ -18,9 +18,9 @@ btnRespuestas.addEventListener("click", function () {
         html: `
           <form class="form-crearcuenta">
             <label class="form-label">Sigla</label>
-            <input type="text" id="sigla" class = "form-control input-text" placeholder="Ejemplo: No Programada">
+            <input type="text" id="sigla" class = "form-control input-text" placeholder="Ejemplo: NO/PROGRAMADA">
             <label class="form-label">Texto</label>
-            <input type="text" id="texto" class = "form-control input-text" placeholder="Texto predefinido">
+            <textarea id="texto" class = "form-control input-text" placeholder="Escribe aquí tu texto predifinido..."></textarea>
             </select>
           </form>
         `,
@@ -104,7 +104,7 @@ editarRespPreds.forEach(editarRespPred => {
                             <label class="form-label">Sigla</label>
                             <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
                             <label class="form-label">Texto</label>
-                            <input type="text" id="texto" class = "form-control input-text" value="${data.text}">
+                            <textarea type="text" id="texto" class = "form-control input-text">${data.text}</textarea>
                         </form>
                         `,
                     showCancelButton: true,

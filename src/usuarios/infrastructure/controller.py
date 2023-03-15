@@ -57,4 +57,9 @@ class UsuariosController:
         data = response.validarusuarioUnico(usuario)
         return data
     
+    def guardarImageCliente(self, file, usuario):
+        response = UsuariosResponse()
+        data = response.guardarImage(file, usuario) 
+        return data
+    
 

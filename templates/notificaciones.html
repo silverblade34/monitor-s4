@@ -25,55 +25,57 @@
                 </div>
                 <ul class="accordion">
                     <li>
-                        <div class="accordion-button"> <span><i class='bx bx-filter'></i> Seleccionar columnas</span><i
-                                class='bx bx-chevron-down icon-arrow'></i></div>
-                        <div class="accordion-content">
-                            {% if datauser.CodCuenta == "0000" %}
-                            <span><input type="checkbox" id="chk_cod_cuenta" checked data-column="0"> Sigla
-                                cuenta</span>
-                            <span><input type="checkbox" id="chk_cod_cliente" checked data-column="1"> Sigla
-                                cliente</span>
-                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="2"> Código
-                                evento</span>
-                            <span><input type="checkbox" id="chk_placa" checked data-column="3"> Placa</span>
-                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="4"> Fecha
-                                recepción</span>
-                            <span><input type="checkbox" id="chk_velocidad" checked data-column="5"> Velocidad</span>
-                            <span><input type="checkbox" id="chk_direccion" checked data-column="6"> Dirección</span>
-                            <span><input type="checkbox" id="chk_estado" checked data-column="7"> Estado</span>
-                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="8"> Fecha ultima
-                                acción</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Prioridad</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="10"> Acciones</span>
-                            {% elif datauser.CodCliente == "All" %}
-                            <span><input type="checkbox" id="chk_cod_cliente" checked data-column="0"> Sigla
-                                cliente</span>
-                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="1"> Código
-                                evento</span>
-                            <span><input type="checkbox" id="chk_placa" checked data-column="2"> Placa</span>
-                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="3"> Fecha
-                                recepción</span>
-                            <span><input type="checkbox" id="chk_velocidad" checked data-column="4"> Velocidad</span>
-                            <span><input type="checkbox" id="chk_direccion" checked data-column="5"> Dirección</span>
-                            <span><input type="checkbox" id="chk_estado" checked data-column="6"> Estado</span>
-                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="7"> Fecha ultima
-                                acción</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Prioridad</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Acciones</span>
-                            {% else %}
-                            <span><input type="checkbox" id="chk_cod_evento" checked data-column="0"> Código
-                                evento</span>
-                            <span><input type="checkbox" id="chk_placa" checked data-column="1"> Placa</span>
-                            <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="2"> Fecha
-                                recepción</span>
-                            <span><input type="checkbox" id="chk_velocidad" checked data-column="3"> Velocidad</span>
-                            <span><input type="checkbox" id="chk_direccion" checked data-column="4"> Dirección</span>
-                            <span><input type="checkbox" id="chk_estado" checked data-column="5"> Estado</span>
-                            <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="6"> Fecha ultima
-                                acción</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="7"> Prioridad</span>
-                            <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Acciones</span>
-                            {% endif %}
+                        <div class="accordion-filtros-columnas" onclick="acordeonFiltroColumnasTabla()"> <span><i class='bx bx-filter'></i> Seleccionar columnas</span><i
+                                class='bx bx-chevron-down icon-arrow-1'></i></div>
+                        <div class="accordion-content-filtros-columnas" id="accordion-content-filtros-columnas">
+                            <div class="pt-3 pb-3">
+                                {% if datauser.CodCuenta == "0000" %}
+                                <span><input type="checkbox" id="chk_cod_cuenta" checked data-column="0"> Sigla
+                                    cuenta</span>
+                                <span><input type="checkbox" id="chk_cod_cliente" checked data-column="1"> Sigla
+                                    cliente</span>
+                                <span><input type="checkbox" id="chk_cod_evento" checked data-column="2"> Código
+                                    evento</span>
+                                <span><input type="checkbox" id="chk_placa" checked data-column="3"> Placa</span>
+                                <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="4"> Fecha
+                                    recepción</span>
+                                <span><input type="checkbox" id="chk_velocidad" checked data-column="5"> Velocidad</span>
+                                <span><input type="checkbox" id="chk_direccion" checked data-column="6"> Dirección</span>
+                                <span><input type="checkbox" id="chk_estado" checked data-column="7"> Estado</span>
+                                <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="8"> Fecha ultima
+                                    acción</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Prioridad</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="10"> Acciones</span>
+                                {% elif datauser.CodCliente == "All" %}
+                                <span><input type="checkbox" id="chk_cod_cliente" checked data-column="0"> Sigla
+                                    cliente</span>
+                                <span><input type="checkbox" id="chk_cod_evento" checked data-column="1"> Código
+                                    evento</span>
+                                <span><input type="checkbox" id="chk_placa" checked data-column="2"> Placa</span>
+                                <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="3"> Fecha
+                                    recepción</span>
+                                <span><input type="checkbox" id="chk_velocidad" checked data-column="4"> Velocidad</span>
+                                <span><input type="checkbox" id="chk_direccion" checked data-column="5"> Dirección</span>
+                                <span><input type="checkbox" id="chk_estado" checked data-column="6"> Estado</span>
+                                <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="7"> Fecha ultima
+                                    acción</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Prioridad</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="9"> Acciones</span>
+                                {% else %}
+                                <span><input type="checkbox" id="chk_cod_evento" checked data-column="0"> Código
+                                    evento</span>
+                                <span><input type="checkbox" id="chk_placa" checked data-column="1"> Placa</span>
+                                <span><input type="checkbox" id="chk_fecha_recepcion" checked data-column="2"> Fecha
+                                    recepción</span>
+                                <span><input type="checkbox" id="chk_velocidad" checked data-column="3"> Velocidad</span>
+                                <span><input type="checkbox" id="chk_direccion" checked data-column="4"> Dirección</span>
+                                <span><input type="checkbox" id="chk_estado" checked data-column="5"> Estado</span>
+                                <span><input type="checkbox" id="chk_fecha_ult_accion" checked data-column="6"> Fecha ultima
+                                    acción</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="7"> Prioridad</span>
+                                <span><input type="checkbox" id="chk_prioridad" checked data-column="8"> Acciones</span>
+                                {% endif %}
+                            </div>
                         </div>
                     </li>
                 </ul>

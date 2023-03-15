@@ -56,6 +56,7 @@ def actualizar_cuenta():
 def crear_cuenta_cliente():
     if 'user' in session:
         _userCL = UsuariosController()
+        print("-------------------1")
         data = _userCL.crearUsuarioCliente(request.json['data'], session['datauser']['CodCuenta'])
         return data
     else:
@@ -93,7 +94,6 @@ def mostrar_idcuenta():
     _userCL = UsuariosController()
     data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
     datacuenta = data["data"][0]
-    print(datacuenta)
     return datacuenta
 
 @app.route('/validarUsuarioUnico', methods=['GET'])
@@ -101,3 +101,11 @@ def validarUsuarioUnico():
     _userCL = UsuariosController()
     data = _userCL.validarusuarioUnico(request.args["nameusuario"])
     return data
+
+@app.route('/guardarImageCliente', methods=['POST'])
+def guardarImageCliente():
+    _userCL = UsuariosController()
+    print(request.files["file"])
+    print(request.form["usuario"])
+    data = _userCL.guardarImageCliente(request.files["file"], request.form["usuario"])
+    return request.form["usuario"]

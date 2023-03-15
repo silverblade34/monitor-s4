@@ -417,3 +417,66 @@
 
 
 /* Modal editar cuenta */
+
+
+/* ACORDEON AGREGAR CONTACTOS */
+.btn-agregar-contactos{
+	width: 100%;
+	border-radius: 10px;
+	padding: 8px 15px;
+	display: flex;
+	justify-content:space-between;
+	font-size: 13px;
+	cursor: pointer;
+	background-color: #6a66a0;
+	color: #ffffff;
+}
+
+.acordeon-contactos{
+	padding: 0 15px;
+	margin: 0 7px;
+	background-color: #e7e7e7;
+	border-radius: 0 0 10px 10px;
+	max-height: 0;
+	overflow: hidden;
+	transition: all 0.6s;
+}
+
+.acordeon-contactos.abierto {
+	max-height: 320px; /* ajusta la altura máxima deseada */
+}
+
+.acordeon-contactos input{
+	border: 0.5px solid rgb(155, 155, 155);
+}
+
+.acordeon-contactos .form-g label{
+	width: 100%;
+	font-size: 13px;
+	text-align: start;
+}
+.rotate {
+	transform: rotate(180deg);
+	transition: all 0.5s;
+  }
+
+.acordeon-datosEmpresa{
+	padding: 0 15px;
+	margin: 0 7px;
+	background-color: #ececec;
+	border-radius: 0 0 10px 10px;
+	max-height: 0;
+	overflow: hidden;
+	transition: all 0.6s;
+}
+.acordeon-datosEmpresa .form-label{
+	font-size: 13px;
+}
+
+.acordeon-datosEmpresa.abierto {
+	max-height: 250px; /* ajusta la altura máxima deseada */
+}
+
+.acordeon-contactos.cliente.abierto{
+	max-height: 400px; 
+}

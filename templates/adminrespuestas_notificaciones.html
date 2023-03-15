@@ -27,6 +27,7 @@
                         <table id="table-respuestas-predefinidas" class="table mb-0">
                             <thead>
                                 <tr>
+                                    <th>Codigo</th>
                                     <th>Sigla</th>
                                     <th>Texto</th>
                                     <th>Acción</th>
@@ -35,13 +36,12 @@
                             <tbody>
                                 {% for resp in dataresp.respuestas %}
                                 <tr>
+                                    <td>{{resp.codigo}}</td>
                                     <td>{{resp.sigla}}</td>
                                     <td>{{resp.text}}</td>
                                     <td class="actions">
                                         <a href="#" class="editarRespPre" data-id-resp="{{dataresp._id}}" data-cod-resp="{{resp.codigo}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="eliminarRespPre" data-id-resp="{{dataresp._id}}" data-cod-resp="{{resp.codigo}}"><i
-                                                class="bx bx-x delete"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
