@@ -1,6 +1,7 @@
 import requests, json, hashlib
 from config import API_SERVER
-#from werkzeug.utils import secure_filename 
+from werkzeug.utils import secure_filename
+from config import UPLOAD_FOLDER
 import os
 
 class UsuariosResponse:
@@ -122,6 +123,10 @@ class UsuariosResponse:
         return data
     
     def guardarImage(self, file, usuario):
-        # filename = secure_filename(usuario + '.' + file.filename.split('.')[-1])
-        # file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        pass
+        try:
+            filename = secure_filename(usuario + '.' + file.filename.split('.')[-1])
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            return "Guardado"
+        except Exception as err:
+            return err
+        

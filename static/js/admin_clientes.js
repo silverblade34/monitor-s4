@@ -127,9 +127,6 @@ crearClientes2.addEventListener("click", function () {
                 method: 'POST',
                 body: formData
               })
-              .then(response => {
-                // Manejar la respuesta del servidor
-              })
               .catch(error => {
                 // Manejar el error
                 console.error(error);

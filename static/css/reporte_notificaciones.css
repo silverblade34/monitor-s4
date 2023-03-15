@@ -5,6 +5,10 @@
     padding: 0 15px;
 }
 
+.table td.td-reportes {
+    padding: 10px .85rem;
+}
+
 #myForm label{
     text-align: left;
     max-width:fit-content;

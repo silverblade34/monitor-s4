@@ -66,16 +66,32 @@ Author: SAEROX
                     <div class="navbar-header">
                         <a href="/home" class="navbar-brand">
                             <div class="brand-image brand-big">
-                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
+                                <img src="{{url_for('static', filename='img/logos/'+datauser.Usuario+'.png')}}" alt="logo"
                                     class="logo-small">
+                                {% else %}
+                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                class="logo-small">
+                                {% endif %}
                             </div>
                             <div class="brand-image brand-small">
-                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
+                                <img src="{{url_for('static', filename='img/logos/'+datauser.Usuario+'.png')}}" alt="logo"
                                     class="logo-small">
+                                {% else %}
+                                <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
+                                class="logo-small">
+                                {% endif %}
                             </div>
                         </a>
                         <div class="text-logo">
-                            <p>Monitor S4</p>
+                            <p>
+                                {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
+                                    {{datauser.Empresa}}
+                                {% else %}
+                                    Monitor S4
+                                {% endif %}
+                            </p>
                         </div>
                         <!-- Toggle Button -->
                         <a id="toggle-btn" href="#" class="menu-btn active">

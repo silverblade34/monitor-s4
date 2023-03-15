@@ -105,7 +105,5 @@ def validarUsuarioUnico():
 @app.route('/guardarImageCliente', methods=['POST'])
 def guardarImageCliente():
     _userCL = UsuariosController()
-    print(request.files["file"])
-    print(request.form["usuario"])
     data = _userCL.guardarImageCliente(request.files["file"], request.form["usuario"])
-    return request.form["usuario"]
+    return data

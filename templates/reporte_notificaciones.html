@@ -81,15 +81,15 @@
                             <tbody>
                                 {% for notificacion in datanoti %}
                                 <tr>
-                                    <td>{{notificacion.cod_evento}}</td>
-                                    <td>{{notificacion.placa}}</td>
-                                    <td>{{notificacion.fecha}}</td>
-                                    <td>{{notificacion.velocidad}}</td>
-                                    <td><span style="width:100px;">{{notificacion.direccion}}</span></td>
-                                    <td>{{notificacion.geocerca}}</td>
-                                    <td>{{notificacion.fecha_ultima_accion}}</td>
-                                    <td>{{notificacion.DescripcionEstado}}</td>
-                                    <td>{{notificacion.Prioridad}}</td>
+                                    <td class="td-reportes">{{notificacion.cod_evento}}</td>
+                                    <td class="td-reportes">{{notificacion.placa}}</td>
+                                    <td class="td-reportes">{{notificacion.fecha}}</td>
+                                    <td class="td-reportes">{{notificacion.velocidad}}</td>
+                                    <td class="td-reportes"><span style="width:100px;">{{notificacion.direccion}}</span></td>
+                                    <td class="td-reportes">{{notificacion.geocerca}}</td>
+                                    <td class="td-reportes">{{notificacion.fecha_ultima_accion}}</td>
+                                    <td class="td-reportes">{{notificacion.DescripcionEstado}}</td>
+                                    <td class="td-reportes">{{notificacion.Prioridad}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

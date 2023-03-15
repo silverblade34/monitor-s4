@@ -38,15 +38,15 @@
                                     <tbody>
                                         {% for evento in datatipoevento %}
                                         <tr>
-                                            <td>{{evento.cod_cliente}}</td>
-                                            <td>{{evento.cod_evento}}</td>
-                                            <td>{{evento.descripcion}}</td>
-                                            <td>{{evento.prioridad}}</td>
-                                            <td>{{evento.fecha_creacion}}</td>
+                                            <td class="td-reportes">{{evento.cod_cliente}}</td>
+                                            <td class="td-reportes">{{evento.cod_evento}}</td>
+                                            <td class="td-reportes">{{evento.descripcion}}</td>
+                                            <td class="td-reportes">{{evento.prioridad}}</td>
+                                            <td class="td-reportes">{{evento.fecha_creacion}}</td>
                                             {% if evento.status == True %}
-                                            <td><span class="status true">Activo</span></td>
+                                            <td class="td-reportes"><span class="status true">Activo</span></td>
                                             {% else %}
-                                            <td><span class="status false">Desactivada</span></td>
+                                            <td class="td-reportes"><span class="status false">Desactivada</span></td>
                                             {% endif %}
                                         </tr>
                                         {% endfor %}
