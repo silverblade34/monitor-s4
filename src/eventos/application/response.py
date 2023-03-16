@@ -1,4 +1,5 @@
 import requests, json, datetime
+from datetime import datetime
 from config import API_SERVER
 class EventosResponse:
     def responseDataEventos(self, cod_cuenta, cod_cliente):
@@ -46,20 +47,25 @@ class EventosResponse:
         datos_filtrados = self.filtrar_por_parametros(dataNotificaciones, parametros_filtrar)
         print(json.dumps(datos_filtrados))
         return datos_filtrados
-        
-    def obtener_elementos_por_rango_de_fechas(self, lista, fecha_desde, fecha_hasta):
-        return [elemento for elemento in lista if fecha_desde <= elemento['fecha'] <= fecha_hasta]
-    
 
     def filtrar_por_parametros(self, lista, parametros_filtrar):
         def filtro(diccionario):
+            fecha_desde = ""
+            fecha_hasta = ""
+            if parametros_filtrar["fecha_desde"]:
+                fecha_desde = datetime.strptime(parametros_filtrar["fecha_desde"], "%Y-%m-%d")
+            if parametros_filtrar["fecha_hasta"]:
+                fecha_hasta = datetime.strptime(parametros_filtrar["fecha_hasta"], "%Y-%m-%d")
+            fecha_lista = datetime.strptime(diccionario["fecha"],"%d.%m.%Y %H:%M:%S")
+            parametros_filtrar["fecha_desde"]
+            print(fecha_desde)
             if parametros_filtrar["cod_cuenta"] != "" and diccionario["cod_cuenta"] != parametros_filtrar["cod_cuenta"]:
                 return False
             if parametros_filtrar["cod_cliente"] != "" and diccionario["cod_cliente"] != parametros_filtrar["cod_cliente"]:
                 return False
-            if parametros_filtrar["fecha_desde"] != "" and diccionario["fecha"] < parametros_filtrar["fecha_desde"]:
+            if fecha_desde != "" and fecha_lista < fecha_desde:
                 return False
-            if parametros_filtrar["fecha_hasta"] != "" and diccionario["fecha"] > parametros_filtrar["fecha_hasta"]:
+            if fecha_hasta != "" and fecha_lista > fecha_hasta:
                 return False
             if parametros_filtrar["placa"] != "" and diccionario["placa"] != parametros_filtrar["placa"]:
                 return False

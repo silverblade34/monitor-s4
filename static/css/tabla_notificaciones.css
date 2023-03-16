@@ -18,6 +18,10 @@
   height: 20px !important;
 }
 
+.table-responsive .table-notifications.reportes td{
+  padding: 12px .85rem;
+}
+
 .table-responsive .table-notifications td, .table-responsive .table-notifications th {
     border: 1px solid #ddd;
 }
