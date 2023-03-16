@@ -57,8 +57,9 @@ class UsuariosResponse:
                     contrasenafin = usuario["contrasena"]
                 else:
                     contrasenafin = contrasena
-        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),"nombre_contacto1": data["namecontacto1"], "telefono_contacto1": data["contacto1"], "nombre_contacto2": data["namecontacto2"],
-          "telefono_contacto2": data["contacto2"], "ruc": data["ruc"], "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
+        payload = { "id": id, "cod_cuenta": data["cod_cuenta"], "contrasena": contrasenafin, "usuario": data["usuario"], "sigla": data["sigla"].upper(),
+                   "nombre_contacto1": data["namecontacto1"], "telefono_contacto1": data["contacto1"], "nombre_contacto2": data["namecontacto2"], "telefono_contacto2": data["contacto2"],
+                    "ruc": data["ruc"], "empresa": data["nombre_cuenta"].upper(), "rol": data["nombre_rol"], "estado" : data["estado"]}
         print(json.dumps(payload))
         resp = requests.put(f'{API_SERVER}/api/v1/editAccount', data= json.dumps(payload), headers= hed)
         data = resp.json()
@@ -73,7 +74,9 @@ class UsuariosResponse:
         hed = {"Content-Type": "application/json"}
         hash_object = hashlib.md5(datauser["contrasena"].encode())
         contrasena = hash_object.hexdigest()
-        payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
+        payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, 
+                   "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
+                   "nombre_contacto1": datauser["namecontacto1"], "telefono_contacto1": datauser["contacto1"], "nombre_contacto2": datauser["namecontacto2"], "telefono_contacto2": datauser["contacto2"],
         "empresa": datauser["nombre_cliente"].upper(), "rol": datauser["nombre_rol"], "estado" : True}
         resp = requests.post(f'{API_SERVER}/api/v1/createClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
@@ -85,6 +88,7 @@ class UsuariosResponse:
             if str(cuenta["ID"]) == str(idcuenta):
                 for cliente in cuenta["clientes"]:
                     if cliente["cod_cliente"] == codcliente:
+                        print(cliente)
                         return cliente
                     
     def responseActualizarUsuarioCliente(self,id, data, codcuenta):
@@ -102,6 +106,7 @@ class UsuariosResponse:
                         else:
                             contrasenafin = contrasena
         payload = { "id": id, "cod_cliente": data["cod_cliente"] ,"empresa": data["nombre_cliente"].upper(), "usuario": data["usuario"], "sigla" : data["sigla"].upper() , "contrasena": contrasenafin,"ruc": data["ruc"],
+                   "nombre_contacto1": data["namecontacto1"], "telefono_contacto1": data["contacto1"], "nombre_contacto2": data["namecontacto2"], "telefono_contacto2": data["contacto2"],
                    "rol": data["rol_cliente"], "estado" : data["estado"]}
         print(json.dumps(payload))
         resp = requests.put(f'{API_SERVER}/api/v1/editClient', data= json.dumps(payload), headers= hed)

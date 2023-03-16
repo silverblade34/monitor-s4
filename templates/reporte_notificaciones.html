@@ -68,28 +68,32 @@
                             <thead>
                                 <tr>
                                     <th>Código evento</th>
+                                    <th>Prioridad</th>
                                     <th>Placa</th>
-                                    <th>Fecha recepción</th>
+                                    <th><span style="width:60px;">Fecha</span></th>
+                                    <th>Hora</th>
                                     <th>Velocidad</th>
                                     <th><span style="width:100px;">Dirección</span></th>
                                     <th>Geocerca</th>
-                                    <th>Fecha ultima acción</th>
-                                    <th>Descripción estado</th>
-                                    <th>Prioridad</th>
+                                    <th><span style="width:90px;">Ult. acción</span></th>
+                                    <th>Estado</th>
+                                    <th>Usuario</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for notificacion in datanoti %}
                                 <tr>
                                     <td class="td-reportes">{{notificacion.cod_evento}}</td>
+                                    <td class="td-reportes">{{notificacion.prioridad}}</td>
                                     <td class="td-reportes">{{notificacion.placa}}</td>
-                                    <td class="td-reportes">{{notificacion.fecha}}</td>
+                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.fecha}}</span></td>
+                                    <td class="td-reportes">{{notificacion.hora}}</td>
                                     <td class="td-reportes">{{notificacion.velocidad}}</td>
-                                    <td class="td-reportes"><span style="width:100%;">{{notificacion.direccion}}</span></td>
+                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.direccion}}</span></td>
                                     <td class="td-reportes">{{notificacion.geocerca}}</td>
-                                    <td class="td-reportes">{{notificacion.fecha_ultima_accion}}</td>
-                                    <td class="td-reportes">{{notificacion.DescripcionEstado}}</td>
-                                    <td class="td-reportes">{{notificacion.Prioridad}}</td>
+                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.fecha_ultima_accion}}</span></td>
+                                    <td class="td-reportes">{{notificacion.descripcion_estado}}</td>
+                                    <td class="td-reportes">{{notificacion.usuario}}</td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

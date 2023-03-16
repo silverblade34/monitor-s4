@@ -20,6 +20,7 @@ def login():
                 if datauser["status"] == True:
                     session["user"] = datauser["data"]["Usuario"]
                     session["datauser"] = datauser["data"]
+                    session["user_admin"] = datauser["UsuarioClienteAdmin"]
                     session["cod_admin"] = datauser["CodClienteAdmin"]
                     return redirect(url_for('notificaciones'))
                 elif datauser["status"] == False:

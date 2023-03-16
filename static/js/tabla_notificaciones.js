@@ -16,9 +16,10 @@ function actualizarTabla() {
             $('#sorting-table tbody').empty();
             const dataeventos = data.listnot;
             const datausuario = data.datausuario;
+            console.log(dataeventos)
             for (var i = 0; i < dataeventos.length; i++) {
                 var evento = dataeventos[i];
-                if (evento.DescripcionEstado == "En Gestion" || evento.DescripcionEstado == "Sin Atender"){
+                if (evento.descripcion_estado == "En Gestion" || evento.descripcion_estado == "Sin Atender"){
                     if(datausuario.cod_cuenta === "0000"){
                         var fila = '<tr>' +
                             '<td><span>' + evento.sigla_cuenta + '</span></td>' +
@@ -28,9 +29,9 @@ function actualizarTabla() {
                             '<td>' + evento.fecha + '</td>' +
                             '<td>' + evento.velocidad + '</td>' +
                             '<td class="direccion">' + evento.direccion + '</td>' +
-                            '<td><span style="width:100px;">' + evento.DescripcionEstado + '</span></td>' +
+                            '<td><span style="width:100px;">' + evento.descripcion_estado + '</span></td>' +
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
-                            '<td class="pr ' + evento.Prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
+                            '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
                             '</td>' +
@@ -43,9 +44,9 @@ function actualizarTabla() {
                             '<td>' + evento.fecha + '</td>' +
                             '<td>' + evento.velocidad + '</td>' +
                             '<td class="direccion">' + evento.direccion + '</td>' +
-                            '<td><span style="width:100px;">' + evento.DescripcionEstado + '</span></td>' +
+                            '<td><span style="width:100px;">' + evento.descripcion_estado + '</span></td>' +
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
-                            '<td class="pr ' + evento.Prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
+                            '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
                             '</td>' +
@@ -57,9 +58,9 @@ function actualizarTabla() {
                             '<td>' + evento.fecha + '</td>' +
                             '<td>' + evento.velocidad + '</td>' +
                             '<td class="direccion">' + evento.direccion + '</td>' +
-                            '<td><span style="width:100px;">' + evento.DescripcionEstado + '</span></td>' +
+                            '<td><span style="width:100px;">' + evento.descripcion_estado + '</span></td>' +
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
-                            '<td class="pr ' + evento.Prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
+                            '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
                             '</td>' +
@@ -70,7 +71,7 @@ function actualizarTabla() {
             }
             $('#sorting-table').DataTable({
                 "order": [[2, "desc"]],
-                "stateSave": false,
+                "stateSave": true,
                 "search": {
                     "search": searchValue // aplica el valor de búsqueda guardado
                 },

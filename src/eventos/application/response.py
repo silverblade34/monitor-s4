@@ -1,4 +1,4 @@
-import requests, json, datetime
+import requests, json
 from datetime import datetime
 from config import API_SERVER
 class EventosResponse:
@@ -21,7 +21,7 @@ class EventosResponse:
         return data
     
     def responseAgregarComentario(self, datacomentario):
-        fecha_actual = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        fecha_actual = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         dataEnviar = {
             "id": datacomentario["id"],
             "comentario":datacomentario["comentario"],
@@ -56,7 +56,7 @@ class EventosResponse:
                 fecha_desde = datetime.strptime(parametros_filtrar["fecha_desde"], "%Y-%m-%d")
             if parametros_filtrar["fecha_hasta"]:
                 fecha_hasta = datetime.strptime(parametros_filtrar["fecha_hasta"], "%Y-%m-%d")
-            fecha_lista = datetime.strptime(diccionario["fecha"],"%d.%m.%Y %H:%M:%S")
+            fecha_lista = datetime.strptime(diccionario["fecha"],"%Y-%m-%d")
             parametros_filtrar["fecha_desde"]
             print(fecha_desde)
             if parametros_filtrar["cod_cuenta"] != "" and diccionario["cod_cuenta"] != parametros_filtrar["cod_cuenta"]:

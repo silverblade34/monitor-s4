@@ -21,6 +21,7 @@ def func_buscarEvento():
     _eventCL = EventosController()
     idevento = session["idevento"]
     dataevento = _eventCL.buscarEvento(idevento)
+    print(json.dumps(dataevento))
     return dataevento["data"]
 
 @app.route('/agregarComentario', methods=['POST'])

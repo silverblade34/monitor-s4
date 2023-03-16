@@ -477,6 +477,6 @@
 	max-height: 250px; /* ajusta la altura máxima deseada */
 }
 
-.acordeon-contactos.cliente.abierto{
+.acordeon-datosEmpresa.cliente.abierto{
 	max-height: 400px; 
 }

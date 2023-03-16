@@ -156,7 +156,7 @@
                             </li>
                             <div class="accordion-body">
                                 {% for usuarios in datacuentas[0].clientes %}
-                                {% if usuarios.empresa == cliente.empresa %}
+                                {% if usuarios.empresa == cliente.empresa and usuarios.rol != "Administrador" %}
                                 <li class="li not-completed">
                                     <p>USUARIO: {{usuarios.usuario}} | ROL: {{usuarios.rol}}
                                     </p>
@@ -205,7 +205,7 @@
                             </thead>
                             <tbody>
                                 {% for usuario in datacuentas[0].clientes %}
-                                {% if usuario.empresa == datauser.Empresa %}
+                                {% if usuario.empresa == datauser.Empresa and usuario.rol != "Administrador" %}
                                 <tr>
                                     <td>
                                         <img src="{{url_for('static', filename='img/user-img-web.png')}}">

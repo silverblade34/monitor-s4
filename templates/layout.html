@@ -34,6 +34,7 @@ Author: SAEROX
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/elisyam-1.5.min.css')}}">
+    
     <link rel="stylesheet" href="{{url_for('static', filename='css/datetables/datatables.min.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/admin_cuentas.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.2.2/dist/sweetalert2.min.css"
@@ -67,7 +68,7 @@ Author: SAEROX
                         <a href="/home" class="navbar-brand">
                             <div class="brand-image brand-big">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img src="{{url_for('static', filename='img/logos/'+datauser.Usuario+'.png')}}" alt="logo"
+                                <img src="{{url_for('static', filename='img/logos/'+useradmin+'.png')}}" alt="logo"
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
@@ -76,7 +77,7 @@ Author: SAEROX
                             </div>
                             <div class="brand-image brand-small">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img src="{{url_for('static', filename='img/logos/'+datauser.Usuario+'.png')}}" alt="logo"
+                                <img src="{{url_for('static', filename='img/logos/'+ useradmin +'.png')}}" alt="logo"
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
@@ -86,11 +87,7 @@ Author: SAEROX
                         </a>
                         <div class="text-logo">
                             <p>
-                                {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                    {{datauser.Empresa}}
-                                {% else %}
-                                    Monitor S4
-                                {% endif %}
+                               
                             </p>
                         </div>
                         <!-- Toggle Button -->

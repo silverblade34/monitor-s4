@@ -41,14 +41,16 @@ $(document).ready(function () {
             .then(data => {
                 for (var i = 0; i < data.length; i++) {
                     table.row.add(['<td class="td-reportes">' + data[i].cod_evento + '</td>',
+                    '<td class="td-reportes">' + data[i].prioridad + '</td>',
                     '<td class="td-reportes">' + data[i].placa + '</td>',
-                    '<td class="td-reportes">' + data[i].fecha + '</td>',
+                    '<td class="td-reportes"><span style="width:100%;">' + data[i].fecha + '</span></td>',
+                    '<td class="td-reportes">' + data[i].hora + '</td>',
                     '<td class="td-reportes">' + data[i].velocidad + '</td>',
-                    '<td class="td-reportes">' + data[i].direccion + '</td>',
+                    '<td class="td-reportes"><span style="width:100%;">' + data[i].direccion + '</span></td>',
                     '<td class="td-reportes">' + data[i].geocerca + '</td>',
-                    '<td class="td-reportes">' + data[i].fecha_ultima_accion + '</td>',
-                    '<td class="td-reportes">' + data[i].DescripcionEstado + '</td>',
-                    '<td class="td-reportes">' + data[i].Prioridad + '</td>'
+                    '<td class="td-reportes"><span style="min-width:fit-content;">' + data[i].fecha_ultima_accion + '</span></td>',
+                    '<td class="td-reportes">' + data[i].descripcion_estado + '</td>',
+                    '<td class="td-reportes">' + data[i].usuario + '</td>'
                     ]).draw();
                 }
             });

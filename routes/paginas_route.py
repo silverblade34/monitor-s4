@@ -28,7 +28,9 @@ def notificaciones():
     if 'user' in session:
         if 'idevento' in session:
             session.pop('idevento', None)
-        return render_template('notificaciones.html', datauser = session["datauser"], codp = "notificaciones")
+        print(session["datauser"])
+        print(session["cod_admin"])
+        return render_template('notificaciones.html', datauser = session["datauser"], codp = "notificaciones", useradmin = session["user_admin"])
     else:
         return redirect(url_for('login'))
 
@@ -41,7 +43,7 @@ def listar_usuarios():
         try:
             _userCL = UsuariosController()
             data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
-            return render_template('admin_cuentas.html', datacuentas = data["data"], datauser = session["datauser"], codp = "adm-u")
+            return render_template('admin_cuentas.html', datacuentas = data["data"], datauser = session["datauser"], codp = "adm-u", useradmin = session["user_admin"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -58,7 +60,7 @@ def tipo_evento():
             cod_cliente = session["cod_admin"]
             datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
             print(datatipoevento)
-            return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento, codp = "adm-tipevent")
+            return render_template("tipo_evento.html", datauser = session["datauser"], datatipoevento = datatipoevento, codp = "adm-tipevent", useradmin = session["user_admin"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -79,7 +81,7 @@ def editar_evento():
             print(dataevento)
             print(dataresp)
             if dataevento["status"] == True:
-                return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], dataresp = dataresp)
+                return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], useradmin = session["user_admin"], dataresp = dataresp)
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -100,7 +102,7 @@ def reporte_notificaciones():
             cod_cliente = session["cod_admin"]
             datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
             print(datatipoevento)
-            return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti", datatipoevento= datatipoevento)
+            return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti", datatipoevento= datatipoevento, useradmin = session["user_admin"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)
@@ -115,7 +117,7 @@ def adminrespuestas_notificaciones():
             _respuCL = RespuestasController()
             cod_cliente = session["cod_admin"]
             dataresp = _respuCL.listarRespuestas(cod_cliente)
-            return render_template("adminrespuestas_notificaciones.html", datauser = session["datauser"], codp = "resp-noti", dataresp = dataresp)
+            return render_template("adminrespuestas_notificaciones.html", datauser = session["datauser"], codp = "resp-noti", dataresp = dataresp, useradmin = session["user_admin"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
             print(mensaje_error)

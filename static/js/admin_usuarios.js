@@ -65,7 +65,12 @@ crearUsuarios2.addEventListener("click", function () {
               mensajecontent: mensajecontent,
               ruc: ruc,
               nombre_rol: nombre_rol,
-              nombre_cliente: nombre_cliente
+              nombre_cliente: nombre_cliente,
+
+              namecontacto1: "",
+              contacto1: "",
+              namecontacto2: "",
+              contacto2: "",
             }
           };
         }

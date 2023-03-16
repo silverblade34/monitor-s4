@@ -39,9 +39,9 @@ crearClientes2.addEventListener("click", function () {
                 Ver contraseña
               </label>
               <span id="password2-validation-msg" class="password2-validation-msg"></span>
-              <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Registrar Datos del cliente (Obligatorio)</span>
+              <div type="button" id="btn-contacto" onclick="abrirAcordeonDatosEmpresa()" class="btn-agregar-contactos mt-2"><span>Registrar Datos del cliente (Obligatorio)</span>
               <i class='bx bx-chevron-down icon-arrow-2'></i></div>
-              <div id="acordeon-contactos" class="acordeon-contactos cliente">
+              <div id="acordeon-datos-empresa" class="acordeon-contactos">
               <label class="form-label">Ruc</label>
               <input type="text" id="ruc" class = "form-control input-text" placeholder="Ruc de la empresa">
               <label class="form-label">Cliente</label>
@@ -50,6 +50,25 @@ crearClientes2.addEventListener("click", function () {
               <input type="text" id="sigla" class = "form-control input-text" placeholder="Nombre corto empresa">
               <label class="form-label">Logo</label>
               <input type="file" id="logo" accept=".png" class="form-control input-file mb-3">
+              </div>
+              <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Agregar Contactos</span>
+              <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+              <div id="acordeon-contactos" class="acordeon-contactos">
+              <div class="form-g pt-1">
+                <label>Nombre de contacto 1</label>
+                <input type="text" class="form-control" id="namecontacto1" name="namecontacto1" placeholder="Nombre de contacto">
+              </div>
+              <div class="form-g pt-1">
+                <label>Número Contacto 1</label>
+                <input type="text" class="form-control" id="contacto1" name="contacto1" placeholder="Ejemplo: +51 999 888 777">
+              </div>
+              <div class="form-g pt-1">
+              <label>Nombre de contacto 2</label>
+              <input type="text" class="form-control" id="namecontacto2" name="namecontacto2" placeholder="Nombre de contacto">
+              </div>
+              <div class="form-g pt-1 pb-3">
+                <label>Número Contacto 2</label>
+                <input type="text" class="form-control" id="contacto2" name="contacto2" placeholder="Ejemplo: +51 999 888 777">
               </div>
               </div>
             </form>
@@ -67,6 +86,11 @@ crearClientes2.addEventListener("click", function () {
           const nombre_rol = document.getElementById("select-rol").value;
 
           var fileLogo = document.getElementById("logo").files[0];
+
+          const namecontacto1 = document.getElementById("namecontacto1").value;
+          const contacto1 = document.getElementById("contacto1").value;
+          const namecontacto2 = document.getElementById("namecontacto2").value;
+          const contacto2 = document.getElementById("contacto2").value;
           return {
             data: {
               idcuenta: idcuenta,
@@ -79,7 +103,11 @@ crearClientes2.addEventListener("click", function () {
               mensajecontent: mensajecontent,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente,
-              fileLogo: fileLogo
+              fileLogo: fileLogo,
+              namecontacto1: namecontacto1,
+              contacto1: contacto1,
+              namecontacto2: namecontacto2,
+              contacto2: contacto2,
             }
           };
         }
@@ -94,7 +122,7 @@ crearClientes2.addEventListener("click", function () {
           } else if (data.data.contrasena != data.data.contrasena2) {
             Swal.fire("Error", "Las contraseñas no coinciden", "error");
             return;
-          } else if (data.data.usuario.length <= 3) {
+          } else if (data.data.usuario.length < 3) {
             Swal.fire("Error", "El usuario debe tener por lo menos 3 caracteres", "error");
             return;
           } else if (data.data.mensajecontent == "Este usuario ya se ha creado") {
@@ -127,11 +155,11 @@ crearClientes2.addEventListener("click", function () {
                 method: 'POST',
                 body: formData
               })
-              .catch(error => {
-                // Manejar el error
-                console.error(error);
-                Swal.fire("Error", "La imagen no se cargó correctamente al servidor", "error");
-              });
+                .catch(error => {
+                  // Manejar el error
+                  console.error(error);
+                  Swal.fire("Error", "La imagen no se cargó correctamente al servidor", "error");
+                });
               Swal.fire("Agregado", data.message + "!", "success");
               setTimeout(function () {
                 location.reload();
@@ -165,16 +193,11 @@ editarClientes2.forEach(editarCliente2 => {
       })
       .then(data => {
         const contrasenaant = data.contrasena
+        const cod_cliente = data.cod_cliente
         Swal.fire({
           title: "Editar cuenta cliente",
           html: `
           <form class="form-crearcuenta">
-            <label class="form-label">Codigo de cliente</label>
-            <input type="text" id="cod_cliente" class = "form-control input-text" value="${data.cod_cliente}" disabled>
-            <label class="form-label">Empresa</label>
-            <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.empresa}" disabled>
-            <label class="form-label">Sigla</label>
-            <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
             <label class="form-label">Tipo de Rol</label>
             <input type="text" id="nombre_rol" class = "form-control input-text" value="${data.rol}" disabled>
             <label class="form-label">Usuario<span>(mínimo 3 caracteres)</span></label>
@@ -194,8 +217,36 @@ editarClientes2.forEach(editarCliente2 => {
             </label>
             <span id="password2-validation-msg" class="password2-validation-msg"></span>
             </div>
-            <label class="form-label">Ruc</label>
-            <input type="text" id="ruc" class = "form-control input-text" value="${data.ruc}">
+            <div type="button" id="btn-contacto" onclick="abrirAcordeonDatosEmpresa()" class="btn-agregar-contactos mt-2"><span>Registrar Datos del cliente (Obligatorio)</span>
+            <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+              <div id="acordeon-datos-empresa" class="acordeon-contactos">
+              <label class="form-label">Empresa</label>
+              <input type="text" id="nombre_cliente" class = "form-control input-text" value="${data.empresa}" disabled>
+              <label class="form-label">Sigla</label>
+              <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
+              <label class="form-label">Ruc</label>
+              <input type="text" id="ruc" class = "form-control input-text mb-3" value="${data.ruc}">
+              </div>
+              <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Contactos asociados</span>
+              <i class='bx bx-chevron-down icon-arrow-2'></i></div>
+              <div id="acordeon-contactos" class="acordeon-contactos">
+                <div class="form-g pt-1">
+                  <label>Nombre de contacto 1</label>
+                  <input type="text" class="form-control" id="namecontacto1" name="namecontacto1" placeholder="Nombre de contacto" value="${data.nombre_contacto1}">
+                </div>
+                <div class="form-g pt-1">
+                  <label>Número Contacto 1</label>
+                  <input type="text" class="form-control" id="contacto1" name="contacto1" placeholder="Ejemplo: +51 999 888 777" value="${data.telefono_contacto1}">
+                </div>
+                <div class="form-g pt-1">
+                <label>Nombre de contacto 2</label>
+                <input type="text" class="form-control" id="namecontacto2" name="namecontacto2" placeholder="Nombre de contacto" value="${data.nombre_contacto2}">
+                </div>
+                <div class="form-g pt-1 pb-3">
+                  <label>Número Contacto 2</label>
+                  <input type="text" class="form-control" id="contacto2" name="contacto2" placeholder="Ejemplo: +51 999 888 777" value="${data.telefono_contacto2}">
+                </div>
+              </div>
             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
             <label class="form-label">Estado</label>
             <input class="form-check-input" type="checkbox" id="estado-cuenta" ${data.estado === true ? 'checked' : ''}>
@@ -205,7 +256,6 @@ editarClientes2.forEach(editarCliente2 => {
           showCancelButton: true,
           confirmButtonText: "Actualizar cuenta",
           preConfirm: function () {
-            const codcliente = document.getElementById("cod_cliente").value;
             const usuario = document.getElementById("usuario_cuenta").value;
             const sigla = document.getElementById("sigla").value;
             const password = document.getElementById("password").value;
@@ -214,10 +264,15 @@ editarClientes2.forEach(editarCliente2 => {
             const nombre_rol = document.getElementById("nombre_rol").value;
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
             const nombre_cliente = document.getElementById("nombre_cliente").value;
+
+            const namecontacto1 = document.getElementById("namecontacto1").value;
+            const contacto1 = document.getElementById("contacto1").value;
+            const namecontacto2 = document.getElementById("namecontacto2").value;
+            const contacto2 = document.getElementById("contacto2").value;
             return {
               id: cuentaId,
               data: {
-                cod_cliente: codcliente,
+                cod_cliente: cod_cliente,
                 nombre_cliente: nombre_cliente,
                 usuario: usuario,
                 sigla: sigla,
@@ -225,7 +280,12 @@ editarClientes2.forEach(editarCliente2 => {
                 contrasena2: passwordInput2,
                 ruc: ruc,
                 rol_cliente: nombre_rol,
-                estado: estadoCheckbox
+                estado: estadoCheckbox,
+
+                namecontacto1: namecontacto1,
+                contacto1: contacto1,
+                namecontacto2: namecontacto2,
+                contacto2: contacto2,
               }
             };
           }
@@ -393,7 +453,12 @@ crearUsuariosXcliente.addEventListener("click", function () {
               ruc: ruc,
               mensajecontent: mensajecontent,
               nombre_rol: nombre_rol,
-              nombre_cliente: nombre_cliente
+              nombre_cliente: nombre_cliente,
+
+              namecontacto1: "",
+              contacto1: "",
+              namecontacto2: "",
+              contacto2: "",
             }
           };
         }
@@ -513,7 +578,12 @@ editarUsuarioXclientes.forEach(editarUsuarioXcliente => {
                 contrasena2: passwordInput2,
                 ruc: data.ruc,
                 rol_cliente: nombre_rol,
-                estado: estadoCheckbox
+                estado: estadoCheckbox,
+
+                namecontacto1: "",
+                contacto1: "",
+                namecontacto2: "",
+                contacto2: "",
               }
             };
           }

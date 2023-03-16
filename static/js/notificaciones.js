@@ -17,28 +17,28 @@ function actualizarNotificaciones() {
         '</li>';
       $('#dropdown-menu-notification').append(encabezado);
       var cont = 0;
-      var lengthnot = listnot.length - 1; 
-        while (cont <= 4) {
-          var evento = listnot[lengthnot];
-          if (evento.estado == 0) {
-            var fila = ' <li>' +
-              '<a href="#">' +
-              '<div class="message-icon">' +
-              '<i style="font-size: 25px;" class="bx bxs-bell-ring"></i>' +
-              '</div>' +
-              '<div class="message-body">' +
-              '<div class="message-body-heading">' +
-              evento.fecha + ' | ' + evento.cod_evento
-              + '</div>' +
-              '<span class="date">' + 'Placa: ' + evento.placa + '</span>' +
-              '</div>' +
-              '</a>' +
-              '</li>';
-            $('#dropdown-menu-notification').append(fila);
-            cont++;
-          }
-          lengthnot--;
+      var lengthnot = listnot.length - 1;
+      while (cont <= 4) {
+        var evento = listnot[lengthnot];
+        if (evento.estado == 0) {
+          var fila = ' <li>' +
+            '<a href="#">' +
+            '<div class="message-icon">' +
+            '<i style="font-size: 25px;" class="bx bxs-bell-ring"></i>' +
+            '</div>' +
+            '<div class="message-body">' +
+            '<div class="message-body-heading">' +
+            evento.fecha + ' | ' + evento.cod_evento
+            + '</div>' +
+            '<span class="date">' + 'Placa: ' + evento.placa + '</span>' +
+            '</div>' +
+            '</a>' +
+            '</li>';
+          $('#dropdown-menu-notification').append(fila);
+          cont++;
         }
+        lengthnot--;
+      }
       cola = '<li>' +
         '<a rel="nofollow" href="/notificaciones" class="dropdown-item all-notifications text-center">View' +
         'All Notifications</a>' +
@@ -123,7 +123,12 @@ editarUsuarioXclientes2.forEach(editarUsuarioXcliente2 => {
                 contrasena2: passwordInput2,
                 ruc: data.ruc,
                 rol_cliente: nombre_rol,
-                estado: estadoCheckbox
+                estado: estadoCheckbox,
+
+                namecontacto1: "",
+                contacto1: "",
+                namecontacto2: "",
+                contacto2: "",
               }
             };
           }

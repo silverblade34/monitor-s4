@@ -56,7 +56,6 @@ def actualizar_cuenta():
 def crear_cuenta_cliente():
     if 'user' in session:
         _userCL = UsuariosController()
-        print("-------------------1")
         data = _userCL.crearUsuarioCliente(request.json['data'], session['datauser']['CodCuenta'])
         return data
     else:
