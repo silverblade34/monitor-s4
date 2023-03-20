@@ -18,19 +18,38 @@ def layout():
 
 @app.route('/', methods=['GET'])
 def index():
-    if 'user' in session:
-        return redirect(url_for('notificaciones'))
+    if 'user' in session and 'datauser' in session:
+        return redirect(url_for('dashboard'))
+    else:
+        return redirect(url_for('login'))
+    
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    if 'user' in session and 'datauser' in session:
+        try:
+            if session["datauser"]["CodCliente"] == "All":
+                return render_template('dashboard_cuentas.html', datauser = session["datauser"], codp = "home")
+            else:
+                return render_template('dashboard_clientes.html', datauser = session["datauser"], codp = "home", useradmin = session["user_admin"])
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('login.html', msgerror = mensaje_error)
     else:
         return redirect(url_for('login'))
 
 @app.route('/notificaciones', methods=['GET'])
 def notificaciones():
-    if 'user' in session:
-        if 'idevento' in session:
-            session.pop('idevento', None)
-        print(session["datauser"])
-        print(session["cod_admin"])
-        return render_template('notificaciones.html', datauser = session["datauser"], codp = "notificaciones", useradmin = session["user_admin"])
+    if 'user' in session and 'datauser' in session:
+        try:
+            if 'idevento' in session:
+                session.pop('idevento', None)
+            print(session["cod_admin"])
+            return render_template('notificaciones.html', datauser = session["datauser"], codp = "notificaciones", useradmin = session["user_admin"])
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('login.html', msgerror = mensaje_error)
     else:
         return redirect(url_for('login'))
 

@@ -10,6 +10,12 @@ class EventosResponse:
         resp = requests.post(f'{API_SERVER}/api/v1/notifications/Account', data=json.dumps(dataEnviar))
         data = resp.json()
         if data["data"] is not None:
+            for notificaciones in data["data"]:
+                notificaciones["fechahora"] = notificaciones["fecha"] + " " + notificaciones["hora"]
+                if len(notificaciones["list_comentarios"]) > 0:
+                    notificaciones["comentario"] = notificaciones["list_comentarios"][-1]["comentario"]
+                else:
+                    notificaciones["comentario"] = ""
             return data["data"]
         else:
             return []
@@ -45,7 +51,6 @@ class EventosResponse:
             "cod_evento" : cod_evento
         }
         datos_filtrados = self.filtrar_por_parametros(dataNotificaciones, parametros_filtrar)
-        print(json.dumps(datos_filtrados))
         return datos_filtrados
 
     def filtrar_por_parametros(self, lista, parametros_filtrar):
@@ -56,9 +61,8 @@ class EventosResponse:
                 fecha_desde = datetime.strptime(parametros_filtrar["fecha_desde"], "%Y-%m-%d")
             if parametros_filtrar["fecha_hasta"]:
                 fecha_hasta = datetime.strptime(parametros_filtrar["fecha_hasta"], "%Y-%m-%d")
-            fecha_lista = datetime.strptime(diccionario["fecha"],"%Y-%m-%d")
+            fecha_lista = datetime.strptime(diccionario["fecha"], "%d-%m-%Y")
             parametros_filtrar["fecha_desde"]
-            print(fecha_desde)
             if parametros_filtrar["cod_cuenta"] != "" and diccionario["cod_cuenta"] != parametros_filtrar["cod_cuenta"]:
                 return False
             if parametros_filtrar["cod_cliente"] != "" and diccionario["cod_cliente"] != parametros_filtrar["cod_cliente"]:

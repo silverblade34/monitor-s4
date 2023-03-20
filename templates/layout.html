@@ -13,7 +13,7 @@ Author: SAEROX
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Sysnet</title>
     <link rel="shortcut icon" href="{{url_for('static', filename='icons/logo-png.png')}}" />
-    <meta name="description" content="Elisyam is a Web App and Admin Dashboard Template built with Bootstrap 4">
+    <meta name="description" content="Plataforma monitor S4 para el monitoreo de las notificaciones de alerta">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Google Fonts -->
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
@@ -32,20 +32,32 @@ Author: SAEROX
         crossorigin="" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='icons/logo-png.png')}}">
     <!-- Stylesheet -->
+    <!-- Sweet alert -->
+    <link rel="stylesheet" href="sweetalert2.min.css">
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/bootstrap.min.css')}}">
+    <!-- Elisyam -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/base/vendors/elisyam-1.5.min.css')}}">
-    
+    <!-- Datatables -->
     <link rel="stylesheet" href="{{url_for('static', filename='css/datetables/datatables.min.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/admin_cuentas.css')}}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10.2.2/dist/sweetalert2.min.css"
-        integrity="sha384-TcnWZLK1x3OehEiV7Unu/LXyV7ysuEtR0Vz8bw1GZjtjLmDbE5K5/5n1m9G5q3c" crossorigin="anonymous">
+    <!-- Biblioteca Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Estilos paginas -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin_cuentas.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/tipo_evento.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/reporte_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/tabla_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/edit_evento.css')}}">
+    <!-- Datatables Responsive -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
+
+    <!-- Chart - Graficos dinamicos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
 </head>
 
 <body id="page-top">
@@ -72,7 +84,7 @@ Author: SAEROX
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
-                                class="logo-small">
+                                    class="logo-small">
                                 {% endif %}
                             </div>
                             <div class="brand-image brand-small">
@@ -81,13 +93,13 @@ Author: SAEROX
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
-                                class="logo-small">
+                                    class="logo-small">
                                 {% endif %}
                             </div>
                         </a>
                         <div class="text-logo">
                             <p>
-                               
+
                             </p>
                         </div>
                         <!-- Toggle Button -->
@@ -109,8 +121,9 @@ Author: SAEROX
                         <li class="nav-item dropdown"><a id="notifications" rel="nofollow" data-target="#" href="#"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i
                                     class="la la-bell animated infinite swing"></i><span class="badge-pulse"></span></a>
-                            <ul aria-labelledby="notifications" class="dropdown-menu notification" id="dropdown-menu-notification">
-                               
+                            <ul aria-labelledby="notifications" class="dropdown-menu notification"
+                                id="dropdown-menu-notification">
+
                             </ul>
                         </li>
                         <li>{{ datauser.Usuario}}</li>
@@ -158,7 +171,7 @@ Author: SAEROX
                 <nav class="side-navbar box-scroll sidebar-scroll">
                     <!-- Begin Main Navigation -->
                     <ul class="list-unstyled">
-                        <li class=""><a href="#"><i class='bx bx-home'></i><span>Home</span></a>
+                        <li class="{% if codp == 'home' %} active {% endif %}"><a href="#"><i class='bx bx-home'></i><span>Home</span></a>
                         </li>
                         <li><a href="#dropdown-app" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bxs-devices'></i><span>Monitoreo</span></a>
@@ -168,17 +181,23 @@ Author: SAEROX
                         </li>
                     </ul>
                     <ul class="list-unstyled">
-                        <li class="{% if codp == 'notificaciones' %} active {% endif %}"><a href="#dropdown-ui" aria-expanded="false" data-toggle="collapse"><i
+                        <li class="{% if codp == 'notificaciones' %} active {% endif %}"><a href="#dropdown-ui"
+                                aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-bell'></i><span>Eventos</span></a>
-                            <ul id="dropdown-ui" class="collapse list-unstyled {% if codp == 'notificaciones' %} show {% endif %} pt-0">
-                                <li><a class="{% if codp == 'notificaciones' %} active {% endif %}" href="/notificaciones">Consultar registrar</a></li>
+                            <ul id="dropdown-ui"
+                                class="collapse list-unstyled {% if codp == 'notificaciones' %} show {% endif %} pt-0">
+                                <li><a class="{% if codp == 'notificaciones' %} active {% endif %}"
+                                        href="/notificaciones">Consultar registrar</a></li>
                             </ul>
                         </li>
                         <li><a href="#dropdown-icons" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-bar-chart-square'></i><span>Reportes</span></a>
-                            <ul id="dropdown-icons" class="collapse list-unstyled {% if codp == 'report-noti' %} show {% endif %} pt-0">
+                            <ul id="dropdown-icons"
+                                class="collapse list-unstyled {% if codp == 'report-noti' %} show {% endif %} pt-0">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <li><a href="/reporte_notificaciones" class="{% if codp == 'report-noti' %} active {% endif %}">Notificaciones</a></li>
+                                <li><a href="/reporte_notificaciones"
+                                        class="{% if codp == 'report-noti' %} active {% endif %}">Notificaciones</a>
+                                </li>
                                 {% endif %}
                                 <!-- <li><a href="#">Listado de eventos x cliente x turno</a></li> -->
                             </ul>
@@ -191,18 +210,25 @@ Author: SAEROX
                             </ul>
                         </li>
                         {% if datauser.Rol == "Administrador" %}
-                        <li class="{% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} active {% endif %}"><a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
+                        <li
+                            class="{% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} active {% endif %}">
+                            <a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
-                            <ul id="dropdown-tables" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show{% endif %} pt-0">
+                            <ul id="dropdown-tables"
+                                class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show{% endif %} pt-0">
                                 <a href="#dropdown-mantenimientos" aria-expanded="false"
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
-                                <ul id="dropdown-mantenimientos" class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show {% endif %} pt-0">
-                                    <li><a class="{% if codp =='adm-u' %} active {% endif %}" href="/listar_usuarios">Usuarios</a></li>
+                                <ul id="dropdown-mantenimientos"
+                                    class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show {% endif %} pt-0">
+                                    <li><a class="{% if codp =='adm-u' %} active {% endif %}"
+                                            href="/listar_usuarios">Usuarios</a></li>
                                     {% if datauser.Usuario != "root" %}
-                                    <li><a class="{% if codp =='adm-tipevent' %} active {% endif %}" href="/tipo_evento">Tipo eventos</a></li>
+                                    <li><a class="{% if codp =='adm-tipevent' %} active {% endif %}"
+                                            href="/tipo_evento">Tipo eventos</a></li>
                                     {% endif %}
                                     {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                    <li><a class="{% if codp =='resp-noti' %} active {% endif %}" href="/adminrespuestas_notificaciones">Respuestas predefinidas</a></li>
+                                    <li><a class="{% if codp =='resp-noti' %} active {% endif %}"
+                                            href="/adminrespuestas_notificaciones">Respuestas predefinidas</a></li>
                                     {% endif %}
                                 </ul>
                             </ul>
@@ -242,7 +268,6 @@ Author: SAEROX
     <!-- End Page Content -->
     </div>
     </div>
-    
     <script src="{{url_for('static', filename='js/vendors/base/jquery.min.js')}}"></script>
     <script src="{{url_for('static', filename='js/notificaciones.js')}}"></script>
     <!-- Carga de la API de Google Maps -->
@@ -266,6 +291,7 @@ Author: SAEROX
     <!-- Begin Page Snippets -->
     <script src="{{url_for('static', filename='js/components/tables/tables.js')}}" defer></script>
     <!-- End Page Snippets -->
+    <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js" defer></script>
 </body>
 
 </html>

@@ -85,20 +85,20 @@
                             <thead>
                                 <tr>
                                     {% if datauser.CodCuenta == "0000" %}
-                                    <th>Sigla cuenta</th>
-                                    <th>Sigla cliente</th>
+                                    <th style="max-width:70px;">Sigla cuenta</th>
+                                    <th style="max-width:70px;">Sigla cliente</th>
                                     {% elif datauser.CodCliente == "All" %}
-                                    <th>Sigla cliente</th>
+                                    <th style="max-width:70px;">Sigla cliente</th>
                                     {% endif %}
-                                    <th>Código evento</th>
-                                    <th>Placa</th>
-                                    <th>Fecha recepción</th>
-                                    <th>Velocidad</th>
-                                    <th><span style="width:100px;">Dirección</span></th>
-                                    <th>Estado</th>
-                                    <th>Fecha ultima acción</th>
-                                    <th>Prioridad</th>
-                                    <th>Acción</th>
+                                    <th style="max-width:70px;">Código evento</th>
+                                    <th style="max-width:70px;">Placa</th>
+                                    <th style="max-width:120px;">Fecha recepción</th>
+                                    <th style="max-width:60px;">Velocidad</th>
+                                    <th><span style="width:fit-content;">Dirección</span></th>
+                                    <th style="max-width:60px;">Estado</th>
+                                    <th style="max-width:120px;">Fecha ultima acción</th>
+                                    <th style="max-width:40px">Prioridad</th>
+                                    <th style="max-width:40px;">Acción</th>
                                 </tr>
                             </thead>
                             <tbody>

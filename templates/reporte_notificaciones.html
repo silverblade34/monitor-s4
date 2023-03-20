@@ -28,13 +28,11 @@
                             <form id="myForm" class="form-inline me-2">
                                 <div class="mr-3">
                                     <label for="fecha-desde">Fecha desde:</label>
-                                    <input type="date" id="fecha-desde" name="fecha_desde"
-                                        class="form-control mb-2">
+                                    <input type="date" id="fecha-desde" name="fecha_desde" class="form-control mb-2">
                                 </div>
                                 <div class="mr-3">
                                     <label for="fecha-hasta">Fecha hasta:</label>
-                                    <input type="date" id="fecha-hasta" name="fecha_hasta"
-                                        class="form-control mb-2">
+                                    <input type="date" id="fecha-hasta" name="fecha_hasta" class="form-control mb-2">
                                 </div>
                                 <div class="mr-3">
                                     <label for="placa">Placa:</label>
@@ -68,15 +66,18 @@
                             <thead>
                                 <tr>
                                     <th>Código evento</th>
-                                    <th>Prioridad</th>
-                                    <th>Placa</th>
+                                    <th><span style="width:35px;">Prioridad</span></th>
+                                    <th><span style="width:35px;">Placa</span></th>
                                     <th><span style="width:60px;">Fecha</span></th>
                                     <th>Hora</th>
-                                    <th>Velocidad</th>
+                                    <th><span style="width:35px;">Velocidad</span></th>
+                                    <th>Latitud</th>
+                                    <th>Longitud</th>
                                     <th><span style="width:100px;">Dirección</span></th>
                                     <th>Geocerca</th>
                                     <th><span style="width:90px;">Ult. acción</span></th>
                                     <th>Estado</th>
+                                    <th>Comentario</th>
                                     <th>Usuario</th>
                                 </tr>
                             </thead>
@@ -84,15 +85,25 @@
                                 {% for notificacion in datanoti %}
                                 <tr>
                                     <td class="td-reportes">{{notificacion.cod_evento}}</td>
-                                    <td class="td-reportes">{{notificacion.prioridad}}</td>
-                                    <td class="td-reportes">{{notificacion.placa}}</td>
-                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.fecha}}</span></td>
+                                    <td class="td-reportes"><span
+                                        style="min-width:fit-content;">{{notificacion.prioridad}}</span></td>
+                                    <td class="td-reportes"><span
+                                        style="min-width:fit-content;">{{notificacion.placa}}</span></td>
+                                    <td class="td-reportes"><span
+                                            style="min-width:fit-content;">{{notificacion.fecha}}</span></td>
                                     <td class="td-reportes">{{notificacion.hora}}</td>
-                                    <td class="td-reportes">{{notificacion.velocidad}}</td>
-                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.direccion}}</span></td>
+                                    <td class="td-reportes"><span
+                                        style="min-width:fit-content;">{{notificacion.velocidad}}</span></td>
+                                    <td class="td-reportes">{{notificacion.latitud}}</td>
+                                    <td class="td-reportes">{{notificacion.longitud}}</td>
+                                    <td class="td-reportes"><span
+                                            style="min-width:fit-content;">{{notificacion.direccion}}</span></td>
                                     <td class="td-reportes">{{notificacion.geocerca}}</td>
-                                    <td class="td-reportes"><span style="min-width:fit-content;">{{notificacion.fecha_ultima_accion}}</span></td>
+                                    <td class="td-reportes"><span
+                                            style="min-width:fit-content;">{{notificacion.fecha_ultima_accion}}</span>
+                                    </td>
                                     <td class="td-reportes">{{notificacion.descripcion_estado}}</td>
+                                    <td class="td-reportes">{{notificacion.comentario}}</td>
                                     <td class="td-reportes">{{notificacion.usuario}}</td>
                                 </tr>
                                 {% endfor %}

@@ -17,12 +17,13 @@ def login():
             if str(request.form['usuario']) != "" and str(request.form['password']) != "":
                 _credentialCL = CredentialController()
                 datauser = _credentialCL.validarUsuario(request.form['usuario'], request.form['password'])
+                print(datauser)
                 if datauser["status"] == True:
                     session["user"] = datauser["data"]["Usuario"]
                     session["datauser"] = datauser["data"]
                     session["user_admin"] = datauser["UsuarioClienteAdmin"]
                     session["cod_admin"] = datauser["CodClienteAdmin"]
-                    return redirect(url_for('notificaciones'))
+                    return redirect(url_for('dashboard'))
                 elif datauser["status"] == False:
                     return render_template('login.html', message = "Usuario no válido")
                 return render_template('login.html')
