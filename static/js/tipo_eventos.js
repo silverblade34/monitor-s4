@@ -101,9 +101,9 @@ editarTipoEventos.forEach(editarTipoEvento => {
                             <input type="text" id="descripcion" class = "form-control input-text" value="${data.descripcion}">
                             <label class="form-label">Prioridad</label>
                             <select id="prioridad" class="form-select">
-                            <option value="Regular" ${data.prioridad === "REGULAR" ? "selected" : ""}>REGULAR</option>
-                            <option value="Urgente" ${data.prioridad === "URGENTE" ? "selected" : ""}>URGENTE</option>
-                            <option value="Critico" ${data.prioridad === "CRITICO" || data.prioridad === "CRÍTICO" ? "selected" : ""}>CRITICO</option>
+                            <option value="REGULAR" ${data.prioridad === "REGULAR" ? "selected" : ""}>REGULAR</option>
+                            <option value="URGENTE" ${data.prioridad === "URGENTE" ? "selected" : ""}>URGENTE</option>
+                            <option value="CRITICO" ${data.prioridad === "CRITICO" || data.prioridad === "CRÍTICO" ? "selected" : ""}>CRITICO</option>
                             </select>
                             <div class="form-check toggle-switch text-end form-switch me-4 pt-3">
                             <label class="form-label">Estado</label>

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block body %}
 <!-- Begin Preloader -->
-
+</head>
 <div class="container-fluid cuentas">
     <div class="row">
         <div class="page-header">
@@ -71,19 +71,19 @@
                             </li>
                             <div class="accordion-body">
                                 {% for cliente in usuario.clientes %}
-                                    {% if cliente.rol == "Administrador" %}
-                                    <li class="li not-completed">
-                                        <p>{{cliente.empresa}} | {{cliente.cod_cliente}}
-                                        </p>
-                                        <div>
-                                            {% if cliente.estado == True %}
-                                            <span class="status true">Activo</span>
-                                            {% else %}
-                                            <span class="status false">Desactivada</span>
-                                            {% endif %}
-                                        </div>
-                                    </li>
-                                    {% endif %}
+                                {% if cliente.rol == "Administrador" %}
+                                <li class="li not-completed">
+                                    <p>{{cliente.empresa}} | {{cliente.cod_cliente}}
+                                    </p>
+                                    <div>
+                                        {% if cliente.estado == True %}
+                                        <span class="status true">Activo</span>
+                                        {% else %}
+                                        <span class="status false">Desactivada</span>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                                {% endif %}
                                 {% endfor %}
                             </div>
                             {% endfor %}
@@ -189,7 +189,9 @@
                     <div class="order">
                         <div class="head">
                             <h3>Clientes</h3>
-                            <button id="crearusuario-2" data-rp-empresa="{{datauser.Empresa}}" data-rp-ruc="{{datauser.Ruc}}" data-rp-sigla="{{datauser.sigla}}" class="btn btn-success">Crear usuario</button>
+                            <button id="crearusuario-2" data-rp-empresa="{{datauser.Empresa}}"
+                                data-rp-ruc="{{datauser.Ruc}}" data-rp-sigla="{{datauser.sigla}}"
+                                class="btn btn-success">Crear usuario</button>
                         </div>
                         <table>
                             <thead>
@@ -221,10 +223,12 @@
                                     <td><span class="status false">Desactivada</span></td>
                                     {% endif %}
                                     <td class="actions">
-                                        <a href="#" class="editarUsuarioXCliente2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                        <a href="#" class="editarUsuarioXCliente2"
+                                            data-cuenta-id="{{datacuentas[0].ID}}"
                                             data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-clienteUsuario2" data-cuenta-id="{{datacuentas[0].ID}}"
+                                        <a href="#" class="delete-clienteUsuario2"
+                                            data-cuenta-id="{{datacuentas[0].ID}}"
                                             data-cod-cliente="{{usuario.cod_cliente}}"><i
                                                 class="bx bx-x delete"></i></a>
                                     </td>
