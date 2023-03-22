@@ -11,6 +11,9 @@
     display: flex;
     align-items: center;
     grid-gap: 24px;
+    box-shadow: 0px 0px 10px -4px rgba(141, 141, 141, 0.7);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(102, 102, 102, 0.7);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(138, 138, 138, 0.7);
 }
 
 #content .container-dashboard .box-info li .cards-cant {
@@ -97,10 +100,20 @@
 
 /* Dashboard clientes */
 .container-dashboard .container-table-eventos {
+    font-size: 12px;
     width: 100%;
     border-radius: 20px !important;
     border-collapse: collapse;
-    padding: 20px;
+}
+
+.container-dashboard .container-table-eventos th {
+    padding: 6px 8px;
+    text-align: center;
+}
+
+.container-dashboard .container-table-eventos td {
+    text-align: center;
+    padding: 6px 8px;
 }
 
 .container-dashboard  table th:first-child,
@@ -123,14 +136,9 @@ table tr:first-child td {
     border-bottom: none;
 }
 
-.container-dashboard .container-table-eventos td {
-    padding: 8px 10px;
-    border: 1px solid #a0a0a0;
-}
-
-.container-dashboard .order {
+.container-dashboard .cont-table {
     overflow: hidden;
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
     -webkit-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
     -moz-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
@@ -141,7 +149,7 @@ table tr:first-child td {
 }
 
 .container-dashboard .container-table-eventos thead {
-    background-color: brown;
+    background-color: #6a66a0;
     color: #ffffff;
 }
 

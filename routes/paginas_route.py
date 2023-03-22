@@ -4,12 +4,16 @@ from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 from src.tipoEventos.infrastructure.controller import TipoEventosController
 from src.respuestas.infrastructure.controller import RespuestasController
-import requests 
+import requests, uuid
 
 #from app import app
 from __main__ import app, cache
-app.secret_key = "hhyy526//--"
+from session import set_session_cookie_name
 CORS(app)
+
+@app.before_request
+def before_request():
+    set_session_cookie_name()
 
 @app.route('/layout')
 @cache.cached(timeout=60*60*24)

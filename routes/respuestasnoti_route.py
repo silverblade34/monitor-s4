@@ -1,11 +1,17 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_cors import CORS
 from src.respuestas.infrastructure.controller import RespuestasController
-import requests 
+import requests, uuid
 #from app import app
 from __main__ import app
-app.secret_key = "hhyy526//--"
+from session import set_session_cookie_name
+
+
 CORS(app)
+
+@app.before_request
+def before_request():
+    set_session_cookie_name()
 
 @app.route('/crear_resp_prede', methods=['POST'])
 def crear_resp_prede():

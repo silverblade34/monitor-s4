@@ -57,6 +57,8 @@ class EventosResponse:
         def filtro(diccionario):
             fecha_desde = ""
             fecha_hasta = ""
+            print(diccionario)
+            print(parametros_filtrar)
             if parametros_filtrar["fecha_desde"]:
                 fecha_desde = datetime.strptime(parametros_filtrar["fecha_desde"], "%Y-%m-%d")
             if parametros_filtrar["fecha_hasta"]:
@@ -73,7 +75,7 @@ class EventosResponse:
                 return False
             if parametros_filtrar["placa"] != "" and diccionario["placa"] != parametros_filtrar["placa"]:
                 return False
-            if parametros_filtrar["descripcion_estado"] != "" and diccionario["DescripcionEstado"] != parametros_filtrar["descripcion_estado"]:
+            if parametros_filtrar["descripcion_estado"] != "" and diccionario["descripcion_estado"] != parametros_filtrar["descripcion_estado"]:
                 return False
             if parametros_filtrar["cod_evento"] != "" and diccionario["cod_evento"] != parametros_filtrar["cod_evento"]:
                 return False
