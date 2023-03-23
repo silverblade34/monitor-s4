@@ -11,9 +11,9 @@
     display: flex;
     align-items: center;
     grid-gap: 24px;
-    box-shadow: 0px 0px 10px -4px rgba(141, 141, 141, 0.7);
-    -webkit-box-shadow: 0px 0px 10px -4px rgba(102, 102, 102, 0.7);
-    -moz-box-shadow: 0px 0px 10px -4px rgba(138, 138, 138, 0.7);
+    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
 }
 
 #content .container-dashboard .box-info li .cards-cant {
@@ -116,8 +116,8 @@
     padding: 6px 8px;
 }
 
-.container-dashboard  table th:first-child,
-.container-dashboard  table td:first-child {
+.container-dashboard table th:first-child,
+.container-dashboard table td:first-child {
     border-left: none;
 }
 
@@ -138,10 +138,10 @@ table tr:first-child td {
 
 .container-dashboard .cont-table {
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
-    -webkit-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
-    -moz-box-shadow: 0px 0px 10px -4px rgba(0, 0, 0, 0.7);
+    border-radius: 2px;
+    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
 }
 
 .container-dashboard .container-table-eventos th {
@@ -149,10 +149,33 @@ table tr:first-child td {
 }
 
 .container-dashboard .container-table-eventos thead {
-    background-color: #6a66a0;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #0f0f0f;
+    border-bottom: 1px solid #dddddd;
 }
 
+.widget-cant-not-vehiculos{
+    border-radius: 0;
+    height: 100%;
+    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
+    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
+    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
+}
+
+.mychart-horizontal-operadores{
+    max-height: 350px;
+    padding: 0 30px;
+}
+
+.media-right span{
+    font-size: 30px !important;
+    font-weight: 800;
+}
+
+.media-right .like{
+    display: flex !important;
+    align-items: center;
+}
 
 @media screen and (max-width: 906px) {
     #content .container-dashboard .box-info {

@@ -17,7 +17,7 @@
     </div>
     <div class="container-dashboard">
         <div class="cont-table">
-            <table  class="container-table-eventos">
+            <table class="container-table-eventos">
 
             </table>
         </div>
@@ -25,8 +25,17 @@
             <li class="border">
                 <i class='bx bxs-group'></i>
                 <span class="text">
-                    <h4>Total clientes</h4>
-                    <p class="cards-cant">12</p>
+                    <h4>Eventos sin atender</h4>
+                    <p class="cards-cant" id="card-cant-events-sinatender"></p>
+                    <div>
+                    </div>
+                </span>
+            </li>
+            <li class="border">
+                <i class='bx bxs-truck'></i>
+                <span class="text">
+                    <h4>Eventos en Gestión</h4>
+                    <p class="cards-cant" id="card-cant-events-engestion"></p>
                     <div>
                     </div>
                 </span>
@@ -34,8 +43,8 @@
             <li class="border">
                 <i class='bx bxs-bell'></i>
                 <span class="text">
-                    <h4>Total eventos</h4>
-                    <p class="cards-cant">1453</p>
+                    <h4>Eventos confirmados</h4>
+                    <p class="cards-cant" id="card-cant-events-confirmados"></p>
                     <div>
                     </div>
                 </span>
@@ -43,37 +52,53 @@
             <li class="border">
                 <i class='bx bxs-truck'></i>
                 <span class="text">
-                    <h4>Total vehiculos</h4>
-                    <p class="cards-cant">85</p>
-                    <div>
-                    </div>
-                </span>
-            </li>
-            <li class="border">
-                <i class='bx bxs-truck'></i>
-                <span class="text">
-                    <h4>Total vehiculos</h4>
-                    <p class="cards-cant">85</p>
+                    <h4>Eventos descartados</h4>
+                    <p class="cards-cant" id="card-cant-events-descartados"></p>
                     <div>
                     </div>
                 </span>
             </li>
         </ul>
         <div class="row gap-3">
-            <div class="col-lg-6">
+            <div class="col-lg-9">
                 <div class="container-table-eventos">
+                    <!-- Horizontal Bar 01 -->
+                    <!-- <div class="widget has-shadow widget-cant-not-vehiculos">
+                        <div class="widget-header bordered no-actions d-flex align-items-center">
+                            <h4>Notificaciones atendidas por operador</h4>
+                        </div>
+                        <div class="widget-body">
+                            <div class="chart">
+                                <canvas id="mychart-horizontal" class="mychart-horizontal-operadores"></canvas>
+                            </div>
+                        </div>
+                    </div> -->
+                    <!-- End Horizontal Bar 01 -->
                     <div class="cont-table">
                         <table id="container-table-eventos" class="table align-items-center mb-0">
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="container-table-eventos">
-                    <div class="cont-table">
-                        <table id="container-table-vehiculos" class="table align-items-center mb-0">
-                        </table>
+            <div class="col-lg-3">
+                <div class="widget widget-06 has-shadow widget-cant-not-vehiculos">
+                    <!-- Begin Widget Header -->
+                    <div class="widget-header bordered d-flex align-items-center">
+                        <h2>Notificaciones por vehiculos</h2>
+                        <div class="widget-options">
+                        </div>
                     </div>
+                    <!-- End Widget Header -->
+                    <!-- Begin Widget Body -->
+                    <div class="widget-body p-0">
+                        <div id="list-group" class="widget-scroll" style="max-height:490px;">
+                            <ul id="lista-vehiculos" class="reviews list-group w-100">
+                                <!-- 01 -->
+                            </ul>
+                        </div>
+                        <!-- End List -->
+                    </div>
+                    <!-- End Widget Body -->
                 </div>
             </div>
         </div>
@@ -81,7 +106,4 @@
 </div>
 <script src="{{url_for('static', filename='js/dashboard.js')}}" defer></script>
 <script src="{{url_for('static', filename='js/charts/charts-bars-horizontal.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-bars.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-lines.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-pie.js')}}" defer></script>
 {% endblock %}

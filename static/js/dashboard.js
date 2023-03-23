@@ -10,14 +10,14 @@ function actualizarTablaCantsTipoEvents() {
             console.log(data)
             const eventos = data.data_eventos;
             var cant = 0
-            const cantevents = Object.keys(eventos).map(key => { 
+            const cantevents = Object.keys(eventos).map(key => {
                 cant = cant + eventos[key]
                 return cant
             })
-            console.log("CANT: "+ cant)
+            console.log("CANT: " + cant)
             // Crea una fila por cada elemento del objeto "data_eventos"
             const filas = Object.keys(eventos).map(key => {
-                const porce = (eventos[key]/cant)*100
+                const porce = (eventos[key] / cant) * 100
                 const porcefin = Math.floor(porce);
                 return `<tr>
                   <td>${key}</td>
@@ -53,10 +53,11 @@ function actualizarTablaCantsTipoEvents() {
         });
 }
 
-const tabla_vehiculos_cant = document.getElementById("container-table-vehiculos")
+const cont_vehiculos_cant = document.getElementById("lista-vehiculos")
+
 
 // Función que realiza una petición GET al endpoint y actualiza la tabla con los datos
-function actualizarTablaCantsVehiculos() {
+function actualizarContCantsVehiculos() {
     fetch(`/tipoevento_home`, {
         method: "GET",
     })
@@ -65,52 +66,69 @@ function actualizarTablaCantsVehiculos() {
             console.log(data)
             const vehiculos = data.data_vehiculos;
             var cant = 0
-            const cantevents = Object.keys(vehiculos).map(key => { 
+            const cantevents = Object.keys(vehiculos).map(key => {
                 cant = cant + vehiculos[key]
                 return cant
             })
-            console.log("CANT: "+ cant)
+            console.log("CANT: " + cant)
             // Crea una fila por cada elemento del objeto "data_eventos"
             const filas = Object.keys(vehiculos).map(key => {
-                const porce = (vehiculos[key]/cant)*100
+                const porce = (vehiculos[key] / cant) * 100
                 const porcefin = Math.floor(porce);
-                return `<tr>
-                  <td>${key}</td>
-                  <td>${vehiculos[key]}</td>
-                  <td class="align-middle">
-                    <div class="progress-wrapper w-75 mx-auto">
-                        <div class="progress-info">
-                        <div class="progress-percentage">
-                            <span class="text-xs font-weight-bold">${porcefin}%</span>
-                        </div>
-                        </div>
-                        <div class="progress">
-                        <div class="progress-bar bg-gradient-info" role="progressbar"
-                            aria-valuenow="${porcefin}" aria-valuemin="0" aria-valuemax="100"
-                            style="width: ${porcefin}%;"></div>
+                return `<li class="list-group-item">
+                    <div class="media">
+                    <div class="media-left align-self-start">
+                    <img src="../static/img/camion.jpg" alt="camion" class="user-img rounded-circle">
+                    </div>
+                    <div class="media-body align-self-center">
+                        <div class="username">
+                            <h4>${key}</h4>
                         </div>
                     </div>
-                    </td>
-                </tr>`;
+                    <div class="media-right pr-3 align-self-center">
+                        <div class="like text-center">
+                            <span>${vehiculos[key]}</span>
+                            <i class="la la-bell animated infinite swing"></i>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+                `;
             });
 
             // Actualiza el contenido de la tabla
-            tabla_vehiculos_cant.innerHTML = `
-        <thead>
-          <th scope="col">Vehiculos</th>
-          <th scope="col">Cantidad</th>
-          <th scope="col">Porcentaje</th>
-        </thead>
-        <tbody>
-          ${filas.join('')}
-        </tbody>
+            cont_vehiculos_cant.innerHTML = `
+                ${filas.join('')}
       `;
         });
 }
 
+// INSERTAR INFORMACION EN LAS CARDS
+
+// Define una función para actualizar los valores de las tarjetas
+function actualizarTarjetas() {
+    fetch(`/cards_clientes`, {
+        method: "GET",
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data)
+            // Actualiza los valores de las tarjetas con los datos recibidos
+            document.getElementById("card-cant-events-sinatender").textContent = data.events_sinatender;
+            document.getElementById("card-cant-events-engestion").textContent = data.events_engestion;
+            document.getElementById("card-cant-events-confirmados").textContent = data.events_confirmados;
+            document.getElementById("card-cant-events-descartados").textContent = data.events_descartados;
+        })
+}
+
+// Llama a la función "actualizarTarjetas" cada 10 segundos
+setInterval(actualizarTarjetas, 10000);
+
 // Actualiza la tabla cada 20 segundos
 setInterval(actualizarTablaCantsTipoEvents, 20000);
+setInterval(actualizarContCantsVehiculos, 20000);
 $(document).ready(function () {
-    actualizarTablaCantsVehiculos();
+    actualizarContCantsVehiculos();
     actualizarTablaCantsTipoEvents();
+    actualizarTarjetas();
 });

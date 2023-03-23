@@ -83,13 +83,6 @@ function actualizarTabla() {
                         $('div.inner', row).show();
                     }
                 },
-                "stateSaveParams": function (settings, data) {
-                    data.search = ""; // incluir la propiedad "search" en el estado guardado
-                    data.order = []; // incluir la propiedad "order" en el estado guardado
-                    data.start = 0; // incluir la propiedad "start" en el estado guardado
-                    data.length = settings._iDisplayLength; // incluir la propiedad "length" en el estado guardado
-                    data.columns = []; // excluir la propiedad "columns" del estado guardado
-                },
                 "language": {
                     "sProcessing": "Procesando...",
                     "sLengthMenu": "Mostrar _MENU_ registros",
@@ -145,6 +138,7 @@ $(document).ready(function () {
 });
 setInterval(actualizarTabla, 15000);
 
+
 // OCULTAR COLUMNAS DE NOTIFICACIONES
 $('input[type="checkbox"]').on('change', function () {
     var table = $('#sorting-table').DataTable();
@@ -157,6 +151,7 @@ $('input[type="checkbox"]').on('change', function () {
     console.log(columnasVisibles)
     table.draw();
 });
+
 
 // ACORDEON TABLA NOTIFICACIONES
 

@@ -226,6 +226,8 @@ editarClientes2.forEach(editarCliente2 => {
               <input type="text" id="sigla" class = "form-control input-text" value="${data.sigla}">
               <label class="form-label">Ruc</label>
               <input type="text" id="ruc" class = "form-control input-text mb-3" value="${data.ruc}">
+              <label class="form-label">Logo</label>
+              <input type="file" id="logo" accept=".png" class="form-control input-file mb-3">
               </div>
               <div type="button" id="btn-contacto" onclick="abrirAcordeonContactos()" class="btn-agregar-contactos mt-2"><span>Contactos asociados</span>
               <i class='bx bx-chevron-down icon-arrow-2'></i></div>
@@ -265,6 +267,8 @@ editarClientes2.forEach(editarCliente2 => {
             const estadoCheckbox = document.getElementById("estado-cuenta").checked;
             const nombre_cliente = document.getElementById("nombre_cliente").value;
 
+            var fileLogo = document.getElementById("logo").files[0];
+
             const namecontacto1 = document.getElementById("namecontacto1").value;
             const contacto1 = document.getElementById("contacto1").value;
             const namecontacto2 = document.getElementById("namecontacto2").value;
@@ -281,7 +285,7 @@ editarClientes2.forEach(editarCliente2 => {
                 ruc: ruc,
                 rol_cliente: nombre_rol,
                 estado: estadoCheckbox,
-
+                fileLogo: fileLogo,
                 namecontacto1: namecontacto1,
                 contacto1: contacto1,
                 namecontacto2: namecontacto2,
@@ -292,6 +296,8 @@ editarClientes2.forEach(editarCliente2 => {
         }).then(function (result) {
           if (result.value) {
             const data = result.value;
+            const fileLogo = data.data.fileLogo;
+            const usuario = data.data.usuario;
             if (!data.data.cod_cliente || !data.data.usuario || !data.data.contrasena || !data.data.ruc) {
               Swal.fire("Error", "Todos los campos son requeridos", "error");
               return;
@@ -316,6 +322,25 @@ editarClientes2.forEach(editarCliente2 => {
                 return response.json();
               })
               .then(data => {
+                // Enviar la imagen al servidor mediante AJAX
+                // Crear un objeto FormData
+                const formData = new FormData();
+                formData.append('usuario', usuario);
+                formData.append('file', fileLogo);
+
+                // Enviar la imagen al servidor mediante fetch
+                fetch('/guardarImageCliente', {
+                  method: 'POST',
+                  body: formData
+                })
+                  .then(data => {
+                    Swal.fire("Actualizado", "La imagen se cargo correctamente" + "!", "success");
+                   })
+                  .catch(error => {
+                    // Manejar el error
+                    console.error(error);
+                    Swal.fire("Error", "La imagen no se cargó correctamente al servidor", "error");
+                  });
                 Swal.fire("Actualizado", data.message + "!", "success");
                 setTimeout(function () {
                   location.reload();

@@ -8,12 +8,8 @@ import requests, uuid
 
 #from app import app
 from __main__ import app, cache
-from session import set_session_cookie_name
 CORS(app)
 
-@app.before_request
-def before_request():
-    set_session_cookie_name()
 
 @app.route('/layout')
 @cache.cached(timeout=60*60*24)
@@ -100,8 +96,10 @@ def editar_evento():
             _respuCL = RespuestasController()
             cod_cliente = session["cod_admin"]
             dataresp = _respuCL.listarRespuestas(cod_cliente)
-            dataevento = _eventCL.buscarEvento(session["idevento"])
-            print(dataevento)
+            cod_cuenta = session["datauser"]["CodCuenta"]
+            cod_cliente = session["cod_admin"]
+            dataevento = _eventCL.buscarEvento(session["idevento"], cod_cuenta, cod_cliente)
+            print(session["datauser"])
             print(dataresp)
             if dataevento["status"] == True:
                 return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], useradmin = session["user_admin"], dataresp = dataresp)

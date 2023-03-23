@@ -5,3 +5,8 @@ class DashboardController:
         response = DashboardResponse()
         data = response.responseListTableEvents(cod_cuenta, cod_cliente)
         return data
+
+    def cardsClientes(self, cod_cuenta, cod_cliente):
+        response = DashboardResponse()
+        data = response.responseCardsClientes(cod_cuenta, cod_cliente) 
+        return data

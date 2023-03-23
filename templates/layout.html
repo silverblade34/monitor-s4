@@ -1,13 +1,5 @@
 <!DOCTYPE html>
-<!--
-Item Name: Elisyam - Web App & Admin Dashboard Template
-Version: 1.5
-Author: SAEROX
-
-** A license must be purchased in order to legally use this template for your project **
--->
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -79,7 +71,7 @@ Author: SAEROX
                         <a href="/home" class="navbar-brand">
                             <div class="brand-image brand-big">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img src="{{url_for('static', filename='img/logos/'+useradmin+'.png')}}" alt="logo"
+                                <img style="height: 50px; width: 50px;"  src="{{url_for('static', filename='img/logos/'+useradmin+'.png')}}" alt="logo"
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
@@ -88,7 +80,7 @@ Author: SAEROX
                             </div>
                             <div class="brand-image brand-small">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img src="{{url_for('static', filename='img/logos/'+ useradmin +'.png')}}" alt="logo"
+                                <img style="height: 55px; width: 55px;" src="{{url_for('static', filename='img/logos/'+ useradmin +'.png')}}" alt="logo"
                                     class="logo-small">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
@@ -268,6 +260,7 @@ Author: SAEROX
     </div>
     </div>
     <script src="{{url_for('static', filename='js/vendors/base/jquery.min.js')}}"></script>
+
     <script src="{{url_for('static', filename='js/notificaciones.js')}}"></script>
     <!-- Carga de la API de Google Maps -->
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

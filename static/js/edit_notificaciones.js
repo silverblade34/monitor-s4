@@ -48,6 +48,7 @@ btnAddComentarios.forEach(btnAddComentario => {
             if (result.isConfirmed) {
                 const idevento = this.dataset.idEvento;
                 const usuario = this.dataset.usuarioComent;
+                const usuarioRol = this.dataset.usuarioRol;
                 const desc_estado = this.dataset.typeComent;
                 const comentario = document.getElementById("textarea-comentario").value;
                 const dataenv =
@@ -55,6 +56,7 @@ btnAddComentarios.forEach(btnAddComentario => {
                     "data": {
                         "id": idevento,
                         "desc_estado": desc_estado,
+                        "rol": usuarioRol,
                         "usuario": usuario,
                         "comentario": comentario
                     }

@@ -4,14 +4,9 @@ from src.eventos.infrastructure.controller import EventosController
 import requests, json, uuid
 #from app import app
 from __main__ import app
-from session import set_session_cookie_name
-
 
 CORS(app)
 
-@app.before_request
-def before_request():
-    set_session_cookie_name()
 
 @app.route('/listar_eventos', methods=['GET'])
 def listar_eventos():
@@ -26,7 +21,9 @@ def listar_eventos():
 def func_buscarEvento():
     _eventCL = EventosController()
     idevento = session["idevento"]
-    dataevento = _eventCL.buscarEvento(idevento)
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    cod_cliente = session["cod_admin"]
+    dataevento = _eventCL.buscarEvento(idevento, cod_cuenta, cod_cliente)
     print(json.dumps(dataevento))
     return dataevento["data"]
 

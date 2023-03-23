@@ -6,9 +6,9 @@ class EventosController:
         data = response.responseDataEventos(cod_cuenta, cod_cliente)
         return data
     
-    def buscarEvento(self, idevento):
+    def buscarEvento(self, idevento, cod_cuenta, cod_cliente):
         response = EventosResponse()
-        data = response.responseBuscarEvento(idevento)
+        data = response.responseBuscarEvento(idevento, cod_cuenta, cod_cliente)
         return data
     
     def agregarComentario(self, datacomentario):

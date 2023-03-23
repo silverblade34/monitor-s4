@@ -45,27 +45,35 @@
                                         <label for="" class="label-edit-not">Geocerca:</label>
                                         <input type="text" class="form-control input-edit-not" value="{{dataevento.geocerca}}" disabled>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mt-1">
                                         <label for="" class="label-edit-not">Fecha de recepción:</label>
                                         <input type="text" class="form-control input-edit-not" value="{{dataevento.fecha}}" disabled>
                                     </div>
-
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mt-1">
                                         <label for=""  class="label-edit-not">Prioridad:</label>
                                         <input type="text" class="form-control input-edit-not" value="{{dataevento.prioridad}}" disabled>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 mt-1">
                                         <label for="" class="label-edit-not">Cliente:</label>
                                         <input type="text" class="form-control input-edit-not" value="{{dataevento.origen}}" disabled>
+                                    </div>
+
+                                    <div class="col-lg-4 mt-1">
+                                        <label for=""  class="label-edit-not">Contacto 1({{dataevento.nombre_contacto1}}):</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.telefono_contacto1}}" disabled>
+                                    </div>
+                                    <div class="col-lg-4 mt-1">
+                                        <label for=""  class="label-edit-not">Contacto 2({{dataevento.nombre_contacto2}}):</label>
+                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.telefono_contacto2}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 pt-2">
                                     <h5><i class='bx bxs-comment-detail'></i> Registrar comentarios</h5>
                                 </div>
                                 <div class="col-lg-12 pt-2">
-                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En gestión</button>
-                                    <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
-                                    <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
+                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En gestión</button>
+                                    <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
+                                    <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
                                 </div>
                                 <div class="col-lg-12 pt-3">
                                     <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"

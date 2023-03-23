@@ -5,13 +5,9 @@ import requests, uuid
 
 #from app import app
 from __main__ import app
-from session import set_session_cookie_name
 
 CORS(app)
 
-@app.before_request
-def before_request():
-    set_session_cookie_name()
 
 @app.route('/login', methods=['GET', 'POST']) 
 # Si se dirige al enlace por medio de la redireccion de index() por ende por GET lo enviara al login.html
@@ -22,7 +18,6 @@ def login():
             if str(request.form['usuario']) != "" and str(request.form['password']) != "":
                 _credentialCL = CredentialController()
                 datauser = _credentialCL.validarUsuario(request.form['usuario'], request.form['password'])
-                print(datauser)
                 if datauser["status"] == True:
                     session["user"] = datauser["data"]["Usuario"]
                     session["datauser"] = datauser["data"]

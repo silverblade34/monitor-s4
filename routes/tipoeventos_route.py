@@ -4,14 +4,8 @@ from src.tipoEventos.infrastructure.controller import TipoEventosController
 import requests, uuid
 #from app import app
 from __main__ import app
-from session import set_session_cookie_name
-
 
 CORS(app)
-
-@app.before_request
-def before_request():
-    set_session_cookie_name()
 
 @app.route('/creartipo_eventos', methods=['POST'])
 def creartipo_eventos():
