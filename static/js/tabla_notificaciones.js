@@ -34,6 +34,7 @@ function actualizarTabla() {
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
                     } else if (datausuario.cod_cuenta != "0000" && datausuario.cod_cliente === "All") {
@@ -49,6 +50,7 @@ function actualizarTabla() {
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
                     } else if (datausuario.cod_cliente != "All") {
@@ -63,6 +65,7 @@ function actualizarTabla() {
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
                             '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
                     }

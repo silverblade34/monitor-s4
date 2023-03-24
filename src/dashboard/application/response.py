@@ -52,15 +52,21 @@ class DashboardResponse:
         _userCL = UsuariosController()
         datausers = _userCL.listarUsuarios(cod_cuenta)
         datareturn = {}
-        datareturn["toteventos"] = len(datanoti["data"])
+        toteventos = 0
+        if datanoti["data"]:
+            toteventos = len(datanoti["data"])
+        else:
+            toteventos = 0
+        datareturn["toteventos"] = toteventos
         totclientes = 0
         for users in datausers["data"][0]["clientes"]:
             if users["rol"] == "Administrador":
                 totclientes += 1
         datareturn["totclientes"]= totclientes
         placas_distintas = set()
-        for d in datanoti["data"]:
-            placas_distintas.add(d["placa"])
+        if datanoti["data"]:
+            for d in datanoti["data"]:
+                placas_distintas.add(d["placa"])
         datareturn["totplacas"]= len(placas_distintas)
         return datareturn
         
