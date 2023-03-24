@@ -43,6 +43,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/reporte_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/tabla_notificaciones.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/edit_evento.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/admin_turnos.css')}}">
     <!-- Datatables Responsive -->
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
 
@@ -202,15 +203,15 @@
                         </li>
                         {% if datauser.Rol == "Administrador" %}
                         <li
-                            class="{% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} active {% endif %}">
+                            class="{% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' or codp =='turnos' %} active {% endif %}">
                             <a href="#dropdown-tables" aria-expanded="false" data-toggle="collapse"><i
                                     class='bx bx-cog'></i><span>Administrar</span></a>
                             <ul id="dropdown-tables"
-                                class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show{% endif %} pt-0">
+                                class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' or codp =='turnos' %} show{% endif %} pt-0">
                                 <a href="#dropdown-mantenimientos" aria-expanded="false"
                                     data-toggle="collapse"><span>Mantenimientos</span></a>
                                 <ul id="dropdown-mantenimientos"
-                                    class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' %} show {% endif %} pt-0">
+                                    class="collapse list-unstyled {% if codp =='adm-u' or codp =='adm-tipevent' or codp =='resp-noti' or codp =='turnos' %} show {% endif %} pt-0">
                                     <li><a class="{% if codp =='adm-u' %} active {% endif %}"
                                             href="/listar_usuarios">Usuarios</a></li>
                                     {% if datauser.Usuario != "root" %}
@@ -220,6 +221,8 @@
                                     {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
                                     <li><a class="{% if codp =='resp-noti' %} active {% endif %}"
                                             href="/adminrespuestas_notificaciones">Respuestas predefinidas</a></li>
+                                    <li><a class="{% if codp =='turnos' %} active {% endif %}"
+                                                href="/admin_turnos">Turnos</a></li>
                                     {% endif %}
                                 </ul>
                             </ul>

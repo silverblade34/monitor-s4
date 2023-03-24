@@ -162,7 +162,7 @@ function actualizarTarjetas() {
 }
 
 // Llama a la función "actualizarTarjetas" cada 10 segundos
-setInterval(actualizarTarjetas, 10000);
+setInterval(actualizarTarjetas, 20000);
 
 // Actualiza la tabla cada 20 segundos
 setInterval(actualizarTablaCantsTipoEvents, 20000);

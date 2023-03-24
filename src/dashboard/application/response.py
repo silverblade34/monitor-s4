@@ -8,7 +8,6 @@ class DashboardResponse:
             "cod_cuenta": cod_cuenta,
             "cod_cliente": cod_cliente
         }
-        print(datapayload)
         url = f"{API_SERVER}/api/v1/home/clientes"
         resp = requests.post(url, data=json.dumps(datapayload))
         data = resp.json()
@@ -31,16 +30,17 @@ class DashboardResponse:
         events_confirmados = 0
         events_descartados = 0
         datareturn = {}
-        if len(data["data"]) > 0:
-            for events in data["data"]:
-                if events["descripcion_estado"] == "Sin Atender":
-                    events_sinatender += 1
-                elif events["descripcion_estado"] == "En Gestion":
-                    events_engestion += 1
-                elif events["descripcion_estado"] == "Confirmado":
-                    events_confirmados += 1
-                elif events["descripcion_estado"] == "Descartado":
-                    events_descartados += 1
+        if data["data"]:
+            if len(data["data"]) > 0:
+                for events in data["data"]:
+                    if events["descripcion_estado"] == "Sin Atender":
+                        events_sinatender += 1
+                    elif events["descripcion_estado"] == "En Gestion":
+                        events_engestion += 1
+                    elif events["descripcion_estado"] == "Confirmado":
+                        events_confirmados += 1
+                    elif events["descripcion_estado"] == "Descartado":
+                        events_descartados += 1
         datareturn["events_sinatender"] = events_sinatender
         datareturn["events_engestion"] = events_engestion
         datareturn["events_confirmados"] = events_confirmados

@@ -76,11 +76,12 @@ class UsuariosResponse:
         contrasena = hash_object.hexdigest()
         payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, 
                    "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
-                   "nombre_contacto1": datauser["namecontacto1"], "telefono_contacto1": datauser["contacto1"], "nombre_contacto2": datauser["namecontacto2"], "telefono_contacto2": datauser["contacto2"],
+                   "nombre_contacto1": datauser["namecontacto1"], "telefono_contacto1": datauser["contacto1"], "descripcion_turno": datauser["turno"],
+                    "nombre_contacto2": datauser["namecontacto2"], "telefono_contacto2": datauser["contacto2"],
         "empresa": datauser["nombre_cliente"].upper(), "rol": datauser["nombre_rol"], "estado" : True}
+        print(json.dumps(payload))
         resp = requests.post(f'{API_SERVER}/api/v1/createClient', data= json.dumps(payload), headers= hed)
         data = resp.json()
-        print(data)
         return data
     
     def responseBuscarUsuarioCliente(self, datacuentas, idcuenta, codcliente):

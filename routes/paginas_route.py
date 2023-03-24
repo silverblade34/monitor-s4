@@ -4,6 +4,7 @@ from src.usuarios.infrastructure.controller import UsuariosController
 from src.eventos.infrastructure.controller import EventosController
 from src.tipoEventos.infrastructure.controller import TipoEventosController
 from src.respuestas.infrastructure.controller import RespuestasController
+from src.turnos.infrastructure.controller import TurnosController
 import requests, uuid
 
 #from app import app
@@ -85,7 +86,7 @@ def tipo_evento():
             print(mensaje_error)
             return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('notificaciones'))
+        return redirect(url_for('login'))
 
 @app.route('/editar_evento', methods=['GET'])
 def editar_evento():
@@ -108,7 +109,7 @@ def editar_evento():
             print(mensaje_error)
             return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('notificaciones'))
+        return redirect(url_for('login'))
     
 @app.route('/reporte_notificaciones', methods=['GET'])
 def reporte_notificaciones():
@@ -129,7 +130,7 @@ def reporte_notificaciones():
             print(mensaje_error)
             return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('notificaciones'))
+        return redirect(url_for('login'))
     
 @app.route('/adminrespuestas_notificaciones', methods=['GET'])
 def adminrespuestas_notificaciones():
@@ -144,4 +145,19 @@ def adminrespuestas_notificaciones():
             print(mensaje_error)
             return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
     else:
-        return redirect(url_for('notificaciones'))
+        return redirect(url_for('login'))
+    
+@app.route('/admin_turnos', methods=['GET'])
+def admin_turnos():
+    if 'user' in session:
+        try:
+            _turnosCL = TurnosController()
+            data = _turnosCL.listarTurnosOperarios(session["cod_admin"])
+            turnos = data["data"][0]
+            return render_template("admin_turnos.html", datauser = session["datauser"], dataturnos = turnos, codp = "turnos", useradmin = session["user_admin"])
+        except requests.exceptions.RequestException as e:
+            mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."
+            print(mensaje_error)
+            return render_template('notificaciones.html', datauser = session["datauser"], msgerror = mensaje_error)
+    else:
+        return redirect(url_for('login'))

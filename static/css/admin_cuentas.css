@@ -481,3 +481,7 @@
 .acordeon-datosEmpresa.cliente.abierto{
 	max-height: 400px; 
 }
+
+.content-turno{
+	display: none;
+}

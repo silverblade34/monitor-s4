@@ -11,7 +11,6 @@ app.config['SESSION_PERMANENT'] = False
 app.config['SESSION_USE_SIGNER'] = True
 app.config['SESSION_FILE_DIR'] = './.flask_session/'
 app.config['SECRET_KEY'] = 'super-secret-key'
-
 # Inicialización de la extensión
 Session(app)
 
@@ -27,6 +26,7 @@ import routes.notificaciones_route
 import routes.usuarios_routes
 import routes.respuestasnoti_route
 import routes.dashboard_route
+import routes.turnos_route
 
 # Importar la función de manejo de errores 404 de la ruta de páginas
 from routes.paginas_route import pagina_no_encontrada

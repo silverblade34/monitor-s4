@@ -1,6 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 from flask_cors import CORS
 from src.usuarios.infrastructure.controller import UsuariosController
+from src.turnos.infrastructure.controller import TurnosController
 import requests, uuid
 #from app import app
 from __main__ import app
@@ -91,8 +92,13 @@ def eliminar_cuenta_cliente():
 @app.route('/mostrar_idcuenta', methods=['GET'])
 def mostrar_idcuenta():
     _userCL = UsuariosController()
+    _turnosCL = TurnosController()
     data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
+    dataturnos = _turnosCL.listarTurnosOperarios(session["cod_admin"])
+    turnos = dataturnos["data"][0]
     datacuenta = data["data"][0]
+    datacuenta["turnos"] = turnos
+    print(datacuenta)
     return datacuenta
 
 @app.route('/validarUsuarioUnico', methods=['GET'])

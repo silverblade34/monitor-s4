@@ -335,7 +335,7 @@ editarClientes2.forEach(editarCliente2 => {
                 })
                   .then(data => {
                     Swal.fire("Actualizado", "La imagen se cargo correctamente" + "!", "success");
-                   })
+                  })
                   .catch(error => {
                     // Manejar el error
                     console.error(error);

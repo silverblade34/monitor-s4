@@ -1,3 +1,12 @@
+function elegirTurnoOperador(){
+  const selectRol = document.getElementById("select-rol");
+  const selectTurnos = document.getElementById("select-turnos").parentNode;
+  if (selectRol.value === "Operador") {
+    selectTurnos.style.display = "block";
+  } else {
+    selectTurnos.style.display = "none";
+  }
+}
 
 // ----------------------------------Modal Crear usuario por cliente SweetAlert2-----------------------------------
 
@@ -14,20 +23,33 @@ crearUsuarios2.addEventListener("click", function () {
       return response.json();
     })
     .then(data => {
+      console.log(data)
       const nombre_cliente = this.dataset.rpEmpresa;
       const ruc = this.dataset.rpRuc;
       const sigla = this.dataset.rpSigla;
       const idcuenta = data.ID
+      const optionsturnos = data.turnos.turnos.map(item => {
+        return `<option value="${item.descripcion}">${item.descripcion}</option>`
+      })
+        .join('');
+      console.log(optionsturnos)
       Swal.fire({
         title: "Crear usuario",
         html: `
             <form class="form-crearcuenta">
               <label class="form-label">Rol</label>
-              <select class="form-select" id="select-rol" aria-label="Default select example">
+              <select class="form-select" id="select-rol" onchange="elegirTurnoOperador()" aria-label="Default select example">
               <option selected>Seleccione un rol</option>
               <option value="Supervisor">Supervisor</option>
               <option value="Operador">Operador</option>
               </select>
+              <div class="content-turno">
+              <label class="form-label">Turno</label>
+              <select class="form-select" id="select-turnos" aria-label="Default select example">
+              <option selected>Asignar un turno</option>
+              ${optionsturnos}
+              </select>
+              </div>
               <label class="form-label">Usuario<span>(mínimo 3 caracteres)</span></label>
               <input type="text" id="usuario_cuenta" oninput="validarUsuarioUnico()" class = "form-control input-text" placeholder="Usuario de admin de cuenta">
               <span id="usuario_mensaje" class="usuario-validation-msg"></span>
@@ -52,6 +74,7 @@ crearUsuarios2.addEventListener("click", function () {
           const usuario = document.getElementById("usuario_cuenta").value;
           const password = document.getElementById("password").value;
           const passwordInput2 = document.getElementById("password2").value;
+          const turno = document.getElementById("select-turnos").value;
           const mensajecontent = document.getElementById("usuario_mensaje").textContent;
           const nombre_rol = document.getElementById("select-rol").value;
           return {
@@ -66,7 +89,7 @@ crearUsuarios2.addEventListener("click", function () {
               ruc: ruc,
               nombre_rol: nombre_rol,
               nombre_cliente: nombre_cliente,
-
+              turno: turno,
               namecontacto1: "",
               contacto1: "",
               namecontacto2: "",

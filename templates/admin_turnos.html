@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="page-header">
+            <div class="d-flex align-items-center">
+                <h2 class="page-header-title">Administrar Turnos</h2>
+                <div>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="db-default.html"><i class='bx bx-bell'></i></a></li>
+                        <li class="breadcrumb-item active">Administrar Turnos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Page Header -->
+    <div class="row">
+        <div class="col-xl-12">
+            <!-- Sorting -->
+            <div class="widget has-shadow pt-4 pb-4">
+                <div id="widget-body" class="widget-body">
+                    <div class="table-responsive">
+                        <button class="btn btn-success mb-3" id="crear-turnos"
+                            data-id-turnos="{{dataturnos._id}}">Crear nuevo</button>
+                        <table id="table-admin-turnos" class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Codigo</th>
+                                    <th>Descripción</th>
+                                    <th>Desde</th>
+                                    <th>Hasta</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if dataturnos.turnos %}
+                                    {% for turnos in dataturnos.turnos %}
+                                    <tr>
+                                        <td>{{turnos.cod_turno}}</td>
+                                        <td>{{turnos.descripcion}}</td>
+                                        <td>{{turnos.desde}}</td>
+                                        <td>{{turnos.hasta}}</td>
+                                        <td class="actions">
+                                            <a href="#" class="editarTurnos" data-cod-turno="{{turnos.cod_turno}}" data-id-turno="{{dataturnos._id}}"><i
+                                                    class="bx bx-edit edit"></i></a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- End Sorting -->
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" defer></script>
+<script src="{{url_for('static', filename='js/admin_turnos.js')}}" defer></script>
+{% endblock %}

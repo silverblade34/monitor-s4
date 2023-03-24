@@ -1,0 +1,22 @@
+#table-admin-turnos thead{
+    background-color: #c46868;
+    color: #ffff;
+}
+
+#table-admin-turnos td{
+    padding: 5px 5px;
+    text-align: center;
+}
+
+#table-admin-turnos .actions i{
+    font-size: 23px;
+    border-radius: 50%;
+    padding: 10px;
+    color: rgb(66, 66, 66);
+}
+
+#table-admin-turnos .actions i:hover{
+    background-color: #5d5386;
+    transition: all 0.4s;
+    color: #ffff;
+}
