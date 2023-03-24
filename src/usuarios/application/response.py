@@ -74,6 +74,7 @@ class UsuariosResponse:
         hed = {"Content-Type": "application/json"}
         hash_object = hashlib.md5(datauser["contrasena"].encode())
         contrasena = hash_object.hexdigest()
+        print(datauser)
         payload = {"id": datauser["idcuenta"], "cod_cliente" : datauser["cod_cliente"],"cod_cuenta": cod_cuenta ,"contrasena" : contrasena, 
                    "sigla" : datauser["sigla"].upper() ,"usuario" : datauser["usuario"], "ruc" : datauser["ruc"],
                    "nombre_contacto1": datauser["namecontacto1"], "telefono_contacto1": datauser["contacto1"], "descripcion_turno": datauser["turno"],
