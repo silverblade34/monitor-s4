@@ -95,7 +95,10 @@ def mostrar_idcuenta():
     _turnosCL = TurnosController()
     data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
     dataturnos = _turnosCL.listarTurnosOperarios(session["cod_admin"])
-    turnos = dataturnos["data"][0]
+    if dataturnos["data"]:
+        turnos = dataturnos["data"][0]
+    else:
+        turnos = []
     datacuenta = data["data"][0]
     datacuenta["turnos"] = turnos
     print(datacuenta)
