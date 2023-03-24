@@ -16,14 +16,9 @@
         </div>
     </div>
     <div class="container-dashboard">
-        <div class="cont-table">
-            <table class="container-table-eventos">
-
-            </table>
-        </div>
         <ul class="box-info mb-3 mt-3">
-            <li class="border">
-                <i class='bx bxs-group'></i>
+            <li class="">
+                <i class='bx bxs-bell-minus'></i>
                 <span class="text">
                     <h4>Eventos sin atender</h4>
                     <p class="cards-cant" id="card-cant-events-sinatender"></p>
@@ -31,8 +26,8 @@
                     </div>
                 </span>
             </li>
-            <li class="border">
-                <i class='bx bxs-truck'></i>
+            <li class="">
+                <i class='bx bxs-user-voice' ></i>
                 <span class="text">
                     <h4>Eventos en Gestión</h4>
                     <p class="cards-cant" id="card-cant-events-engestion"></p>
@@ -40,8 +35,8 @@
                     </div>
                 </span>
             </li>
-            <li class="border">
-                <i class='bx bxs-bell'></i>
+            <li class="">
+                <i class='bx bxs-user-check'></i>
                 <span class="text">
                     <h4>Eventos confirmados</h4>
                     <p class="cards-cant" id="card-cant-events-confirmados"></p>
@@ -49,8 +44,8 @@
                     </div>
                 </span>
             </li>
-            <li class="border">
-                <i class='bx bxs-truck'></i>
+            <li class="">
+                <i class='bx bx-no-entry'></i>
                 <span class="text">
                     <h4>Eventos descartados</h4>
                     <p class="cards-cant" id="card-cant-events-descartados"></p>
@@ -60,27 +55,15 @@
             </li>
         </ul>
         <div class="row gap-3">
-            <div class="col-lg-9">
+            <div class="col-lg-6 mt-3">
                 <div class="container-table-eventos">
-                    <!-- Horizontal Bar 01 -->
-                    <!-- <div class="widget has-shadow widget-cant-not-vehiculos">
-                        <div class="widget-header bordered no-actions d-flex align-items-center">
-                            <h4>Notificaciones atendidas por operador</h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="chart">
-                                <canvas id="mychart-horizontal" class="mychart-horizontal-operadores"></canvas>
-                            </div>
-                        </div>
-                    </div> -->
-                    <!-- End Horizontal Bar 01 -->
                     <div class="cont-table">
                         <table id="container-table-eventos" class="table align-items-center mb-0">
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-3 mt-3">
                 <div class="widget widget-06 has-shadow widget-cant-not-vehiculos">
                     <!-- Begin Widget Header -->
                     <div class="widget-header bordered d-flex align-items-center">
@@ -101,9 +84,30 @@
                     <!-- End Widget Body -->
                 </div>
             </div>
+            <div class="col-lg-3 mt-3">
+                <div class="widget widget-06 has-shadow widget-cant-not-vehiculos">
+                    <!-- Begin Widget Header -->
+                    <div class="widget-header bordered d-flex align-items-center">
+                        <h2>Not. Atendidas por operador</h2>
+                        <div class="widget-options">
+                        </div>
+                    </div>
+                    <!-- End Widget Header -->
+                    <!-- Begin Widget Body -->
+                    <div class="widget-body p-0">
+                        <div id="list-group" class="widget-scroll" style="max-height:490px;">
+                            <ul id="lista-operadores" class="reviews list-group w-100">
+                                <!-- 01 -->
+                            </ul>
+                        </div>
+                        <!-- End List -->
+                    </div>
+                    <!-- End Widget Body -->
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<script src="{{url_for('static', filename='js/dashboard.js')}}" defer></script>
+<script src="{{url_for('static', filename='js/dashboard_clientes.js')}}" defer></script>
 <script src="{{url_for('static', filename='js/charts/charts-bars-horizontal.js')}}" defer></script>
 {% endblock %}

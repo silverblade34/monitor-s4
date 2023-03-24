@@ -19,37 +19,37 @@
     <div class="">
       <!-- Cards -->
       <ul class="box-info mb-3">
-        <li class="border">
+        <li class="">
           <i class='bx bxs-group'></i>
           <span class="text">
             <h4>Total clientes</h4>
-            <p class="cards-cant">12</p>
+            <p class="cards-cant" id="card-cant-clientes"></p>
             <div>
             </div>
           </span>
         </li>
-        <li class="border">
+        <li class="">
           <i class='bx bxs-bell'></i>
           <span class="text">
             <h4>Total eventos</h4>
-            <p class="cards-cant">1453</p>
+            <p class="cards-cant" id="card-cant-notifications"></p>
             <div>
             </div>
           </span>
         </li>
-        <li class="border">
+        <li class="">
           <i class='bx bxs-truck'></i>
           <span class="text">
             <h4>Total vehiculos</h4>
-            <p class="cards-cant">85</p>
+            <p class="cards-cant" id="card-cant-vehiculos"></p>
             <div>
             </div>
           </span>
         </li>
-        <li class="border">
+        <li class="">
           <i class='bx bxs-truck'></i>
           <span class="text">
-            <h4>Total vehiculos</h4>
+            <h4>En beta</h4>
             <p class="cards-cant">85</p>
             <div>
             </div>
@@ -96,7 +96,7 @@
     </div>
   </div>
 </div>
-
+<script src="{{url_for('static', filename='js/dashboard_cuentas.js')}}" defer></script>
 <script src="{{url_for('static', filename='js/charts/charts-bars-horizontal.js')}}" defer></script>
 <script src="{{url_for('static', filename='js/charts/charts-bars.js')}}" defer></script>
 <script src="{{url_for('static', filename='js/charts/charts-lines.js')}}" defer></script>

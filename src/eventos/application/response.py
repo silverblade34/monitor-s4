@@ -24,6 +24,26 @@ class EventosResponse:
             return data["data"]
         else:
             return []
+        
+    def responseDataReportes(self, cod_cuenta, cod_cliente):
+        dataEnviar = {
+            "cod_cuenta": cod_cuenta,
+            "cod_cliente": cod_cliente
+        }
+        resp = requests.post(
+            f'{API_SERVER}/api/v1/notifications/Report', data=json.dumps(dataEnviar))
+        data = resp.json()
+        if data["data"] is not None:
+            for notificaciones in data["data"]:
+                notificaciones["fechahora"] = notificaciones["fecha"] + \
+                    " " + notificaciones["hora"]
+                if len(notificaciones["list_comentarios"]) > 0:
+                    notificaciones["comentario"] = notificaciones["list_comentarios"][-1]["comentario"]
+                else:
+                    notificaciones["comentario"] = ""
+            return data["data"]
+        else:
+            return []
 
     def responseBuscarEvento(self, idevento, cod_cuenta, cod_cliente):
         dataEnviar = {
@@ -52,7 +72,7 @@ class EventosResponse:
         return data
 
     def responseDataReporteFiltros(self, cod_cuenta, cod_cliente, fecha_desde, fecha_hasta, placa, cod_evento, descripcion_estado):
-        dataNotificaciones = self.responseDataEventos(cod_cuenta, cod_cliente)
+        dataNotificaciones = self.responseDataReportes(cod_cuenta, cod_cliente)
         parametros_filtrar = {
             "cod_cuenta": cod_cuenta,
             "cod_cliente": cod_cliente,

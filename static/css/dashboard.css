@@ -11,9 +11,7 @@
     display: flex;
     align-items: center;
     grid-gap: 24px;
-    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
-    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
-    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
+    box-shadow: 0 1px 15px 1px rgba(41, 31, 88, 0.08);
 }
 
 #content .container-dashboard .box-info li .cards-cant {
@@ -32,49 +30,25 @@
 }
 
 #content .container-dashboard .box-info li:nth-child(1) .bx {
-    background: var(--light-blue);
-    color: var(--blue);
+    background: var(--blue);
+    color: var(--light-blue);
 }
 
 #content .container-dashboard .box-info li:nth-child(2) .bx {
-    background: var(--light-yellow);
-    color: var(--yellow);
+    background: var(--yellow);
+    color: var(--light-yellow);
 }
 
 #content .container-dashboard .box-info li:nth-child(3) .bx {
-    background: var(--light-orange);
-    color: var(--orange);
+    background: var(--orange);
+    color: var(--light-orange);
 }
 
 #content .container-dashboard .box-info li:nth-child(4) .bx {
-    background: var(--light-blue);
-    color: var(--blue);
+    background: var(--red);
+    color: var(--light-red);
 }
 
-#content .container-dashboard .box-info li:nth-child(5) .bx {
-    background: var(--light-yellow);
-    color: var(--yellow);
-}
-
-#content .container-dashboard .box-info li:nth-child(6) .bx {
-    background: var(--light-orange);
-    color: var(--orange);
-}
-
-#content .container-dashboard .box-info li:nth-child(7) .bx {
-    background: var(--light-blue);
-    color: var(--blue);
-}
-
-#content .container-dashboard .box-info li:nth-child(8) .bx {
-    background: var(--light-yellow);
-    color: var(--yellow);
-}
-
-#content .container-dashboard .box-info li:nth-child(9) .bx {
-    background: var(--light-orange);
-    color: var(--orange);
-}
 
 #content .container-dashboard .box-info li .text h3 {
     font-size: 24px;
@@ -98,7 +72,7 @@
 }
 
 
-/* Dashboard clientes */
+/* ---------TABLA NOTIFICACIONES POR EVENTOS----------- */
 .container-dashboard .container-table-eventos {
     font-size: 12px;
     width: 100%;
@@ -138,10 +112,9 @@ table tr:first-child td {
 
 .container-dashboard .cont-table {
     overflow: hidden;
-    border-radius: 2px;
-    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
-    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
-    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
+    padding-bottom: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
 }
 
 .container-dashboard .container-table-eventos th {
@@ -154,27 +127,50 @@ table tr:first-child td {
     border-bottom: 1px solid #dddddd;
 }
 
-.widget-cant-not-vehiculos{
-    border-radius: 0;
+/* ---------TABLA NOTIFICACIONES POR EVENTOS----------- */
+
+
+/* ---------CARDS NOTIFICACIONES POR OPERADOR Y VEHICULO----------- */
+.widget-cant-not-vehiculos {
+    border-radius: 10px;
+    overflow: hidden;
     height: 100%;
-    box-shadow: 0px 0px 10px -4px rgba(145, 145, 145, 0.7);
-    -webkit-box-shadow: 0px 0px 10px -4px rgba(105, 105, 105, 0.7);
-    -moz-box-shadow: 0px 0px 10px -4px rgba(155, 155, 155, 0.7);
+    box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
 }
 
-.mychart-horizontal-operadores{
-    max-height: 350px;
-    padding: 0 30px;
-}
-
-.media-right span{
-    font-size: 30px !important;
+.media-right span {
+    color: #262b77;
+    font-size: 21px !important;
     font-weight: 800;
 }
 
-.media-right .like{
+.media-right .like {
     display: flex !important;
     align-items: center;
+}
+
+/* ---------CARDS NOTIFICACIONES POR OPERADOR Y VEHICULO----------- */
+@media screen and (min-width: 1510px) {
+    /* Reglas de estilo aquí */
+    .page-header {
+        padding: 0 15px 10px 15px;
+    }
+
+    .container-dashboard{
+        margin-bottom: 40px;
+    }
+
+}
+
+@media screen and (max-width: 1500px) {
+    .page-header {
+        padding: 0 15px 10px 15px;
+    }
+
+    .container-dashboard{
+        margin-bottom: 40px;
+    }
+
 }
 
 @media screen and (max-width: 906px) {
@@ -184,5 +180,9 @@ table tr:first-child td {
 
     .container-charts {
         grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        padding: 0 15px 10px 15px;
     }
 }

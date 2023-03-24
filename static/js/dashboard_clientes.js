@@ -7,14 +7,12 @@ function actualizarTablaCantsTipoEvents() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             const eventos = data.data_eventos;
             var cant = 0
             const cantevents = Object.keys(eventos).map(key => {
                 cant = cant + eventos[key]
                 return cant
             })
-            console.log("CANT: " + cant)
             // Crea una fila por cada elemento del objeto "data_eventos"
             const filas = Object.keys(eventos).map(key => {
                 const porce = (eventos[key] / cant) * 100
@@ -63,14 +61,12 @@ function actualizarContCantsVehiculos() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             const vehiculos = data.data_vehiculos;
             var cant = 0
             const cantevents = Object.keys(vehiculos).map(key => {
                 cant = cant + vehiculos[key]
                 return cant
             })
-            console.log("CANT: " + cant)
             // Crea una fila por cada elemento del objeto "data_eventos"
             const filas = Object.keys(vehiculos).map(key => {
                 const porce = (vehiculos[key] / cant) * 100
@@ -88,7 +84,6 @@ function actualizarContCantsVehiculos() {
                     <div class="media-right pr-3 align-self-center">
                         <div class="like text-center">
                             <span>${vehiculos[key]}</span>
-                            <i class="la la-bell animated infinite swing"></i>
                         </div>
                     </div>
                     </div>
@@ -103,6 +98,52 @@ function actualizarContCantsVehiculos() {
         });
 }
 
+
+const cont_operadores_cant = document.getElementById("lista-operadores")
+
+
+// Función que realiza una petición GET al endpoint y actualiza la tabla con los datos
+function actualizarContCantsOperadores() {
+    fetch(`/tipoevento_home`, {
+        method: "GET",
+    })
+        .then(response => response.json())
+        .then(data => {
+            const operadores = data.data_operadores;
+            var cant = 0
+            const cantevents = Object.keys(operadores).map(key => {
+                cant = cant + operadores[key]
+                return cant
+            })
+            // Crea una fila por cada elemento del objeto "data_eventos"
+            const filas = Object.keys(operadores).map(key => {
+                return `<li class="list-group-item">
+                    <div class="media">
+                    <div class="media-left align-self-start">
+                    <img src="../static/img/logo_operador.webp" alt="camion" class="user-img rounded-circle">
+                    </div>
+                    <div class="media-body align-self-center">
+                        <div class="username">
+                            <h4>${key}</h4>
+                        </div>
+                    </div>
+                    <div class="media-right pr-3 align-self-center">
+                        <div class="like text-center">
+                            <span>${operadores[key]}</span>
+                        </div>
+                    </div>
+                    </div>
+                </li>
+                `;
+            });
+
+            // Actualiza el contenido de la tabla
+            cont_operadores_cant.innerHTML = `
+                ${filas.join('')}
+      `;
+        });
+}
+
 // INSERTAR INFORMACION EN LAS CARDS
 
 // Define una función para actualizar los valores de las tarjetas
@@ -112,7 +153,6 @@ function actualizarTarjetas() {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             // Actualiza los valores de las tarjetas con los datos recibidos
             document.getElementById("card-cant-events-sinatender").textContent = data.events_sinatender;
             document.getElementById("card-cant-events-engestion").textContent = data.events_engestion;
@@ -127,8 +167,10 @@ setInterval(actualizarTarjetas, 10000);
 // Actualiza la tabla cada 20 segundos
 setInterval(actualizarTablaCantsTipoEvents, 20000);
 setInterval(actualizarContCantsVehiculos, 20000);
+setInterval(actualizarContCantsOperadores, 20000);
 $(document).ready(function () {
     actualizarContCantsVehiculos();
     actualizarTablaCantsTipoEvents();
+    actualizarContCantsOperadores();
     actualizarTarjetas();
 });

@@ -10,3 +10,8 @@ class DashboardController:
         response = DashboardResponse()
         data = response.responseCardsClientes(cod_cuenta, cod_cliente) 
         return data
+
+    def cardsCuentas(self, cod_cuenta, cod_cliente):
+        response = DashboardResponse()
+        data = response.responseCardsCuentas(cod_cuenta, cod_cliente) 
+        return data

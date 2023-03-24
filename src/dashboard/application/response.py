@@ -1,5 +1,6 @@
 import requests, json
 from config import API_SERVER
+from src.usuarios.infrastructure.controller import UsuariosController
 
 class DashboardResponse:
     def responseListTableEvents(self, cod_cuenta, cod_cliente):
@@ -13,7 +14,7 @@ class DashboardResponse:
         data = resp.json()
         return data
     
-    def responseCardsClientes(self, cod_cuenta, cod_cliente):
+    def consultaNotifications(self, cod_cuenta, cod_cliente):
         dataEnviar = {
             "cod_cuenta": cod_cuenta,
             "cod_cliente": cod_cliente
@@ -21,6 +22,10 @@ class DashboardResponse:
         resp = requests.post(
             f'{API_SERVER}/api/v1/notifications/Account', data=json.dumps(dataEnviar))
         data = resp.json()
+        return data
+    
+    def responseCardsClientes(self, cod_cuenta, cod_cliente):
+        data = self.consultaNotifications(cod_cuenta, cod_cliente)
         events_sinatender = 0
         events_engestion = 0
         events_confirmados = 0
@@ -41,4 +46,22 @@ class DashboardResponse:
         datareturn["events_confirmados"] = events_confirmados
         datareturn["events_descartados"] = events_descartados
         return datareturn
+    
+    def responseCardsCuentas(self, cod_cuenta, cod_cliente):
+        datanoti = self.consultaNotifications(cod_cuenta, cod_cliente)
+        _userCL = UsuariosController()
+        datausers = _userCL.listarUsuarios(cod_cuenta)
+        datareturn = {}
+        datareturn["toteventos"] = len(datanoti["data"])
+        totclientes = 0
+        for users in datausers["data"][0]["clientes"]:
+            if users["rol"] == "Administrador":
+                totclientes += 1
+        datareturn["totclientes"]= totclientes
+        placas_distintas = set()
+        for d in datanoti["data"]:
+            placas_distintas.add(d["placa"])
+        datareturn["totplacas"]= len(placas_distintas)
+        return datareturn
+        
         

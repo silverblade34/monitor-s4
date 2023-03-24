@@ -25,3 +25,11 @@ def cards_clientes():
     cod_cliente = session["cod_admin"]
     data = _dashCL.cardsClientes(cod_cuenta, cod_cliente)
     return data
+
+@app.route('/cards_cuentas', methods=['GET']) 
+def cards_cuentas():
+    _dashCL = DashboardController()
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    cod_cliente = session["datauser"]["CodCliente"]
+    data = _dashCL.cardsCuentas(cod_cuenta, cod_cliente)
+    return data
