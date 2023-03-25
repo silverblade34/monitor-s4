@@ -100,8 +100,6 @@ def editar_evento():
             cod_cuenta = session["datauser"]["CodCuenta"]
             cod_cliente = session["cod_admin"]
             dataevento = _eventCL.buscarEvento(session["idevento"], cod_cuenta, cod_cliente)
-            print(session["datauser"])
-            print(dataresp)
             if dataevento["status"] == True:
                 return render_template("edit_notificaciones.html", id = session["idevento"], dataevento = dataevento["data"], datauser = session["datauser"], useradmin = session["user_admin"], dataresp = dataresp)
         except requests.exceptions.RequestException as e:
@@ -123,7 +121,6 @@ def reporte_notificaciones():
             cod_cuenta = session["datauser"]["CodCuenta"]
             cod_cliente = session["cod_admin"]
             datatipoevento = _eventTypeCL.listarTipoEventos(cod_cuenta, cod_cliente)
-            print(datatipoevento)
             return render_template("reporte_notificaciones.html", datauser = session["datauser"], datanoti = datanoti, codp = "report-noti", datatipoevento= datatipoevento, useradmin = session["user_admin"])
         except requests.exceptions.RequestException as e:
             mensaje_error = "Hubo un error al conectarse con la API. Por favor, inténtelo de nuevo más tarde."

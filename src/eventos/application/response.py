@@ -90,8 +90,6 @@ class EventosResponse:
         def filtro(diccionario):
             fecha_desde = ""
             fecha_hasta = ""
-            print(diccionario)
-            print(parametros_filtrar)
             if parametros_filtrar["fecha_desde"]:
                 fecha_desde = datetime.strptime(
                     parametros_filtrar["fecha_desde"], "%Y-%m-%d")

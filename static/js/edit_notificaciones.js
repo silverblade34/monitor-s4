@@ -94,3 +94,6 @@ btnAddComentarios.forEach(btnAddComentario => {
         });
     });
 });
+
+
+// -----------------TABLA COMENTARIOS------------------

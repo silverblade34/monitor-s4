@@ -2,7 +2,7 @@
 {% block body %}
 <div class="container-fluid">
     <div class="row">
-        <div class="page-header">
+        <div class="page-header edit-noti">
             <div class="d-flex align-items-center">
                 <h2 class="page-header-title">Editar notificación</h2>
                 <div>
@@ -18,62 +18,83 @@
         <div class="col-xl-12">
             <!-- Sorting -->
             <div class="widget has-shadow">
-                <div class="widget-header bordered no-actions d-flex align-items-center justify-content-between">
-                    <a class="btn btn-success" href="/notificaciones"><i class='bx bx-chevron-left'></i>Regresar</a>
+                <div
+                    class="widget-header edit-noti bordered no-actions d-flex align-items-center justify-content-between">
+                    <a class="btn btn-success btn-regresar" href="/notificaciones"><i
+                            class='bx bx-chevron-left'></i><span>Regresar</span></a>
                     <h4>Información general de la notificación</h4>
                 </div>
-                <div id="widget-body" class="widget-body">
+                <div id="widget-body" class="widget-body edit-evento">
                     <div>
                         <p>Localización Geocerca</p>
                     </div>
                     <div id="datos-evento" class="datos-evento row">
-                        <div id="map" class="mapa-evento col-lg-6">
+                        <div id="map" class="mapa-evento col-lg-6 col-md-12">
 
                         </div>
-                        <form action="" id="formulario-datos" class="col-lg-6">
+                        <form action="" id="formulario-datos" class="col-lg-6 col-md-12">
                             <div class="row">
                                 <div class="container-datos col-lg-12 row">
                                     <div class="col-lg-4">
-                                        <label for=""  class="label-edit-not">Código del Evento:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.cod_evento}}" disabled>
+                                        <label for="" class="label-edit-not">Código del Evento:</label>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.cod_evento}}" disabled>
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="" class="label-edit-not">Placa:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.placa}}" disabled>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.placa}}" disabled>
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="" class="label-edit-not">Geocerca:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.geocerca}}" disabled>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.geocerca}}" disabled>
                                     </div>
                                     <div class="col-lg-4 mt-1">
                                         <label for="" class="label-edit-not">Fecha de recepción:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.fecha}}" disabled>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.fecha}}" disabled>
                                     </div>
                                     <div class="col-lg-4 mt-1">
-                                        <label for=""  class="label-edit-not">Prioridad:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.prioridad}}" disabled>
+                                        <label for="" class="label-edit-not">Prioridad:</label>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.prioridad}}" disabled>
                                     </div>
                                     <div class="col-lg-4 mt-1">
                                         <label for="" class="label-edit-not">Cliente:</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.origen}}" disabled>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.origen}}" disabled>
                                     </div>
 
                                     <div class="col-lg-4 mt-1">
-                                        <label for=""  class="label-edit-not">Contacto 1({{dataevento.nombre_contacto1}}):</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.telefono_contacto1}}" disabled>
+                                        <label for="" class="label-edit-not">Contacto
+                                            1({{dataevento.nombre_contacto1}}):</label>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.telefono_contacto1}}" disabled>
                                     </div>
                                     <div class="col-lg-4 mt-1">
-                                        <label for=""  class="label-edit-not">Contacto 2({{dataevento.nombre_contacto2}}):</label>
-                                        <input type="text" class="form-control input-edit-not" value="{{dataevento.telefono_contacto2}}" disabled>
+                                        <label for="" class="label-edit-not">Contacto
+                                            2({{dataevento.nombre_contacto2}}):</label>
+                                        <input type="text" class="form-control input-edit-not"
+                                            value="{{dataevento.telefono_contacto2}}" disabled>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 pt-2">
                                     <h5><i class='bx bxs-comment-detail'></i> Registrar comentarios</h5>
                                 </div>
                                 <div class="col-lg-12 pt-2">
-                                    <button type="button" class="btn-comentario btn btn-primary" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En gestión</button>
-                                    <button type="button" class="btn-comentario btn btn-success" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Confirmado">Confirmado</button>
-                                    <button type="button" class="btn-comentario btn btn-warning" data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}" data-usuario-coment="{{datauser.Usuario}}" data-type-coment="Descartado">Descartado</button>
+                                    <button type="button" class="btn-comentario btn-ult btn btn-primary"
+                                        data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}"
+                                        data-usuario-coment="{{datauser.Usuario}}" data-type-coment="En Gestion">En
+                                        gestión</button>
+                                    <button type="button" class="btn-comentario btn-ult btn btn-success"
+                                        data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}"
+                                        data-usuario-coment="{{datauser.Usuario}}"
+                                        data-type-coment="Confirmado">Confirmado</button>
+                                    <button type="button" class="btn-comentario btn-ult btn btn-warning"
+                                        data-id-evento="{{dataevento.ID}}" data-usuario-rol="{{datauser.Rol}}"
+                                        data-usuario-coment="{{datauser.Usuario}}"
+                                        data-type-coment="Descartado">Descartado</button>
                                 </div>
                                 <div class="col-lg-12 pt-3">
                                     <textarea class="textarea form-control" name="" id="textarea-comentario" cols="30"
@@ -81,34 +102,36 @@
                                 </div>
                                 <div class="col-lg-12 cont-resp-prede pt-3">
                                     {% for respuesta in dataresp.respuestas %}
-                                    <button type="button" class="btn btn-info"
-                                        id="btn-textarea-1"  onclick="rellenarTextarea('{{ respuesta.text }}')">{{respuesta.sigla}}</button>
+                                    <button type="button" class="btn btn-info btn-coment-prede" id="btn-textarea-1"
+                                        onclick="rellenarTextarea('{{ respuesta.text }}')">{{respuesta.sigla}}</button>
                                     {% endfor %}
                                 </div>
                             </div>
                         </form>
                         <div class="col-lg-12 pt-3">
                             <p>Comentarios</p>
-                            <table class="table table-comentarios">
-                                <thead>
-                                    <tr>
-                                        <th>Comentario</th>
-                                        <th>Estado</th>
-                                        <th>Usuario</th>
-                                        <th>Fecha</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {% for comentario in dataevento.list_comentarios %}
-                                    <tr>
-                                        <td>{{comentario.comentario}}</td>
-                                        <td>{{comentario.descripcion_estado}}</td>
-                                        <td>{{comentario.usuario}}</td>
-                                        <td>{{comentario.fecha_envio}}</td>
-                                    </tr>
-                                    {% endfor %}
-                                </tbody>
-                            </table>
+                            <div class="table-cont-comentarios">
+                                <table id="table-comentarios" class="table-comentarios">
+                                    <thead>
+                                        <tr>
+                                            <th>Comentario</th>
+                                            <th>Estado</th>
+                                            <th>Usuario</th>
+                                            <th>Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for comentario in dataevento.list_comentarios %}
+                                        <tr>
+                                            <td>{{comentario.comentario}}</td>
+                                            <td>{{comentario.descripcion_estado}}</td>
+                                            <td>{{comentario.usuario}}</td>
+                                            <td>{{comentario.fecha_envio}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

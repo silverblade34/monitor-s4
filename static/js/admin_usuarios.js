@@ -128,7 +128,7 @@ crearUsuarios2.addEventListener("click", function () {
               return response.json();
             })
             .then(data => {
-              Swal.fire("Agregado", data.message + "!", "success");
+              Swal.fire("Agregado", "Usuario Agregado" + "!", "success");
               setTimeout(function () {
                 location.reload();
               }, 2000);

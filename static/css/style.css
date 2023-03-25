@@ -1,0 +1,8 @@
+.logos-clientes {
+    max-width: 100%;
+    max-height: 60px;
+    -webkit-max-width: 100%;
+    /* para navegadores webkit (Safari, Chrome, etc.) */
+    -moz-max-width: 100%;
+    /* para navegadores Firefox */
+}

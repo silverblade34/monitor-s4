@@ -37,6 +37,7 @@
         integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Estilos paginas -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/admin_cuentas.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/tipo_evento.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
@@ -72,8 +73,8 @@
                         <a href="/dashboard" class="navbar-brand">
                             <div class="brand-image brand-big">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img style="height: 50px; width: 50px;"  src="{{url_for('static', filename='img/logos/'+useradmin+'.png')}}" alt="logo"
-                                    class="logo-small">
+                                <img src="{{url_for('static', filename='img/logos/'+useradmin+'.png')}}" alt="logo"
+                                    class="logo-small logos-clientes">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
                                     class="logo-small">
@@ -81,8 +82,8 @@
                             </div>
                             <div class="brand-image brand-small">
                                 {% if datauser.CodCuenta != "0000" and datauser.CodCliente != "All" %}
-                                <img style="height: 55px; width: 55px;" src="{{url_for('static', filename='img/logos/'+ useradmin +'.png')}}" alt="logo"
-                                    class="logo-small">
+                                <img src="{{url_for('static', filename='img/logos/'+ useradmin +'.png')}}" alt="logo"
+                                    class="logo-small logos-clientes">
                                 {% else %}
                                 <img src="{{url_for('static', filename='icons/logo-small.png')}}" alt="logo"
                                     class="logo-small">
