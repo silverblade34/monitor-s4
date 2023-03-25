@@ -60,45 +60,21 @@
       <div class="mb-8 container-charts">
         <div class="border p-3">
           <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Bars
+            Eventos por mes
           </h4>
-          <canvas id="mychart-horizontal"></canvas>
-          <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-            <!-- Chart legend -->
-            <div class="flex items-center">
-              <span class="inline-block w-3 h-3 mr-1 bg-teal-500 rounded-full"></span>
-              <span>Shoes</span>
-            </div>
-            <div class="flex items-center">
-              <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-              <span>Bags</span>
-            </div>
-          </div>
+          <canvas id="mychartlinechart"></canvas>
         </div>
         <div class="border p-3">
           <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Traffic
+            Eventos por clientes
           </h4>
-          <canvas id="line"></canvas>
-          <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-            <!-- Chart legend -->
-            <div class="flex items-center">
-              <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-              <span>Organic</span>
-            </div>
-            <div class="flex items-center">
-              <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-              <span>Paid</span>
-            </div>
-          </div>
+          <canvas id="barrahorizontal"></canvas>
         </div>
       </div>
     </div>
   </div>
 </div>
 <script src="{{url_for('static', filename='js/dashboard_cuentas.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-bars-horizontal.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-bars.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-lines.js')}}" defer></script>
-<script src="{{url_for('static', filename='js/charts/charts-pie.js')}}" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="{{url_for('static', filename='js/charts/charts.js')}}" defer></script>
 {% endblock %}

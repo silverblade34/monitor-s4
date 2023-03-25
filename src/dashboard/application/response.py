@@ -69,5 +69,15 @@ class DashboardResponse:
                 placas_distintas.add(d["placa"])
         datareturn["totplacas"]= len(placas_distintas)
         return datareturn
+    
+    def responseGraficosCuentas(self, cod_cuenta, cod_cliente):
+        dataEnviar = {
+            "cod_cuenta": cod_cuenta,
+            "cod_cliente": cod_cliente
+        }
+        resp = requests.post(
+            f'{API_SERVER}/api/v1/home/accounts', data=json.dumps(dataEnviar))
+        data = resp.json()
+        return data
         
         

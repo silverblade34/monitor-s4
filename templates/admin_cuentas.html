@@ -144,8 +144,6 @@
                     <div class="accordion todo">
                         <div class="head">
                             <h3>Usuarios por clientes</h3>
-                            <button id="crearUsuarioXCliente" class="btn btn-primary text-color-white">Crear
-                                usuario</button>
                         </div>
                         <ul class="todo-list">
                             {% for cliente in datacuentas[0].clientes %}
@@ -161,12 +159,11 @@
                                     <p>USUARIO: {{usuarios.usuario}} | ROL: {{usuarios.rol}}
                                     </p>
                                     <div>
-                                        <a href="#" class="editarUsuarioXCliente" data-cuenta-id="{{datacuentas[0].ID}}"
-                                            data-cod-cliente="{{usuarios.cod_cliente}}"><i
-                                                class="bx bx-edit edit"></i></a>
-                                        <a href="#" class="delete-clienteUsuario" data-cuenta-id="{{datacuentas[0].ID}}"
-                                            data-cod-cliente="{{usuarios.cod_cliente}}"><i
-                                                class="bx bx-x delete"></i></a>
+                                        {% if usuarios.estado == True %}
+                                        <span class="status true">Activo</span>
+                                        {% else %}
+                                        <span class="status false">Desactivada</span>
+                                        {% endif %}
                                     </div>
                                 </li>
                                 {% endif %}

@@ -33,3 +33,12 @@ def cards_cuentas():
     cod_cliente = session["datauser"]["CodCliente"]
     data = _dashCL.cardsCuentas(cod_cuenta, cod_cliente)
     return data
+
+@app.route('/graficos_home_cuentas', methods=['GET']) 
+def graficos_home_cuentas():
+    _dashCL = DashboardController()
+    cod_cuenta = session["datauser"]["CodCuenta"]
+    cod_cliente = session["datauser"]["CodCliente"]
+    data = _dashCL.graficosCuentas(cod_cuenta, cod_cliente)
+    print(data)
+    return data

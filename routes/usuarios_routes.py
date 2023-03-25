@@ -94,6 +94,7 @@ def mostrar_idcuenta():
     _userCL = UsuariosController()
     _turnosCL = TurnosController()
     data = _userCL.listarUsuarios(session['datauser']['CodCuenta'])
+    print(session["cod_admin"])
     dataturnos = _turnosCL.listarTurnosOperarios(session["cod_admin"])
     if dataturnos["data"]:
         turnos = dataturnos["data"][0]
@@ -101,7 +102,6 @@ def mostrar_idcuenta():
         turnos = []
     datacuenta = data["data"][0]
     datacuenta["turnos"] = turnos
-    print(datacuenta)
     return datacuenta
 
 @app.route('/validarUsuarioUnico', methods=['GET'])

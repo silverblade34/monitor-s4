@@ -33,7 +33,7 @@ function actualizarTabla() {
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
-                            '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="/editar_evento?idevento=' + evento.ID + '" title="Editar"><i class="bx bx-edit edit"></i></a>' +
                             '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
@@ -49,7 +49,7 @@ function actualizarTabla() {
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
-                            '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="/editar_evento?idevento=' + evento.ID + '" title="Editar"><i class="bx bx-edit edit"></i></a>' +
                             '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
@@ -64,7 +64,7 @@ function actualizarTabla() {
                             '<td>' + evento.fecha_ultima_accion + '</td>' +
                             '<td class="pr ' + evento.prioridad + '"> <span class="badge-text badge-text-small info"></span></td>' +
                             '<td class="td-actions">' +
-                            '<a href="/editar_evento?idevento=' + evento.ID + '"><i class="bx bx-edit edit"></i></a>' +
+                            '<a href="/editar_evento?idevento=' + evento.ID + '" title="Editar"><i class="bx bx-edit edit"></i></a>' +
                             '<a href="" title="Ver video"><i class="bx bx-play edit"></i></a>' +
                             '</td>' +
                             '</tr>';
